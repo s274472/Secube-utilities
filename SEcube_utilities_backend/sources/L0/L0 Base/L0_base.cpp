@@ -33,6 +33,7 @@
 #include "L0_base.h"
 #include <memory>
 #include <time.h>
+#include <sstream>
 
 L0Base::L0Base() {
 	this->it = {};

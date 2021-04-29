@@ -12,11 +12,13 @@
 
 using namespace std;
 
-unique_ptr<L0> l0 = make_unique<L0>();
-unique_ptr<L1> l1 = make_unique<L1>();
+unique_ptr<L0> l0;
+unique_ptr<L1> l1;
 
 int main() {
 	int sel, err;
+	l0 = make_unique<L0>();
+	l1 = make_unique<L1>();
 
 	cout << "Welcome to SEcube utilities! Please Login to your SEcube device."
 			<< endl;
