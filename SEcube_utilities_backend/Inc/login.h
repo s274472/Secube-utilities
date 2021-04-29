@@ -7,6 +7,6 @@
 
 using namespace std;
 
-int login();
+int login(array<uint8_t, L1Parameters::Size::PIN>);
 
 #endif

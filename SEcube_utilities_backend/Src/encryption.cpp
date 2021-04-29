@@ -74,7 +74,7 @@ int encryption( string filename, uint32_t keyID, string encAlgo ) {
 	inFile.open(filename);
 	if (!inFile) {
 		cout << "Unable to open file " << filename << endl;
-		l1->L1Logout();
+//		l1->L1Logout();
 		return -1;
 	}
 	while (getline (inFile, currLine)) {
@@ -106,7 +106,7 @@ int encryption( string filename, uint32_t keyID, string encAlgo ) {
 	uint16_t r = crypto_filename((char*)filename.c_str(), encoded_filename, &enclen); // generate the name of the encrypted file starting from the original name (encoded filename = SHA-256 of original name)
 	if(r){
 		cout << "\nUnexpected error. Quit." << endl;
-		l1->L1Logout();
+//		l1->L1Logout();
 		return -1;
 	}
 	ifstream encfile(encoded_filename, ios::binary|ios::in|ios::ate);
@@ -124,7 +124,7 @@ int encryption( string filename, uint32_t keyID, string encAlgo ) {
 	    cout << str << endl;
 	} else {
 		cout << "\nUnexpected error. Quit." << endl;
-		l1->L1Logout();
+//		l1->L1Logout();
 		return -1;
 	}
 

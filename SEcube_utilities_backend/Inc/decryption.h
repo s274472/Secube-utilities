@@ -7,6 +7,6 @@
 
 using namespace std;
 
-int decryption();
+int decryption(string);
 
 #endif

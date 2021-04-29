@@ -3,14 +3,8 @@
 extern unique_ptr<L0> l0;
 extern unique_ptr<L1> l1;
 
-int decryption() {
+int decryption(string filename) {
 
-	cout << "\nEnter the file path that you want to decrypt..." << endl;
-	string filename;
-	if (!(cin >> filename)) {
-		cout << "Input error...quit." << endl;
-		return -1;
-	}
 	SEfile file1(l1.get());
 	file1.secure_open((char*) filename.c_str(), SEFILE_READ, SEFILE_OPEN);
 	int pos;

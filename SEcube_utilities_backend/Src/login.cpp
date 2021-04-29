@@ -3,10 +3,8 @@
 extern unique_ptr<L0> l0;
 extern unique_ptr<L1> l1;
 
-int login() {
-	int err;
+int login(array<uint8_t, L1Parameters::Size::PIN> pin) {
 	int dev_err;
-	array<uint8_t, L1Parameters::Size::PIN> pin;
 	this_thread::sleep_for(chrono::milliseconds(1000));
 	cout << "Looking for SEcube devices..." << endl;
 	this_thread::sleep_for(chrono::milliseconds(2000));
@@ -59,29 +57,22 @@ int login() {
 		l1->L1SelectSEcube(sn);
 		cout << "Selected device:" << devices.at(sel).first << " - "
 				<< devices.at(sel).second << endl;
-		do {
-			err = 0;
-			this_thread::sleep_for(chrono::milliseconds(1000));
-			cout << "\nInsert your PIN:" << endl;
-			std::string pass;
-			cin >> pass;
-			std::copy(pass.begin(), pass.end(), std::begin(pin));
-			try {
-				l1->L1Login(pin, SE3_ACCESS_USER, true);
 
-			} catch (...) { // catch any kind of exception (login will throw if the password is wrong or if any error happens)
-				cerr << "SEcube login error. Check the pin and retry." << endl;
-				err = 1;
-			}
-			if (err == 0){
-			if (!l1->L1GetSessionLoggedIn()) { // check if login was ok
-				cerr << "SEcube login error. Quit." << endl;
-				return -1;
-			} else {
-				cout << "SEcube login OK" << endl;
-			}
-			}
-		} while (err != 0);
+		try {
+			l1->L1Login(pin, SE3_ACCESS_USER, true);
+
+		} catch (...) { // catch any kind of exception (login will throw if the password is wrong or if any error happens)
+			cerr << "SEcube login error. Check the pin and retry." << endl;
+			return -1;
+		}
+
+		if (!l1->L1GetSessionLoggedIn()) { // check if login was ok
+			cerr << "SEcube login error. Quit." << endl;
+			return -1;
+		} else {
+			cout << "SEcube login OK" << endl;
+		}
+
 	}
 	return 0;
 }

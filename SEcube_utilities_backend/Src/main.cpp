@@ -21,7 +21,9 @@ int main() {
 	cout << "Welcome to SEcube utilities! Please Login to your SEcube device."
 			<< endl;
 	/* Login */
-	do{} while(login() != 0);
+	if(login({'t','e','s','t'}) != 0) {
+		return -1;
+	}
 
 	/* Actions */
 	do {
@@ -46,10 +48,10 @@ int main() {
 
 		switch (sel) {
 		case 1:
-			encryption("prova3.txt",811, "AES_HMACSHA256");
+			encryption("prova1.txt",811, "AES_HMACSHA256");
 			break;
 		case 2:
-			decryption();
+			decryption("prova1.txt");
 			break;
 		case 3:
 			//digest
