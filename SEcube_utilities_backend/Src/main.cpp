@@ -51,10 +51,10 @@ int main() {
 
 		switch (sel) {
 		case 1:
-			encryption("prova1.txt", 983, "AES_HMACSHA256");
+			encryption("/home/user/Desktop/sefile_example.txt", 978, "AES_HMACSHA256");
 			break;
 		case 2:
-			decryption("prova1.txt");
+			decryption("/home/user/Desktop/sefile_example.txt");
 			break;
 		case 3:
 			digest("prova1.txt", 983, "HMAC-SHA-256"); //algorithms : 0) SHA-256 (no key required) 1) HMAC-SHA-256
