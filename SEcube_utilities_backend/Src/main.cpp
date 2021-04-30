@@ -4,6 +4,7 @@
 
 #include "../Inc/decryption.h"
 #include "../Inc/encryption.h"
+#include "../Inc/digest.h"
 #include "../Inc/login.h"
 #include "../Inc/logout.h"
 #include "../sefile/environment.h"
@@ -50,13 +51,13 @@ int main() {
 
 		switch (sel) {
 		case 1:
-			encryption("prova1.txt",811, "AES_HMACSHA256");
+			encryption("prova1.txt", 983, "AES_HMACSHA256");
 			break;
 		case 2:
 			decryption("prova1.txt");
 			break;
 		case 3:
-			//digest
+			digest("prova1.txt", 983, "HMAC-SHA-256"); //algorithms : 0) SHA-256 (no key required) 1) HMAC-SHA-256
 			break;
 		default:
 			/* Logout */
