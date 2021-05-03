@@ -23,7 +23,7 @@ int digest(string filename, uint32_t keyID, string algo) {
 	vector<pair<uint32_t, uint16_t>> keys;
 
 	//Get the string from file, to compute digest
-	ifstream fileP(filename, ios::binary|ios::in|ios::ate);
+	ifstream fileP((char*)filename.c_str(), ios::binary|ios::in|ios::ate);
 	if (fileP.is_open()) {
 		streampos size;  //pointer to a point in the streambuf
 		char * memblock;

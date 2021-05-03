@@ -5,7 +5,6 @@ extern unique_ptr<L1> l1;
 
 //Will return the number of devices found.
 int list_devices() {
-	int dev_err;
 	cout << "Looking for SEcube devices..." << endl;
 	this_thread::sleep_for(chrono::milliseconds(2000));
 
@@ -33,8 +32,7 @@ int list_devices() {
 	return numdevices;
 }
 
-int login(array<uint8_t, L1Parameters::Size::PIN> pin) {
-	int dev_err;
+int login(array<uint8_t, L1Parameters::Size::PIN> pin, int device) {
 	this_thread::sleep_for(chrono::milliseconds(1000));
 	cout << "Looking for SEcube devices..." << endl;
 	this_thread::sleep_for(chrono::milliseconds(2000));
@@ -59,34 +57,18 @@ int login(array<uint8_t, L1Parameters::Size::PIN> pin) {
 		index++;
 	}
 
-	int sel = 0;
-	do {
-		dev_err = 0;
-		this_thread::sleep_for(chrono::milliseconds(1000));
-		cout
-				<< "\nEnter the number corresponding to the SEcube device you want to use..."
-				<< endl;
-		if (!(cin >> sel)) {
-			cerr << "Input error...quit." << endl;
-			return -1;
-		} else if (sel < 0 || sel >= numdevices) {
-			cerr << "Invalid device number. Please retry." << endl;
-			dev_err = 1;
-		}
-	} while (dev_err != 0);
-
-	if ((sel >= 0) && (sel < numdevices)) {
+	if ((device >= 0) && (device < numdevices)) {
 		std::array<uint8_t, L0Communication::Size::SERIAL> sn = { 0 };
-		if (devices.at(sel).second.length() > L0Communication::Size::SERIAL) {
+		if (devices.at(device).second.length() > L0Communication::Size::SERIAL) {
 			cerr << "Unexpected error...quit." << endl;
 			return -1;
 		} else {
-			memcpy(sn.data(), devices.at(sel).second.data(),
-					devices.at(sel).second.length());
+			memcpy(sn.data(), devices.at(device).second.data(),
+					devices.at(device).second.length());
 		}
 		l1->L1SelectSEcube(sn);
-		cout << "Selected device:" << devices.at(sel).first << " - "
-				<< devices.at(sel).second << endl;
+		cout << "Selected device:" << devices.at(device).first << " - "
+				<< devices.at(device).second << endl;
 
 		try {
 			l1->L1Login(pin, SE3_ACCESS_USER, true);
@@ -125,4 +107,79 @@ int logout() {
 	return 0;
 }
 
+int parse_args(int argc, char *argv[],char *pin, int *utility,
+		char *path, uint32_t *keyID, string *alg) {
+	int cur = 1;
+	while (cur < argc) {
+		//Help
+		if (strcmp(argv[cur], "-help") == 0) {
+			print_command_line();
+			return 0;
+		}
+		//Pin
+		if (strcmp(argv[cur], "-p") == 0) {
+			if (argc > cur + 1) {
+				strcpy(pin, argv[++cur]);
+			} else
+				return 0;
+		}
+		//Encryption
+		if (strcmp(argv[cur], "-e") == 0) {
+			*utility = 0;
+		}
+		//Decryption
+		if (strcmp(argv[cur], "-d") == 0) {
+			*utility = 1;
+		}
+		//Digest
+		if (strcmp(argv[cur], "-d") == 0) {
+			*utility = 2;
+		}
+		//Filename path
+		if (strcmp(argv[cur], "-f") == 0) {
+			if (argc > cur + 1) {
+				strcpy(path, argv[++cur]);
+			} else
+				return 0;
+		}
+		//Key ID
+		if (strcmp(argv[cur], "-k") == 0) {
+			if (argc > cur + 1) {
+				*keyID = atof(argv[++cur]);
+			} else
+				return 0;
+		}
+		//Algorithm
+		if (strcmp(argv[cur], "-aes") == 0) {
+			*alg = "AES_HMACSHA256";
+		}
+		if (strcmp(argv[cur], "-sha") == 0) {
+			*alg = "SHA-256";
+		}
+		if (strcmp(argv[cur], "-hmac") == 0) {
+			*alg = "HMAC-SHA-256";
+		}
+		cur++;
+	}
+	return 1;
+}
 
+void print_command_line() {
+	cout
+			<< "************************************************************************"
+			<< endl;
+	cout << "SECube Utilities: " << endl;
+	cout << "-p <pin>" << endl;
+	cout << "-e encryption" << endl;
+	cout << "-d decryption" << endl;
+	cout << "-di digest" << endl;
+	cout << "-f <filename path>: filename path to use for the selected utility"
+			<< endl;
+	cout << "-k <keyID>: key ID to use for encrypt or compute digest" << endl;
+	cout << "-aes AES_HMACSHA256 (encryption only)" << endl;
+	cout << "-sha SHA-256 (digest only)" << endl;
+	cout << "-hmac HMAC-SHA-256 (digest only)" << endl;
+	cout
+			<< "************************************************************************"
+			<< endl;
+}
