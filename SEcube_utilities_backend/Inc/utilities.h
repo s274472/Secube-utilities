@@ -17,5 +17,5 @@ int parse_args(int argc, char *argv[], char *pin, utility *utility, char *path,
 		uint32_t *keyID, string *alg);
 void print_command_line();
 int list_devices();  //return value: number of found devices, or -1 in case of error.
-//list keys
+int list_keys(); // returns: number of stored keys inside the SEcube device, or -1 in case of error.
 #endif

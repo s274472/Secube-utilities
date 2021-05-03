@@ -32,6 +32,32 @@ int list_devices() {
 	return numdevices;
 }
 
+// List all the stored keys inside the SEcube device
+// returns: number of stored keys inside the SEcube device, or -1 in case of error.
+int list_keys() {
+
+	vector<pair<uint32_t, uint16_t>> keys;
+	try{
+		l1->L1KeyList(keys);
+	} catch (...) {
+		cout << "Unexpected error trying to list the stored keys..." << endl;
+		return -1;
+	}
+
+	cout << "Keys stored inside the SEcube device:" << endl;
+	if(keys.size() == 0){
+		cout << "\nThere are no keys currently stored inside the SEcube device." << endl;
+	} else {
+		int cnt = 0;
+		for(pair<uint32_t, uint16_t> k : keys){
+			cout << cnt << ") Key ID " << k.first << " - length: " << 8*k.second << " bit" << endl;
+			cnt++;
+		}
+	}
+
+	return keys.size();
+}
+
 int login(array<uint8_t, L1Parameters::Size::PIN> pin, int device) {
 	this_thread::sleep_for(chrono::milliseconds(1000));
 	cout << "Looking for SEcube devices..." << endl;
