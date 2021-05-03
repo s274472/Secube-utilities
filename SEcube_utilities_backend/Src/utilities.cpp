@@ -3,6 +3,36 @@
 extern unique_ptr<L0> l0;
 extern unique_ptr<L1> l1;
 
+//Will return the number of devices found.
+int list_devices() {
+	int dev_err;
+	cout << "Looking for SEcube devices..." << endl;
+	this_thread::sleep_for(chrono::milliseconds(2000));
+
+	vector<pair<string, string>> devices;
+	int ret = l0->GetDeviceList(devices); // this API fills the vector with pairs including details about the devices (path and serial number)
+	if (ret) {
+		cerr << "\nError while searching for SEcube devices! Quit." << endl;
+		return -1;
+	}
+
+	int numdevices = l0->GetNumberDevices(); // this API checks how many SEcube devices are connected to the PC
+	if (numdevices == 0) {
+		cerr << "\nNo SEcube devices found! Quit." << endl;
+		return 0;
+	}
+	cout << "Number of SEcube devices found: " << numdevices << endl;
+	cout << "List of SEcube devices (path - serial number):" << endl;
+	int index = 0;
+	for (pair<string, string> p : devices) {
+		cout << index << ") " << p.first << " - " << p.second << endl;
+		index++;
+	}
+	//I think these strings should be passed to the GUI with a socket, to let the user choose the correct SEcube.
+	//In this way the GUI will generate a number that can be passed to the login function.
+	return numdevices;
+}
+
 int login(array<uint8_t, L1Parameters::Size::PIN> pin) {
 	int dev_err;
 	this_thread::sleep_for(chrono::milliseconds(1000));
