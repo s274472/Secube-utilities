@@ -9,6 +9,8 @@ int digest(string filename, uint32_t keyID, string algo) {
 
 	int algo_number;
 
+	cout << "SEcube digest utility" << endl << endl;
+
 	if(algo.compare("SHA-256") == 0) {
 		algo_number = 0;
 	}
@@ -17,6 +19,7 @@ int digest(string filename, uint32_t keyID, string algo) {
 	}
 	else {
 		cout << "Invalid algorithm. Quit." << endl;
+		return -1;
 	}
 
 	char* digest_input;

@@ -5,6 +5,7 @@ extern unique_ptr<L1> l1;
 
 //Will return the number of devices found.
 int list_devices() {
+
 	cout << "Looking for SEcube devices..." << endl;
 	this_thread::sleep_for(chrono::milliseconds(2000));
 
@@ -21,10 +22,13 @@ int list_devices() {
 		return 0;
 	}
 	cout << "Number of SEcube devices found: " << numdevices << endl;
-	cout << "List of SEcube devices (path - serial number):" << endl;
 	int index = 0;
+	cout << "------------------------------------------------------------------------------------" << endl;
+	cout << "DevID" << "\t\tPath" << "\t\t\t\tSerial number" << endl;
+	cout << "------------------------------------------------------------------------------------" << endl;
 	for (pair<string, string> p : devices) {
-		cout << index << ") " << p.first << " - " << p.second << endl;
+		cout << index << "\t" << p.first << "\t\t" << p.second << endl;
+		cout << "------------------------------------------------------------------------------------" << endl;
 		index++;
 	}
 	//I think these strings should be passed to the GUI with a socket, to let the user choose the correct SEcube.
@@ -59,9 +63,6 @@ int list_keys() {
 }
 
 int login(array<uint8_t, L1Parameters::Size::PIN> pin, int device) {
-	this_thread::sleep_for(chrono::milliseconds(1000));
-	cout << "Looking for SEcube devices..." << endl;
-	this_thread::sleep_for(chrono::milliseconds(2000));
 
 	vector<pair<string, string>> devices;
 	int ret = l0->GetDeviceList(devices); // this API fills the vector with pairs including details about the devices (path and serial number)
@@ -74,13 +75,6 @@ int login(array<uint8_t, L1Parameters::Size::PIN> pin, int device) {
 	if (numdevices == 0) {
 		cerr << "\nNo SEcube devices found! Quit." << endl;
 		return -1;
-	}
-	cout << "Number of SEcube devices found: " << numdevices << endl;
-	cout << "List of SEcube devices (path - serial number):" << endl;
-	int index = 0;
-	for (pair<string, string> p : devices) {
-		cout << index << ") " << p.first << " - " << p.second << endl;
-		index++;
 	}
 
 	if ((device >= 0) && (device < numdevices)) {
@@ -133,78 +127,24 @@ int logout() {
 	return 0;
 }
 
-int parse_args(int argc, char *argv[],char *pin, int *utility,
-		char *path, uint32_t *keyID, string *alg) {
-	int cur = 1;
-	while (cur < argc) {
-		//Help
-		if (strcmp(argv[cur], "-help") == 0) {
-			print_command_line();
-			return 0;
-		}
-		//Pin
-		if (strcmp(argv[cur], "-p") == 0) {
-			if (argc > cur + 1) {
-				strcpy(pin, argv[++cur]);
-			} else
-				return 0;
-		}
-		//Encryption
-		if (strcmp(argv[cur], "-e") == 0) {
-			*utility = 0;
-		}
-		//Decryption
-		if (strcmp(argv[cur], "-d") == 0) {
-			*utility = 1;
-		}
-		//Digest
-		if (strcmp(argv[cur], "-d") == 0) {
-			*utility = 2;
-		}
-		//Filename path
-		if (strcmp(argv[cur], "-f") == 0) {
-			if (argc > cur + 1) {
-				strcpy(path, argv[++cur]);
-			} else
-				return 0;
-		}
-		//Key ID
-		if (strcmp(argv[cur], "-k") == 0) {
-			if (argc > cur + 1) {
-				*keyID = atof(argv[++cur]);
-			} else
-				return 0;
-		}
-		//Algorithm
-		if (strcmp(argv[cur], "-aes") == 0) {
-			*alg = "AES_HMACSHA256";
-		}
-		if (strcmp(argv[cur], "-sha") == 0) {
-			*alg = "SHA-256";
-		}
-		if (strcmp(argv[cur], "-hmac") == 0) {
-			*alg = "HMAC-SHA-256";
-		}
-		cur++;
-	}
-	return 1;
-}
-
 void print_command_line() {
 	cout
 			<< "************************************************************************"
 			<< endl;
 	cout << "SECube Utilities: " << endl;
-	cout << "-p <pin>" << endl;
-	cout << "-e encryption" << endl;
-	cout << "-d decryption" << endl;
-	cout << "-di digest" << endl;
-	cout << "-f <filename path>: filename path to use for the selected utility"
+	cout << "SCU [-help] [-dev <deviceID>] [-p <pin>] [-e|-d|-di|-dl|-kl] [-f <filename path] [-k <keyID>] [-aes|-sha|-hmac]" << endl;
+	cout << "\t-p <pin>" << endl;
+	cout << "\t-e encryption" << endl;
+	cout << "\t-d decryption" << endl;
+	cout << "\t-di digest" << endl;
+	cout << "\t-dl devices list" << endl;
+	cout << "\t-kl keys list" << endl;
+	cout << "\t-f <filename path>: filename path to use for the selected utility"
 			<< endl;
-	cout << "-k <keyID>: key ID to use for encrypt or compute digest" << endl;
-	cout << "-aes AES_HMACSHA256 (encryption only)" << endl;
-	cout << "-sha SHA-256 (digest only)" << endl;
-	cout << "-hmac HMAC-SHA-256 (digest only)" << endl;
+	cout << "\t-k <keyID>: key ID to use for encrypt or compute digest" << endl;
+	cout << "\t-aes AES_HMACSHA256 (encryption only)" << endl;
+	cout << "\t-sha SHA-256 (digest only, no key required)" << endl;
+	cout << "\t-hmac HMAC-SHA-256 (digest only)" << endl;
 	cout
 			<< "************************************************************************"
 			<< endl;

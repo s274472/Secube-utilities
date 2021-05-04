@@ -8,7 +8,7 @@ int encryption( string filename, uint32_t keyID, string encAlgo ) {
 	int encAlgoID;
 
 	// Print the title:
-	cout << "Sefile encrypt utility" << endl << endl;
+	cout << "SEcube encrypt utility" << endl << endl;
 
 	// Check that the provided encAlgo is valid:
 	if( encAlgo == "AES") {

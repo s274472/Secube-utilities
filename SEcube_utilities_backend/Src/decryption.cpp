@@ -5,6 +5,8 @@ extern unique_ptr<L1> l1;
 
 int decryption(string filename) {
 
+	cout << "SEcube decrypt utility" << endl << endl;
+
 	SEfile file1(l1.get());
 	file1.secure_open((char*) filename.c_str(), SEFILE_READ, SEFILE_OPEN);
 	int pos;
