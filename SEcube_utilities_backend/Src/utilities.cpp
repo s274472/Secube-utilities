@@ -132,7 +132,7 @@ void print_command_line() {
 			<< "************************************************************************"
 			<< endl;
 	cout << "SECube Utilities: " << endl;
-	cout << "SCU [-help] [-dev <deviceID>] [-p <pin>] [-e|-d|-di|-dl|-kl] [-f <filename path] [-k <keyID>] [-aes|-sha|-hmac]" << endl;
+	cout << "SCU [-help] [-dev <deviceID>] [-p <pin>] [-e|-d|-di|-dl|-kl] [-f <filename path] [-k <keyID>] [-aes|-sha|-hmac|aes_hmac]" << endl;
 	cout << "\t-p <pin>" << endl;
 	cout << "\t-e encryption" << endl;
 	cout << "\t-d decryption" << endl;
@@ -142,9 +142,10 @@ void print_command_line() {
 	cout << "\t-f <filename path>: filename path to use for the selected utility"
 			<< endl;
 	cout << "\t-k <keyID>: key ID to use for encrypt or compute digest" << endl;
-	cout << "\t-aes AES_HMACSHA256 (encryption only)" << endl;
+	cout << "\t-aes_hmac AES_HMACSHA256 (encryption only)" << endl;
 	cout << "\t-sha SHA-256 (digest only, no key required)" << endl;
 	cout << "\t-hmac HMAC-SHA-256 (digest only)" << endl;
+	cout << "\t-aes AES" << endl;
 	cout
 			<< "************************************************************************"
 			<< endl;

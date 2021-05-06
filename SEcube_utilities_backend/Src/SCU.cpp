@@ -85,14 +85,14 @@ int main(int argc, char *argv[]) {
 				return 0;
 		}
 		//Algorithm
-		if (strcmp(argv[cur], "-aes") == 0) {
+		if (strcmp(argv[cur], "-aes_hmac") == 0) {
 			alg = "AES_HMACSHA256";
-		}
-		if (strcmp(argv[cur], "-sha") == 0) {
+		} else if (strcmp(argv[cur], "-sha") == 0) {
 			alg = "SHA-256";
-		}
-		if (strcmp(argv[cur], "-hmac") == 0) {
+		} else if (strcmp(argv[cur], "-hmac") == 0) {
 			alg = "HMAC-SHA-256";
+		} else if (strcmp(argv[cur], "-aes") == 0) {
+			alg = "AES";
 		}
 		cur++;
 	}

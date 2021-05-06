@@ -68,23 +68,23 @@ int encryption( string filename, uint32_t keyID, string encAlgo ) {
 	file1.secure_seek(0, &pos, SEFILE_END); // append to the end of the file
 
 	// Open the file to encrypt using standard OS system call:
-	ifstream inFile;
-	string currLine;
+	ifstream inFile(filename, ios::binary);
+	char buffer[BUFF_SIZE];
 
-	inFile.open(filename);
-	if (!inFile) {
-		cout << "Unable to open file " << filename << "!" << endl;
-		// l1->L1Logout();
+	if( inFile ){
+
+		inFile.seekg(0, std::ios::beg);
+		while( inFile.readsome(buffer, BUFF_SIZE) ) {
+
+			file1.secure_write( (uint8_t*)buffer, inFile.gcount() );
+		}
+	} else {
+
+		cout << "Error encrypting the file!" << endl;
 		return -1;
 	}
-	while (getline (inFile, currLine)) {
 
-		//cout << currLine << endl;
-		currLine = currLine + "\n";
-		file1.secure_write((uint8_t*)currLine.c_str(), currLine.size());
-	}
-
-	// Close the file:
+	// Close the files:
 	inFile.close();
 	file1.secure_close();
 

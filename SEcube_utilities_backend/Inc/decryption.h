@@ -7,6 +7,8 @@
 
 using namespace std;
 
+#define BUFF_SIZE 1024
+
 int decryption(string);
 
 #endif
