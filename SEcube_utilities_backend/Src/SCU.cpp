@@ -10,6 +10,8 @@
 #include "../sefile/SEfile.h"
 #include "../sqlite/sqlite3.h"
 
+typedef unsigned int uint;
+
 using namespace std;
 
 unique_ptr<L0> l0;
