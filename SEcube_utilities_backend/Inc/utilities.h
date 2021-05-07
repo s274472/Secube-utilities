@@ -4,7 +4,9 @@
 #include <thread> // thread::sleep_for
 #include <fstream>
 #include <iostream>
-
+#include <chrono>
+#include <string>
+#include <cmath>
 using namespace std;
 
 #define ENCRYPTION 0

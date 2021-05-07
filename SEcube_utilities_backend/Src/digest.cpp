@@ -1,5 +1,4 @@
 #include "../Inc/digest.h"
-
 extern unique_ptr<L1> l1;
 
 
@@ -24,15 +23,14 @@ int digest(string filename, uint32_t keyID, string algo) {
 
 	char* digest_input;
 	vector<pair<uint32_t, uint16_t>> keys;
-
+	streampos size;		//pointer to a point in the streambuf
 	//Get the string from file, to compute digest
 	ifstream fileP((char*)filename.c_str(), ios::binary|ios::in|ios::ate);
 	if (fileP.is_open()) {
-		streampos size;  //pointer to a point in the streambuf
 		char * memblock;
 		size = fileP.tellg();
 		memblock = new char [size];
-		memset(memblock, '\0', size);
+		memset(memblock,'\0', size);
 		fileP.seekg (0, ios::beg);
 		fileP.read (memblock, size);
 		fileP.close();
@@ -45,7 +43,7 @@ int digest(string filename, uint32_t keyID, string algo) {
 
 	//Now the file to compute digest is in RAM in variable "digest_input".
 	//Let's calculate the length
-	int testsize = strlen(digest_input);
+	int testsize = size;
 
 
 	//Debug
@@ -60,7 +58,6 @@ int digest(string filename, uint32_t keyID, string algo) {
 
 
 		cout << "\nStarting digest computation..." << endl;
-
 		SEcube_digest data_digest;
 		SEcube_digest temp; // this is used to verify the digest in case of HMAC-SHA-256 recomputing the digest using the nonce set by the previous computation
 		switch(algo_number){
