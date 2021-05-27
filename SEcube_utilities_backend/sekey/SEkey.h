@@ -4,7 +4,7 @@
   * Description        : SEkey library header.
   ******************************************************************************
   *
-  * Copyright ï¿½ 2016-present Blu5 Group <https://www.blu5group.com>
+  * Copyright © 2016-present Blu5 Group <https://www.blu5group.com>
   *
   * This library is free software; you can redistribute it and/or
   * modify it under the terms of the GNU Lesser General Public
@@ -24,6 +24,7 @@
 
 /*! \file  SEkey.h
  *  \brief This file includes everything about SEkey.
+ *  \author Fornero Matteo
  *  \date 22/11/2019
  */
 
@@ -32,6 +33,10 @@
 
 #include "../sefile/SEfile.h"
 #include "../sqlite/sqlite3.h"
+
+void getuserinfo(std::string& ID, std::string& name, std::string& serialnumber, std::string& mode); // added specifically for SEkey GUI
+bool read_sekey_update_path(L0 &l0, L1 *l1); // added specifically for SEkey GUI
+bool set_sekey_update_path(std::string& update_path, L0 &l0, L1 *l1); // added specifically for SEkey GUI
 
 #define PINLEN 32 /**< @brief Length (bytes) of the PIN used to login as user or admin to the SEcube. */
 #define AES256KEYLEN 32 /**< @brief Length of an AES-256 key expressed in bytes. */
@@ -181,6 +186,18 @@ public:
 	void add_group(std::string& group); /**< Add a group to the list of the groups to which the user belongs. */
 	void print_user_details(std::ofstream& sekey_log); /**< used for debugging purpose */
 	std::string& get_sn(){return this->sn;};
+	/* serialize method for Cereal library */
+	
+	// APIS for GUI
+	std::string GUI_getId() { return this->id;};
+	std::string GUI_getName() { return this->name;};
+	std::string GUI_getSn() { return this->sn;};
+	std::vector<std::string> GUI_getGroups() {return this->groups;};
+	
+	template <class Archive>
+	void serialize(Archive& archive){
+		archive(id, name, sn, user_pin, admin_pin, algorithm, k1, k2, init, update_cnt, groups);
+	}
 };
 
 /** @brief The policy class is used to model a security policy adopted by a group.
@@ -191,11 +208,11 @@ class group_policy{
 private:
 	uint32_t max_keys; /**< Maximum number of keys for the group. */
 	uint32_t algorithm; /**< Algorithm used by all keys of this group. */
-	uint32_t default_cryptoperiod; /**< Default cryptoperiod of the keys of this group. */
+	uint32_t default_cryptoperiod; /**< Liveness of the keys of this group. */
 	friend class se_group;
 public:
 	group_policy(): max_keys(0), algorithm(0), default_cryptoperiod(0){};
-	group_policy(uint32_t maxkeys, uint32_t algo, uint32_t cryptoperiod);
+	group_policy(uint32_t maxkeys, uint32_t algo, uint32_t cryptoperiod): max_keys(maxkeys), algorithm(algo), default_cryptoperiod(cryptoperiod){};
 	uint32_t get_max_keys();
 	uint32_t get_algorithm();
 	uint32_t get_default_cryptoperiod();
@@ -203,6 +220,16 @@ public:
 	void set_default_cryptoperiod(uint32_t cryptoperiod);
 	void set_algorithm(uint32_t algo);
 	bool isvalid(); /**< A policy is valid if the algorithm is valid, the max number of keys is greater than 0 and the default cryptoperiod is greater than 0. */
+	/* serialize method for Cereal library */
+	// APIS for GUI
+	uint32_t GUI_getMaxKeys() { return this->max_keys;};
+	uint32_t GUI_getAlgorithm() { return this->algorithm;};
+	uint32_t GUI_getDefaultCryptoperiod() { return this->default_cryptoperiod;};
+
+	template <class Archive>
+	void serialize(Archive& archive){
+		archive(max_keys, algorithm, default_cryptoperiod);
+	}
 };
 
 /**
@@ -239,6 +266,29 @@ public:
 	se_key_status get_status();
 	bool safer(se_key& chosen); /**< Determines if the current key is safer than another key. */
 	void print_key_details(std::ofstream& sekey_log); // used for debugging purpose
+	// APIS for GUI
+	std::string GUI_getId() { return this->id;};
+	std::string GUI_getName() { return this->name;};
+	std::string GUI_getOwner() { return this->owner;};
+	se_key_status GUI_getStatus() { return this->status;};
+	se_key_type GUI_getType() { return this->type;};
+	uint32_t GUI_getAlgorithm() { return this->algorithm;};
+	uint32_t GUI_getLength() { return this->length;};
+	time_t GUI_getGeneration() { return this-> generation;};
+	time_t GUI_getActivation(){ return this->activation;};
+	time_t GUI_getExpiration() { return this->expiration;};
+	time_t GUI_getDeactivation(){ return this->deactivation;};
+	time_t GUI_getCompromise() { return this->compromise;};
+	time_t GUI_getDestruction() { return this->destruction;};
+	time_t GUI_getSuspension() { return this->suspension;};
+	time_t GUI_getCryptoperiod(){ return this->cryptoperiod;};
+
+
+	/* serialize method for Cereal library */
+	template <class Archive>
+	void serialize(Archive& archive){
+		archive(id, name, owner, status, type, algorithm, length, generation, activation, expiration, deactivation, compromise, destruction, suspension, cryptoperiod);
+	}
 };
 
 /** @brief Implement the concept of group inside SEkey.
@@ -270,6 +320,22 @@ public:
 	uint32_t get_keys_cryptoperiod();
 	void set_keys_cryptoperiod(uint32_t cryptoperiod);
 	void print_group_details(std::ofstream& sekey_log); // used for debugging purpose
+	/* serialize method for Cereal library */
+	// APIS for GUI
+	std::string GUI_getId(){ return this->id;};
+	std::string GUI_getName(){ return this->name;};
+	uint32_t GUI_getUserCount(){ return this->users_counter;};
+	uint32_t GUI_getKeyCount(){ return this->keys_counter;};
+	group_policy GUI_getPolicy(){ return this->policy;};
+	std::vector<se_user> GUI_getUserList(){ return this->users_list;};
+	std::vector<se_key> GUI_getKeyList(){ return this->keys_list;};
+
+
+
+	template <class Archive>
+	void serialize(Archive& archive){
+		archive(id, name, users_counter, keys_counter, policy, users_list, keys_list);
+	}
 };
 
 /** @brief Handy RAII wrapper for sqlite3_stmt which requires call to sqlite3_finalize to avoid resource leakage.
@@ -515,6 +581,7 @@ public:
 
 		/** @brief Find a suitable key to encrypt data given a couple of users source-destination.
 		 * @param [out] chosen_key ID of the best key to be used given the specified parameters.
+		 * @param [in] source_user_id User ID of the sender.
 		 * @param [in] dest_user_id User ID of the receiver.
 		 * @param [in] keytype The type of the key. Currently only se_key_type::symmetric_data_encryption is supported.
 		 * @return Returns SEKEY_OK upon success, a value from \ref sekey_error otherwise.
@@ -525,6 +592,7 @@ public:
 
 		/** @brief Find a suitable key to encrypt data to be delivered from a single user to an entire group.
 		 * @param [out] chosen_key ID of the best key to be used given the specified group.
+		 * @param [in] source_user_id User ID of the sender.
 		 * @param [in] group_id Group ID of the receiver.
 		 * @param [in] keytype The type of the key. Currently only se_key_type::symmetric_data_encryption is supported.
 		 * @return Returns SEKEY_OK upon success, a value from \ref sekey_error otherwise.
@@ -534,6 +602,7 @@ public:
 
 		/** @brief Find a suitable key to encrypt data given a sender and multiple recipients.
 		 * @param [out] chosen_key ID of the best key to be used given the users specified.
+		 * @param [in] source_user_id User ID of the sender.
 		 * @param [in] dest_user_id IDs of the recipients.
 		 * @param [in] keytype The type of the key. Currently only se_key_type::symmetric_data_encryption is supported.
 		 * @return Returns SEKEY_OK upon success, a value from \ref sekey_error otherwise.

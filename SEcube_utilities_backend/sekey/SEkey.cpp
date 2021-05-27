@@ -30,12 +30,8 @@
 using namespace std;
 
 //#define SHARED_WINDOWS_FOLDER /**< This macro must be enable if you plan to use a shared Windows folder to distribute SEkey updates. */
-#ifdef _WIN32
-string root = "C:\\Users\\matteo\\sekey\\"; /**< Location where update files must be written/read by the admin/users. Replace with the required value (could be set by higher levels, i.e. GUI). */
-#elif defined(__linux__) || defined(__APPLE__)
-string root = "/home/matteo/Scrivania/SekeyUpdates/";
-#endif
 
+string root; /**< Location where update files must be written/read by the admin/users. Set with the value set by GUI). */
 sqlite3 *db = nullptr; /**< Global pointer to the SQLite database connection for SEkey. */
 bool is_admin = false; /**< Global flag that is true if the SEcube is being used by the administrator and false otherwise. */
 bool blocked = false; /**< Global flag that prevents the user to run any SEkey command except the SEkey update, in case the database is not updated to the latest version. */
@@ -44,6 +40,80 @@ string logs; /* This string is used to incrementally store the rows of the log f
 string SEcube_root; /**< This is the path of the MicroSD of the SEcube. */
 bool SEkey_running = false; // see environment.h
 L1 *SEcube = nullptr; // see environment.h
+
+/* specifically added for SEkey GUI */
+void getuserinfo(std::string& ID, std::string& name, std::string& serialnumber, std::string& mode){
+	ID = currentuser.userid;
+	name = currentuser.username;
+	serialnumber = currentuser.device_sn;
+	if(SEcube->L1GetAccessType() == SE3_ACCESS_USER){
+		mode = "user";
+	} else {
+		mode = "administrator";
+	}
+}
+bool read_sekey_update_path(L0 &l0, L1 *l1){
+	try{
+		std::string filepath;
+		if(get_microsd_path(l0, filepath)){
+			return false;
+		}
+		filepath.append("sekey.config");
+		if(file_exists(filepath) != SEKEY_FILE_FOUND){
+			return false;
+		}
+		uint32_t filedim;
+		secure_getfilesize((char*)filepath.c_str(), &filedim, l1);
+		SEfile file1(l1, L1Key::Id::RESERVED_ID_SEKEY_SECUREDB, L1Algorithms::Algorithms::AES_HMACSHA256);
+		int pos;
+		if(file1.secure_open((char*)filepath.c_str(), SEFILE_READ, SEFILE_OPEN) ||
+		   file1.secure_seek(0, &pos, SEFILE_BEGIN)){
+			return false;
+		}
+		unique_ptr<char[]> filecontent = make_unique<char[]>(filedim);
+		unsigned int bytesread;
+		if(file1.secure_read((uint8_t*)filecontent.get(), filedim, &bytesread) ||
+		   file1.secure_close()){
+			return false;
+		}
+		string tmp(filecontent.get(), bytesread);
+		root = tmp;
+		return true;
+	} catch (...) {
+		return false;
+	}
+}
+bool set_sekey_update_path(std::string& update_path, L0 &l0, L1 *l1){
+	try{
+#if defined(__linux__) || defined(__APPLE__)
+				if(update_path.back() != '/'){
+					update_path.push_back('/'); // add slash if required
+				}
+#elif _WIN32
+				if(update_path.back() != '\\'){
+					update_path.push_back('\\'); // add slash if required
+				}
+#endif
+		root = update_path;
+		std::string filepath;
+		if(get_microsd_path(l0, filepath)){
+			return false;
+		}
+		filepath.append("sekey.config");
+		SEfile file1(l1, L1Key::Id::RESERVED_ID_SEKEY_SECUREDB, L1Algorithms::Algorithms::AES_HMACSHA256);
+		int pos;
+		if(file1.secure_open((char*)filepath.c_str(), SEFILE_WRITE, SEFILE_NEWFILE) ||
+		   file1.secure_seek(0, &pos, SEFILE_END) ||
+		   file1.secure_write((uint8_t*)update_path.data(), update_path.size()) ||
+		   file1.secure_close()){
+			return false;
+		}
+		return true;
+	} catch (...) {
+		return false;
+	}
+}
+/* */
 
 se_key::se_key(std::string& key_id, uint32_t algo, uint32_t key_length, time_t act, time_t exp){
 	this->id = key_id;
@@ -294,11 +364,6 @@ bool group_policy::isvalid(){
 		return false;
 	}
 	return true;
-}
-group_policy::group_policy(uint32_t max, uint32_t algo, uint32_t cryptoperiod){
-	this->algorithm = algo;
-	this->default_cryptoperiod = cryptoperiod;
-	this->max_keys = max;
 }
 
 /* GENERAL SEKEY APIs */
@@ -1115,7 +1180,7 @@ int sekey_find_key_v1(string& chosen_key, string& dest_user_id, se_key_type keyt
 		if(common_groups.empty()){
 			return SEKEY_KEY_NOT_FOUND; // no common groups with active key
 		}
-		// step 3: filter the common groups keeping only the groups which have the minimum number of users
+		// step 2: filter the common groups keeping only the groups which have the minimum number of users
 		for(string& selected_group : common_groups){
 			query = "SELECT users_counter FROM Groups WHERE group_id = ?1;";
 			if((sqlite3_prepare_v2(db, query.c_str(), -1, sqlstmt.getstmtref(), nullptr) != SQLITE_OK) ||
@@ -1144,8 +1209,7 @@ int sekey_find_key_v1(string& chosen_key, string& dest_user_id, se_key_type keyt
 		if(selected_groups.empty()){
 			return SEKEY_KEY_NOT_FOUND;
 		}
-		// step 4: retrieve the id of the active key of the selected group
-		/* step 5: filter the key according to the following criteria:
+		/* step 3: filter the key according to the following criteria:
 				 * 1) smallest group
 				 * 2) best algorithm (in terms of algorithm strength and key strength)
 				 * 3) most recent key (because it is less probable that an attacker has intercepted many communications encrypted with this key)
@@ -1579,7 +1643,9 @@ int sekey_init_user_SEcube(string& uid, array<uint8_t, L1Parameters::Size::PIN>&
 				}
 			}
 		}
-		if(!found){ return SEKEY_ERR; }
+		if(!found){
+			return SEKEY_ERR;
+		}
 		unique_ptr<L1> l1 = make_unique<L1>(index); // L1 for a specific SEcube (the one just connected)
 		try{
 			l1->L1FactoryInit(udata.sn);
