@@ -24,8 +24,10 @@ int main(int argc, char *argv[]) {
 
 	int deviceID;
 	string pin;
+	string user;
+	string group;
 	string path;
-	uint32_t keyID;
+	uint32_t keyID = 0;
 	string alg;
 	utility utility;
 
@@ -70,6 +72,20 @@ int main(int argc, char *argv[]) {
 		if (strcmp(argv[cur], "-kl") == 0) {
 			utility = K_LIST;
 		}
+		//User(s) ID(s)
+		if (strcmp(argv[cur], "-u") == 0) {
+			if (argc > cur + 1) {
+				user = argv[++cur];
+			} else
+				return 0;
+		}
+		//Group ID
+		if (strcmp(argv[cur], "-g") == 0) {
+			if (argc > cur + 1) {
+				group = argv[++cur];
+			} else
+				return 0;
+		}
 		//Filename path
 		if (strcmp(argv[cur], "-f") == 0) {
 			if (argc > cur + 1) {
@@ -107,7 +123,12 @@ int main(int argc, char *argv[]) {
 	switch (utility) {
 	case ENCRYPTION:
 		login(new_pin, deviceID);
+		if (keyID != 0)
 		encryption(path, keyID, alg);
+		else {
+			if (find_key(keyID, user, group))
+				encryption(path, keyID, alg);
+		}
 		logout();
 		break;
 	case DECRYPTION:
@@ -117,7 +138,12 @@ int main(int argc, char *argv[]) {
 		break;
 	case DIGEST:
 		login(new_pin, deviceID);
+		if (keyID != 0)
 		digest(path, keyID, alg); //algorithms : 0) SHA-256 (no key required) 1) HMAC-SHA-256
+		else {
+			if (find_key(keyID, user, group))
+				digest(path, keyID, alg);
+		}
 		logout();
 		break;
 	case DEV_LIST:

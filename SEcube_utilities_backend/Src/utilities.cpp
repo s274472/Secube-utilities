@@ -126,13 +126,68 @@ int logout() {
 
 	return 0;
 }
+int find_key (uint32_t& keyID, string user, string group){
+	string chosen;
+	sekey_error rc;
+	if(sekey_start(*l0, l1.get()) != 0){
+		cout << "Error starting SEkey!" << endl;
+	}
+	if (user.size() != 0){
+		vector<string> users;
+		char U[user.length() + 1];
+		strcpy(U, user.c_str());
+		sekey_error rc;
+		char delim[] = " ";
+		char *ptr = strtok(U,delim);
+		int i = 0;
+		while(ptr != NULL){
+			users[i] = ptr;
+			ptr = strtok(NULL, delim);
+		}
+		if (users.size() == 1){
+			rc = (sekey_error)sekey_find_key_v1(chosen, users[0], se_key_type::symmetric_data_encryption);
+			if (rc == SEKEY_OK) {
+				cout << "Key for " + users[0] + ": " + chosen << endl;
+			} else {
+				cout << "Key for " + users[0] + " not found. Returned value: " << rc << endl;
+			}
+		} else {
+			rc = (sekey_error)sekey_find_key_v3(chosen, users, se_key_type::symmetric_data_encryption);
+			if (rc == SEKEY_OK) {
+				cout << "Key for " + user + ": " + chosen << endl;
+			} else {
+				cout << "Key for " + user + " not found. Returned value: " << rc << endl;
+			}
+		}
+	} else if (group.size() != 0){
+		rc = (sekey_error)sekey_find_key_v2(chosen, group, se_key_type::symmetric_data_encryption);
+			if (rc == SEKEY_OK) {
+				cout << "Key for " + group + ": " + chosen << endl;
+			} else {
+				cout << "Key for " + group + " not found. Returned value: " << rc << endl;
+			}
+	}
+	if (rc == SEKEY_OK) {
+		string key;
+		for (int i = 0; i < chosen.size() - 1; i++){
+			key[i] = chosen[i+1];
+		}
+
+		keyID = ((uint32_t)stoul(key));
+		sekey_stop();
+		return 1;
+	} else {
+		sekey_stop();
+		return 0;
+	}
+}
 
 void print_command_line() {
 	cout
 			<< "************************************************************************"
 			<< endl;
 	cout << "SECube Utilities: " << endl;
-	cout << "SCU [-help] [-dev <deviceID>] [-p <pin>] [-e|-d|-di|-dl|-kl] [-f <filename path] [-k <keyID>] [-aes|-sha|-hmac|aes_hmac]" << endl;
+	cout << "SCU [-help] [-dev <deviceID>] [-p <pin>] [-e|-d|-di|-dl|-kl] [-u <user(s)>|-g <group>][-f <filename path] [-k <keyID>] [-aes|-sha|-hmac|aes_hmac]" << endl;
 	cout << "\t-dev <deviceID>" << endl;
 	cout << "\t-p <pin>" << endl;
 	cout << "\t-e encryption" << endl;
@@ -140,6 +195,8 @@ void print_command_line() {
 	cout << "\t-di digest" << endl;
 	cout << "\t-dl devices list" << endl;
 	cout << "\t-kl keys list" << endl;
+	cout << "\t-u <user(s)> if specified, find keys automatically (put list of users between " ", each one separated by space)" << endl;
+	cout << "\t-g <group> if specified, find keys automatically" << endl;
 	cout << "\t-f <filename path>: filename path to use for the selected utility"
 			<< endl;
 	cout << "\t-k <keyID>: key ID to use for encrypt or compute digest" << endl;
