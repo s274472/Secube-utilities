@@ -31,31 +31,31 @@ int encryption( string filename, uint32_t keyID, string encAlgo ) {
 	}
 
 	// Check that the provided keyID is valid:
-	vector<pair<uint32_t, uint16_t>> keys;
-	try{
-		l1->L1KeyList(keys);
-	} catch (...) {
-		cout << "\nError retrieving keys inside the SEcube device. Quit." << endl;
-		//l1->L1Logout();
-		return -1;
-	}
-	if(keys.size() == 0){
-		cout << "\nError, there are no keys inside the SEcube device. Impossible to continue." << endl;
-		//l1->L1Logout();
-		return -1;
-	}
-
-	bool contained = false;
-	for(pair<uint32_t, uint16_t> k : keys){
-
-		if( k.first == keyID ) { contained = true; break; }
-	}
-	if( !contained ) {
-
-		cout << "\nError, the provided keyID is not valid. Impossible to continue." << endl;
-		//l1->L1Logout();
-		return -1;
-	}
+//	vector<pair<uint32_t, uint16_t>> keys;
+//	try{
+//		l1->L1KeyList(keys);
+//	} catch (...) {
+//		cout << "\nError retrieving keys inside the SEcube device. Quit." << endl;
+//		//l1->L1Logout();
+//		return -1;
+//	}
+//	if(keys.size() == 0){
+//		cout << "\nError, there are no keys inside the SEcube device. Impossible to continue." << endl;
+//		//l1->L1Logout();
+//		return -1;
+//	}
+//
+//	bool contained = false;
+//	for(pair<uint32_t, uint16_t> k : keys){
+//
+//		if( k.first == keyID ) { contained = true; break; }
+//	}
+//	if( !contained ) {
+//
+//		cout << "\nError, the provided keyID is not valid. Impossible to continue." << endl;
+//		//l1->L1Logout();
+//		return -1;
+//	}
 
 	// Encrypt the desired file using sefile:
 	cout << "File to encrypt: " << filename << endl << "KeyID to use for encrypting: " << keyID << endl << "Encryption algorithm: " << encAlgo << endl;

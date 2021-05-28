@@ -127,12 +127,13 @@ int logout() {
 	return 0;
 }
 int find_key (uint32_t& keyID, string user, string group){
+	bool keyfound = false;
 	string chosen;
 	sekey_error rc;
 	if(sekey_start(*l0, l1.get()) != 0){
 		cout << "Error starting SEkey!" << endl;
 	}
-	if (user.size() != 0){
+	if (user.length() > 0){
 		vector<string> users;
 		char U[user.length() + 1];
 		strcpy(U, user.c_str());
@@ -141,13 +142,15 @@ int find_key (uint32_t& keyID, string user, string group){
 		char *ptr = strtok(U,delim);
 		int i = 0;
 		while(ptr != NULL){
-			users[i] = ptr;
+			users.push_back(ptr);
 			ptr = strtok(NULL, delim);
+			i++;
 		}
 		if (users.size() == 1){
 			rc = (sekey_error)sekey_find_key_v1(chosen, users[0], se_key_type::symmetric_data_encryption);
 			if (rc == SEKEY_OK) {
 				cout << "Key for " + users[0] + ": " + chosen << endl;
+				keyfound = true;
 			} else {
 				cout << "Key for " + users[0] + " not found. Returned value: " << rc << endl;
 			}
@@ -155,6 +158,7 @@ int find_key (uint32_t& keyID, string user, string group){
 			rc = (sekey_error)sekey_find_key_v3(chosen, users, se_key_type::symmetric_data_encryption);
 			if (rc == SEKEY_OK) {
 				cout << "Key for " + user + ": " + chosen << endl;
+				keyfound = true;
 			} else {
 				cout << "Key for " + user + " not found. Returned value: " << rc << endl;
 			}
@@ -163,15 +167,14 @@ int find_key (uint32_t& keyID, string user, string group){
 		rc = (sekey_error)sekey_find_key_v2(chosen, group, se_key_type::symmetric_data_encryption);
 			if (rc == SEKEY_OK) {
 				cout << "Key for " + group + ": " + chosen << endl;
+				keyfound = true;
 			} else {
 				cout << "Key for " + group + " not found. Returned value: " << rc << endl;
 			}
 	}
-	if (rc == SEKEY_OK) {
+	if (keyfound) {
 		string key;
-		for (int i = 0; i < chosen.size() - 1; i++){
-			key[i] = chosen[i+1];
-		}
+		key = chosen.substr(1,chosen.length()-1);
 
 		keyID = ((uint32_t)stoul(key));
 		sekey_stop();

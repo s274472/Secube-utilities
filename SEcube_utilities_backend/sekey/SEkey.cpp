@@ -4,7 +4,7 @@
   * Description        : SEkey library implementation.
   ******************************************************************************
   *
-  * Copyright © 2016-present Blu5 Group <https://www.blu5group.com>
+  * Copyright ï¿½ 2016-present Blu5 Group <https://www.blu5group.com>
   *
   * This library is free software; you can redistribute it and/or
   * modify it under the terms of the GNU Lesser General Public
@@ -31,7 +31,9 @@ using namespace std;
 
 //#define SHARED_WINDOWS_FOLDER /**< This macro must be enable if you plan to use a shared Windows folder to distribute SEkey updates. */
 
-string root; /**< Location where update files must be written/read by the admin/users. Set with the value set by GUI). */
+
+string root = "/home/andrea/sekey";
+//string root; /**< Location where update files must be written/read by the admin/users. Set with the value set by GUI). */
 sqlite3 *db = nullptr; /**< Global pointer to the SQLite database connection for SEkey. */
 bool is_admin = false; /**< Global flag that is true if the SEcube is being used by the administrator and false otherwise. */
 bool blocked = false; /**< Global flag that prevents the user to run any SEkey command except the SEkey update, in case the database is not updated to the latest version. */

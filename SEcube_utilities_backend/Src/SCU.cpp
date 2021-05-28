@@ -126,14 +126,25 @@ int main(int argc, char *argv[]) {
 		if (keyID != 0)
 		encryption(path, keyID, alg);
 		else {
-			if (find_key(keyID, user, group))
+			if (find_key(keyID, user, group)) {
+				if(sekey_start(*l0, l1.get()) != 0){
+					cout << "Error starting SEkey!" << endl;
+					return -1;
+				}
 				encryption(path, keyID, alg);
+				sekey_stop();
+			}
 		}
 		logout();
 		break;
 	case DECRYPTION:
 		login(new_pin, deviceID);
+		if(sekey_start(*l0, l1.get()) != 0){
+			cout << "Error starting SEkey!" << endl;
+			return -1;
+		}
 		decryption(path);
+		sekey_stop();
 		logout();
 		break;
 	case DIGEST:
@@ -141,8 +152,14 @@ int main(int argc, char *argv[]) {
 		if (keyID != 0)
 		digest(path, keyID, alg); //algorithms : 0) SHA-256 (no key required) 1) HMAC-SHA-256
 		else {
-			if (find_key(keyID, user, group))
+			if (find_key(keyID, user, group)) {
+				if(sekey_start(*l0, l1.get()) != 0){
+					cout << "Error starting SEkey!" << endl;
+					return -1;
+				}
 				digest(path, keyID, alg);
+				sekey_stop();
+			}
 		}
 		logout();
 		break;
