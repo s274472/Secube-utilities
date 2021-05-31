@@ -22,7 +22,9 @@ int main(int argc, char *argv[]) {
 	l1 = make_unique<L1>();
 	array<uint8_t, L1Parameters::Size::PIN> new_pin;
 
+	bool decrypt_with_sekey = false;
 	int deviceID;
+	string update_path;
 	string pin;
 	string user;
 	string group;
@@ -56,8 +58,14 @@ int main(int argc, char *argv[]) {
 		if (strcmp(argv[cur], "-e") == 0) {
 			utility = ENCRYPTION;
 		}
-		//Decryption
+		//Decryption manual
 		if (strcmp(argv[cur], "-d") == 0) {
+			decrypt_with_sekey = false;
+			utility = DECRYPTION;
+		}
+		//Decryption with sekey
+		if (strcmp(argv[cur], "-dk") == 0) {
+			decrypt_with_sekey = true;
 			utility = DECRYPTION;
 		}
 		//Digest
@@ -71,6 +79,14 @@ int main(int argc, char *argv[]) {
 		//Keys list
 		if (strcmp(argv[cur], "-kl") == 0) {
 			utility = K_LIST;
+		}
+		//Update path
+		if (strcmp(argv[cur], "-update_path") == 0) {
+			utility = UPDATE_PATH;
+			if (argc > cur + 1) {
+				update_path = argv[++cur];
+			} else
+				return 0;
 		}
 		//User(s) ID(s)
 		if (strcmp(argv[cur], "-u") == 0) {
@@ -124,8 +140,12 @@ int main(int argc, char *argv[]) {
 	case ENCRYPTION:
 		login(new_pin, deviceID);
 		if (keyID != 0)
-		encryption(path, keyID, alg);
+			encryption(path, keyID, alg);
 		else {
+			if (!read_sekey_update_path(*l0.get(), l1.get())) {
+				cout << "Update the sekey path!" << endl;
+				return -1;
+			}
 			if (find_key(keyID, user, group)) {
 				if(sekey_start(*l0, l1.get()) != 0){
 					cout << "Error starting SEkey!" << endl;
@@ -139,12 +159,19 @@ int main(int argc, char *argv[]) {
 		break;
 	case DECRYPTION:
 		login(new_pin, deviceID);
-		if(sekey_start(*l0, l1.get()) != 0){
-			cout << "Error starting SEkey!" << endl;
-			return -1;
+		if (decrypt_with_sekey) {
+			if (!read_sekey_update_path(*l0.get(), l1.get())) {
+				cout << "Update the sekey path!" << endl;
+				return -1;
+			}
+			if(sekey_start(*l0, l1.get()) != 0){
+				cout << "Error starting SEkey!" << endl;
+				return -1;
+			}
 		}
 		decryption(path);
-		sekey_stop();
+		if (decrypt_with_sekey)
+			sekey_stop();
 		logout();
 		break;
 	case DIGEST:
@@ -152,6 +179,10 @@ int main(int argc, char *argv[]) {
 		if (keyID != 0)
 		digest(path, keyID, alg); //algorithms : 0) SHA-256 (no key required) 1) HMAC-SHA-256
 		else {
+			if (!read_sekey_update_path(*l0.get(), l1.get())) {
+				cout << "Update the sekey path!" << endl;
+				return -1;
+			}
 			if (find_key(keyID, user, group)) {
 				if(sekey_start(*l0, l1.get()) != 0){
 					cout << "Error starting SEkey!" << endl;
@@ -169,6 +200,15 @@ int main(int argc, char *argv[]) {
 	case K_LIST:
 		login(new_pin, deviceID);
 		list_keys();
+		logout();
+		break;
+	case UPDATE_PATH:
+		login(new_pin, deviceID);
+		if (!set_sekey_update_path(update_path, *l0.get(), l1.get())) {
+			cout << "Error setting the new path!" << endl;
+			return -1;
+		}
+		cout << "Path correctly updated!" << endl;
 		logout();
 		break;
 	default:

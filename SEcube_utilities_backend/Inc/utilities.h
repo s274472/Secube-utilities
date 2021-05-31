@@ -16,6 +16,7 @@ using namespace std;
 #define DIGEST 2
 #define DEV_LIST 3
 #define K_LIST 4
+#define UPDATE_PATH 5
 typedef int utility;
 int login(array<uint8_t, L1Parameters::Size::PIN>, int);
 int logout();
