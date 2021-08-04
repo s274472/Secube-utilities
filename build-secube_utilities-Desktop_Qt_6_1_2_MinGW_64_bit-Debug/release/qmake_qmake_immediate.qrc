@@ -1,0 +1,10 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/">
+<file alias="logo.svg">C:/Users/ip_pa/Desktop/logo/logo.svg</file>
+<file alias="logo_large.png">C:/Users/ip_pa/Desktop/logo/logo_large.png</file>
+<file alias="logo_small.png">C:/Users/ip_pa/Desktop/logo/logo_small.png</file>
+<file alias="logo_small_icon_only.png">C:/Users/ip_pa/Desktop/logo/logo_small_icon_only.png</file>
+<file alias="logo_small_icon_only_inverted.png">C:/Users/ip_pa/Desktop/logo/logo_small_icon_only_inverted.png</file>
+<file alias="logo_white_large.png">C:/Users/ip_pa/Desktop/logo/logo_white_large.png</file>
+</qresource>
+</RCC>

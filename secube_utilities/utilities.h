@@ -20,11 +20,27 @@ private slots:
 
     void on_browseButton_clicked();
 
-    void on_exitButton_clicked();
-
     void on_deviceListButton_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_group_line_textChanged(const QString &arg1);
+
+    void on_user_line_textChanged(const QString &arg1);
+
+    void on_key_line_textChanged(const QString &arg1);
+
+    void on_pushButton_clicked();
+
+    void on_pushButton_4_clicked();
+
+    void on_lineEdit_7_textChanged(const QString &arg1);
+
+    void on_lineEdit_8_textChanged(const QString &arg1);
+
+    void on_lineEdit_9_textChanged(const QString &arg1);
+
+    void on_comboBox_2_activated(int index);
+
+    void on_pushButton_8_clicked();
 
 private:
     Ui::Utilities *ui;
