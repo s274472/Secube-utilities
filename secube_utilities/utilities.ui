@@ -26,7 +26,7 @@
    <string>SECube Utilities</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../../../../MyResources.qrc">
+   <iconset resource="MyResources.qrc">
     <normaloff>:/Logo/logo (1)/logo_small_icon_only.png</normaloff>:/Logo/logo (1)/logo_small_icon_only.png</iconset>
   </property>
   <property name="autoFillBackground">
@@ -988,7 +988,7 @@
   </widget>
  </widget>
  <resources>
-  <include location="../../../../../MyResources.qrc"/>
+  <include location="MyResources.qrc"/>
  </resources>
  <connections/>
 </ui>

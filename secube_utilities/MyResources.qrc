@@ -1,2 +1,7 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/Logo">
+        <file>logo (1)/logo_large.png</file>
+        <file>logo (1)/logo_small.png</file>
+        <file>logo (1)/logo_small_icon_only.png</file>
+    </qresource>
+</RCC>
