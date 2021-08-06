@@ -162,7 +162,7 @@ void Utilities::on_key_line_textChanged(const QString &arg1)
 }
 
 
-void Utilities::on_pushButton_clicked()
+void Utilities::on_browseButton_2_clicked()
 {
     //Open a dialog to choose the file, save the path in the target_file variable
     target_file = QFileDialog::getOpenFileName();
@@ -171,7 +171,7 @@ void Utilities::on_pushButton_clicked()
 }
 
 
-void Utilities::on_pushButton_4_clicked()
+void Utilities::on_browseButton_3_clicked()
 {
     //Open a dialog to choose the file, save the path in the target_file variable
     target_file = QFileDialog::getOpenFileName();
@@ -244,11 +244,65 @@ void Utilities::on_comboBox_2_activated(int index)
 }
 
 
-void Utilities::on_pushButton_8_clicked()
+void Utilities::on_browseButton_4_clicked()
 {
     //Open a dialog to choose the path, save the path in the target_file variable
     target_file = QFileDialog::getExistingDirectory();
     //And update the content of the "Path" form.
     ui -> lineEdit_10 -> setText(target_file);
+}
+
+
+void Utilities::on_deviceListButton_4_clicked()
+{
+
+}
+
+
+void Utilities::on_updatePath_button_clicked()
+{
+
+}
+
+
+void Utilities::on_deviceListButton_3_clicked()
+{
+
+}
+
+
+void Utilities::on_listkeys_button_2_clicked()
+{
+
+}
+
+
+void Utilities::on_digest_button_clicked()
+{
+
+}
+
+
+void Utilities::on_deviceListButton_2_clicked()
+{
+
+}
+
+
+void Utilities::on_decrypt_button_clicked()
+{
+
+}
+
+
+void Utilities::on_listkeys_button_clicked()
+{
+
+}
+
+
+void Utilities::on_encrypt_button_clicked()
+{
+
 }
 

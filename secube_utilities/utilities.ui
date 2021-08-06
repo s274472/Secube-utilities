@@ -383,7 +383,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="browseButton_2">
       <property name="geometry">
        <rect>
         <x>630</x>
@@ -468,7 +468,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="deviceListButton_2">
       <property name="geometry">
        <rect>
         <x>600</x>
@@ -503,7 +503,7 @@
        <bool>false</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="decrypt_button">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -557,7 +557,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="browseButton_3">
       <property name="geometry">
        <rect>
         <x>630</x>
@@ -642,7 +642,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="deviceListButton_3">
       <property name="geometry">
        <rect>
         <x>600</x>
@@ -780,7 +780,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="pushButton_6">
+     <widget class="QPushButton" name="listkeys_button_2">
       <property name="geometry">
        <rect>
         <x>620</x>
@@ -793,7 +793,7 @@
        <string>List keys...</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_7">
+     <widget class="QPushButton" name="digest_button">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -859,7 +859,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_8">
+     <widget class="QPushButton" name="browseButton_4">
       <property name="geometry">
        <rect>
         <x>630</x>
@@ -944,7 +944,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="pushButton_9">
+     <widget class="QPushButton" name="deviceListButton_4">
       <property name="geometry">
        <rect>
         <x>600</x>
@@ -970,7 +970,7 @@
        <number>0</number>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_10">
+     <widget class="QPushButton" name="updatePath_button">
       <property name="geometry">
        <rect>
         <x>0</x>

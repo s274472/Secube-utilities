@@ -57,28 +57,28 @@ public:
     QWidget *tab_2;
     QLabel *label_9;
     QLineEdit *lineEdit;
-    QPushButton *pushButton;
+    QPushButton *browseButton_2;
     QLabel *label_10;
     QLineEdit *lineEdit_2;
     QLabel *label_11;
     QLineEdit *lineEdit_3;
     QScrollArea *scrollArea_3;
     QWidget *scrollAreaWidgetContents_3;
-    QPushButton *pushButton_2;
+    QPushButton *deviceListButton_2;
     QCheckBox *checkBox;
-    QPushButton *pushButton_3;
+    QPushButton *decrypt_button;
     QProgressBar *progressBar_2;
     QWidget *tab_3;
     QLabel *label_12;
     QLineEdit *lineEdit_4;
-    QPushButton *pushButton_4;
+    QPushButton *browseButton_3;
     QLabel *label_13;
     QLineEdit *lineEdit_5;
     QLabel *label_14;
     QLineEdit *lineEdit_6;
     QScrollArea *scrollArea_4;
     QWidget *scrollAreaWidgetContents_4;
-    QPushButton *pushButton_5;
+    QPushButton *deviceListButton_3;
     QLabel *label_15;
     QLineEdit *lineEdit_7;
     QLabel *label_16;
@@ -89,22 +89,22 @@ public:
     QComboBox *comboBox_2;
     QScrollArea *scrollArea_5;
     QWidget *scrollAreaWidgetContents_5;
-    QPushButton *pushButton_6;
-    QPushButton *pushButton_7;
+    QPushButton *listkeys_button_2;
+    QPushButton *digest_button;
     QProgressBar *progressBar;
     QWidget *tab_4;
     QLabel *label_8;
     QLineEdit *lineEdit_10;
-    QPushButton *pushButton_8;
+    QPushButton *browseButton_4;
     QLabel *label_19;
     QLineEdit *lineEdit_11;
     QLabel *label_20;
     QLineEdit *lineEdit_12;
     QScrollArea *scrollArea_6;
     QWidget *scrollAreaWidgetContents_6;
-    QPushButton *pushButton_9;
+    QPushButton *deviceListButton_4;
     QProgressBar *progressBar_4;
-    QPushButton *pushButton_10;
+    QPushButton *updatePath_button;
 
     void setupUi(QMainWindow *Utilities)
     {
@@ -218,9 +218,9 @@ public:
         lineEdit = new QLineEdit(tab_2);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
         lineEdit->setGeometry(QRect(40, 10, 671, 20));
-        pushButton = new QPushButton(tab_2);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(630, 40, 75, 23));
+        browseButton_2 = new QPushButton(tab_2);
+        browseButton_2->setObjectName(QString::fromUtf8("browseButton_2"));
+        browseButton_2->setGeometry(QRect(630, 40, 75, 23));
         label_10 = new QLabel(tab_2);
         label_10->setObjectName(QString::fromUtf8("label_10"));
         label_10->setGeometry(QRect(10, 80, 61, 16));
@@ -242,17 +242,17 @@ public:
         scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
         scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 429, 109));
         scrollArea_3->setWidget(scrollAreaWidgetContents_3);
-        pushButton_2 = new QPushButton(tab_2);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setGeometry(QRect(600, 210, 101, 23));
+        deviceListButton_2 = new QPushButton(tab_2);
+        deviceListButton_2->setObjectName(QString::fromUtf8("deviceListButton_2"));
+        deviceListButton_2->setGeometry(QRect(600, 210, 101, 23));
         checkBox = new QCheckBox(tab_2);
         checkBox->setObjectName(QString::fromUtf8("checkBox"));
         checkBox->setGeometry(QRect(620, 400, 91, 22));
         checkBox->setMouseTracking(false);
         checkBox->setTristate(false);
-        pushButton_3 = new QPushButton(tab_2);
-        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
-        pushButton_3->setGeometry(QRect(0, 440, 711, 23));
+        decrypt_button = new QPushButton(tab_2);
+        decrypt_button->setObjectName(QString::fromUtf8("decrypt_button"));
+        decrypt_button->setGeometry(QRect(0, 440, 711, 23));
         progressBar_2 = new QProgressBar(tab_2);
         progressBar_2->setObjectName(QString::fromUtf8("progressBar_2"));
         progressBar_2->setGeometry(QRect(10, 410, 118, 23));
@@ -266,9 +266,9 @@ public:
         lineEdit_4 = new QLineEdit(tab_3);
         lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
         lineEdit_4->setGeometry(QRect(40, 10, 671, 20));
-        pushButton_4 = new QPushButton(tab_3);
-        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
-        pushButton_4->setGeometry(QRect(630, 40, 75, 23));
+        browseButton_3 = new QPushButton(tab_3);
+        browseButton_3->setObjectName(QString::fromUtf8("browseButton_3"));
+        browseButton_3->setGeometry(QRect(630, 40, 75, 23));
         label_13 = new QLabel(tab_3);
         label_13->setObjectName(QString::fromUtf8("label_13"));
         label_13->setGeometry(QRect(10, 80, 61, 16));
@@ -290,9 +290,9 @@ public:
         scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
         scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 429, 109));
         scrollArea_4->setWidget(scrollAreaWidgetContents_4);
-        pushButton_5 = new QPushButton(tab_3);
-        pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
-        pushButton_5->setGeometry(QRect(600, 210, 101, 23));
+        deviceListButton_3 = new QPushButton(tab_3);
+        deviceListButton_3->setObjectName(QString::fromUtf8("deviceListButton_3"));
+        deviceListButton_3->setGeometry(QRect(600, 210, 101, 23));
         label_15 = new QLabel(tab_3);
         label_15->setObjectName(QString::fromUtf8("label_15"));
         label_15->setGeometry(QRect(10, 170, 55, 16));
@@ -327,12 +327,12 @@ public:
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
         scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 429, 129));
         scrollArea_5->setWidget(scrollAreaWidgetContents_5);
-        pushButton_6 = new QPushButton(tab_3);
-        pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
-        pushButton_6->setGeometry(QRect(620, 410, 80, 25));
-        pushButton_7 = new QPushButton(tab_3);
-        pushButton_7->setObjectName(QString::fromUtf8("pushButton_7"));
-        pushButton_7->setGeometry(QRect(0, 440, 711, 23));
+        listkeys_button_2 = new QPushButton(tab_3);
+        listkeys_button_2->setObjectName(QString::fromUtf8("listkeys_button_2"));
+        listkeys_button_2->setGeometry(QRect(620, 410, 80, 25));
+        digest_button = new QPushButton(tab_3);
+        digest_button->setObjectName(QString::fromUtf8("digest_button"));
+        digest_button->setGeometry(QRect(0, 440, 711, 23));
         progressBar = new QProgressBar(tab_3);
         progressBar->setObjectName(QString::fromUtf8("progressBar"));
         progressBar->setGeometry(QRect(10, 410, 118, 23));
@@ -350,9 +350,9 @@ public:
         lineEdit_10 = new QLineEdit(tab_4);
         lineEdit_10->setObjectName(QString::fromUtf8("lineEdit_10"));
         lineEdit_10->setGeometry(QRect(40, 10, 671, 20));
-        pushButton_8 = new QPushButton(tab_4);
-        pushButton_8->setObjectName(QString::fromUtf8("pushButton_8"));
-        pushButton_8->setGeometry(QRect(630, 40, 75, 23));
+        browseButton_4 = new QPushButton(tab_4);
+        browseButton_4->setObjectName(QString::fromUtf8("browseButton_4"));
+        browseButton_4->setGeometry(QRect(630, 40, 75, 23));
         label_19 = new QLabel(tab_4);
         label_19->setObjectName(QString::fromUtf8("label_19"));
         label_19->setGeometry(QRect(10, 80, 61, 16));
@@ -374,23 +374,23 @@ public:
         scrollAreaWidgetContents_6->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_6"));
         scrollAreaWidgetContents_6->setGeometry(QRect(0, 0, 429, 109));
         scrollArea_6->setWidget(scrollAreaWidgetContents_6);
-        pushButton_9 = new QPushButton(tab_4);
-        pushButton_9->setObjectName(QString::fromUtf8("pushButton_9"));
-        pushButton_9->setGeometry(QRect(600, 210, 101, 23));
+        deviceListButton_4 = new QPushButton(tab_4);
+        deviceListButton_4->setObjectName(QString::fromUtf8("deviceListButton_4"));
+        deviceListButton_4->setGeometry(QRect(600, 210, 101, 23));
         progressBar_4 = new QProgressBar(tab_4);
         progressBar_4->setObjectName(QString::fromUtf8("progressBar_4"));
         progressBar_4->setGeometry(QRect(10, 410, 118, 23));
         progressBar_4->setValue(0);
-        pushButton_10 = new QPushButton(tab_4);
-        pushButton_10->setObjectName(QString::fromUtf8("pushButton_10"));
-        pushButton_10->setGeometry(QRect(0, 440, 711, 23));
+        updatePath_button = new QPushButton(tab_4);
+        updatePath_button->setObjectName(QString::fromUtf8("updatePath_button"));
+        updatePath_button->setGeometry(QRect(0, 440, 711, 23));
         tabWidget->addTab(tab_4, QString());
         centralwidget->setWidget(tabWidget);
         Utilities->setCentralWidget(centralwidget);
 
         retranslateUi(Utilities);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(Utilities);
@@ -421,21 +421,21 @@ public:
 
         tabWidget->setTabText(tabWidget->indexOf(tab_1), QCoreApplication::translate("Utilities", "Encryption", nullptr));
         label_9->setText(QCoreApplication::translate("Utilities", "File:", nullptr));
-        pushButton->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
+        browseButton_2->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
         label_10->setText(QCoreApplication::translate("Utilities", "Device ID:", nullptr));
         label_11->setText(QCoreApplication::translate("Utilities", "PIN:", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
+        deviceListButton_2->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
 #if QT_CONFIG(tooltip)
         checkBox->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>Checking it, SEKey will be used in order to retrieve the proper key. Otherwise, the infos in the file header will be used.</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
         checkBox->setText(QCoreApplication::translate("Utilities", "Use SEKey", nullptr));
-        pushButton_3->setText(QCoreApplication::translate("Utilities", "Decrypt", nullptr));
+        decrypt_button->setText(QCoreApplication::translate("Utilities", "Decrypt", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("Utilities", "Decryption", nullptr));
         label_12->setText(QCoreApplication::translate("Utilities", "File:", nullptr));
-        pushButton_4->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
+        browseButton_3->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
         label_13->setText(QCoreApplication::translate("Utilities", "Device ID:", nullptr));
         label_14->setText(QCoreApplication::translate("Utilities", "PIN:", nullptr));
-        pushButton_5->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
+        deviceListButton_3->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
         label_15->setText(QCoreApplication::translate("Utilities", "Group:", nullptr));
         label_16->setText(QCoreApplication::translate("Utilities", "User(s):", nullptr));
         label_17->setText(QCoreApplication::translate("Utilities", "Key:", nullptr));
@@ -443,15 +443,15 @@ public:
         comboBox_2->setItemText(0, QCoreApplication::translate("Utilities", "HMAC-SHA-256", nullptr));
         comboBox_2->setItemText(1, QCoreApplication::translate("Utilities", "SHA-256", nullptr));
 
-        pushButton_6->setText(QCoreApplication::translate("Utilities", "List keys...", nullptr));
-        pushButton_7->setText(QCoreApplication::translate("Utilities", "Compute Digest", nullptr));
+        listkeys_button_2->setText(QCoreApplication::translate("Utilities", "List keys...", nullptr));
+        digest_button->setText(QCoreApplication::translate("Utilities", "Compute Digest", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("Utilities", "Digest", nullptr));
         label_8->setText(QCoreApplication::translate("Utilities", "Path:", nullptr));
-        pushButton_8->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
+        browseButton_4->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
         label_19->setText(QCoreApplication::translate("Utilities", "Device ID:", nullptr));
         label_20->setText(QCoreApplication::translate("Utilities", "PIN:", nullptr));
-        pushButton_9->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
-        pushButton_10->setText(QCoreApplication::translate("Utilities", "Update SEKey path", nullptr));
+        deviceListButton_4->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
+        updatePath_button->setText(QCoreApplication::translate("Utilities", "Update SEKey path", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("Utilities", "Update SEKey path", nullptr));
     } // retranslateUi
 
