@@ -1,6 +1,7 @@
 #include "utilities.h"
 #include "ui_utilities.h"
 #include <QFileDialog>
+#include <QMessageBox>
 
 #include "backend_interface.h"
 #include <iostream>
@@ -84,6 +85,7 @@ void Utilities::on_deviceListButton_clicked()
             // Update UI:
             if(resp.err_code<0) {
                 cout << resp.err_msg << endl;
+                QMessageBox::information(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
             }
             else {
                 int i = 0;
