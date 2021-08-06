@@ -126,7 +126,7 @@
        </rect>
       </property>
       <property name="toolTip">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If specified, find keys automatically. Insert it as U+the number of the user. Put list of users between &amp;quot; &amp;quot;, each one separated by space.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If specified, find keys automatically. Insert it as U+the number of the user (e.g., U10). Put list of users between &amp;quot; &amp;quot;, each one separated by space.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_5">
@@ -196,6 +196,19 @@
          <height>109</height>
         </rect>
        </property>
+       <widget class="QTextEdit" name="devices_textEdit_1">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>431</width>
+          <height>111</height>
+         </rect>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
       </widget>
      </widget>
      <widget class="QLineEdit" name="pin_line">
@@ -677,6 +690,9 @@
         <height>24</height>
        </rect>
       </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If specified, find keys automatically. Insert it as G+the number of the group (e.g., G10).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
      </widget>
      <widget class="QLabel" name="label_16">
       <property name="geometry">
@@ -699,6 +715,9 @@
         <width>201</width>
         <height>24</height>
        </rect>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If specified, find keys automatically. Insert it as U+the number of the user (e.g., U10). Put list of users between &amp;quot; &amp;quot;, each one separated by space.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_17">

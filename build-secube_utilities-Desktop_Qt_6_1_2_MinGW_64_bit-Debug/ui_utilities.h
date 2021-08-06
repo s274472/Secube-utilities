@@ -21,6 +21,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -42,6 +43,7 @@ public:
     QLabel *label_6;
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
+    QTextEdit *textEdit;
     QLineEdit *pin_line;
     QLabel *label;
     QLineEdit *key_line;
@@ -166,6 +168,10 @@ public:
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 429, 109));
+        textEdit = new QTextEdit(scrollAreaWidgetContents);
+        textEdit->setObjectName(QString::fromUtf8("textEdit"));
+        textEdit->setGeometry(QRect(0, 0, 431, 111));
+        textEdit->setReadOnly(true);
         scrollArea->setWidget(scrollAreaWidgetContents);
         pin_line = new QLineEdit(tab_1);
         pin_line->setObjectName(QString::fromUtf8("pin_line"));
@@ -390,7 +396,7 @@ public:
 
         retranslateUi(Utilities);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(Utilities);
@@ -404,7 +410,7 @@ public:
         browseButton->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
         deviceListButton->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
 #if QT_CONFIG(tooltip)
-        user_line->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>If specified, find keys automatically. Insert it as U+the number of the user. Put list of users between &quot; &quot;, each one separated by space.</p></body></html>", nullptr));
+        user_line->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>If specified, find keys automatically. Insert it as U+the number of the user (e.g., U10). Put list of users between &quot; &quot;, each one separated by space.</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
         label_5->setText(QCoreApplication::translate("Utilities", "Group:", nullptr));
         label_6->setText(QCoreApplication::translate("Utilities", "User(s):", nullptr));
@@ -437,7 +443,13 @@ public:
         label_14->setText(QCoreApplication::translate("Utilities", "PIN:", nullptr));
         deviceListButton_3->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
         label_15->setText(QCoreApplication::translate("Utilities", "Group:", nullptr));
+#if QT_CONFIG(tooltip)
+        lineEdit_7->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>If specified, find keys automatically. Insert it as G+the number of the group (e.g., G10).</p></body></html>", nullptr));
+#endif // QT_CONFIG(tooltip)
         label_16->setText(QCoreApplication::translate("Utilities", "User(s):", nullptr));
+#if QT_CONFIG(tooltip)
+        lineEdit_8->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>If specified, find keys automatically. Insert it as U+the number of the user (e.g., U10). Put list of users between &quot; &quot;, each one separated by space.</p></body></html>", nullptr));
+#endif // QT_CONFIG(tooltip)
         label_17->setText(QCoreApplication::translate("Utilities", "Key:", nullptr));
         label_18->setText(QCoreApplication::translate("Utilities", "Algorithm:", nullptr));
         comboBox_2->setItemText(0, QCoreApplication::translate("Utilities", "HMAC-SHA-256", nullptr));

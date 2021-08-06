@@ -303,6 +303,6 @@ void Utilities::on_listkeys_button_clicked()
 
 void Utilities::on_encrypt_button_clicked()
 {
-
+    ui ->textEdit ->setText("Ciao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\n");
 }
 
