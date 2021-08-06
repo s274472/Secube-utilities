@@ -1,6 +1,11 @@
 #include "utilities.h"
 #include "ui_utilities.h"
 #include <QFileDialog>
+
+#include "backend_interface.h"
+#include <iostream>
+#include <thread>
+#include "cereal/archives/binary.hpp"
 #include <windows.h>
 
 QString target_file;
@@ -46,7 +51,58 @@ void Utilities::on_deviceListButton_clicked()
 {
     //This launches a cmd.exe line command window, modifies the PATH for the current window,
     //adding the secube installation path, and then launches the backend
-    system("cmd /K  \"set PATH=%PATH%;%ProgramFiles%\\secube&&secube_cmd.exe -dl\" ");
+    std::thread server = std::thread([]() {
+       system("secube_cmd.exe -dl -gui_server");
+    });
+    server.detach();
+
+    // Connect to backend server:
+    int sock = connectToBackend();
+
+    // Wait for response from backend:
+    bool quit = false;
+    int res = -1;
+    char request[BUFLEN] = {0};
+    char reply[BUFLEN] = {0};
+    std::stringstream ss; // any stream can be used
+
+    while (!quit) {
+        memset(request, 0, BUFLEN);
+        memset(reply, 0, BUFLEN);
+        res = recv(sock, request, BUFLEN, 0);
+        if (res < 0) {
+            cout << "[LOG] [Client] Error reading GUI request!" << endl;
+        } else { // process request depending on type
+            cout << "[LOG] [Client] Received " << res << " bytes." << endl;
+            Response_DEV_LIST resp;
+
+            std::stringstream ss;
+            ss.write((char*)request, res);
+            cereal::BinaryInputArchive iarchive(ss);
+            iarchive(resp); // Read the data from the archive
+
+            // Update UI:
+            if(resp.err_code<0) {
+                cout << resp.err_msg << endl;
+            }
+            else {
+                int i = 0;
+                for(i=0; i<resp.num_devices;i++) {
+                    cout << resp.serials[i] << endl;
+                }
+            }
+
+            quit = true;
+        }
+    }
+
+    // Close the socket:
+    closesocket(sock);
+
+    // Cleanup winsock:
+    WSACleanup();
+
+    cout << "[LOG] [Client] Disconnected." << endl;
 }
 
 

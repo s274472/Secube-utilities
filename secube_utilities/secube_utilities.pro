@@ -10,9 +10,11 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
+    backend_interface.cpp \
     utilities.cpp
 
 HEADERS += \
+    backend_interface.h \
     utilities.h
 
 FORMS += \
@@ -24,7 +26,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    ../../../../../MyResources.qrc \
+    MyResources.qrc
 
 DISTFILES += \
     ../../../../../logo (1)/logo_large.png
+
+LIBS += "C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\x86_64-w64-mingw32\lib\libws2_32.a"
+LIBS += -lwsock32
