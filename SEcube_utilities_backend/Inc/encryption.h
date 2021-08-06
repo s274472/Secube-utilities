@@ -11,6 +11,6 @@ using namespace std;
 
 #define BUFF_SIZE 1048576
 
-int encryption( std::string , uint32_t , std::string );
+int encryption( int sock, std::string , uint32_t , std::string );
 
 #endif /* ENCRYPTION_H_ */

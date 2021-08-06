@@ -1,10 +1,13 @@
 #include "../Inc/utilities.h"
+#include "../Inc/GUI_interface.h"
 
 extern unique_ptr<L0> l0;
 extern unique_ptr<L1> l1;
 
 //Will return the number of devices found.
-int list_devices() {
+int list_devices(int sock) {
+
+	Response_DEV_LIST resp; // Response to GUI, used if gui_server_on
 
 	cout << "Looking for SEcube devices..." << endl;
 	this_thread::sleep_for(chrono::milliseconds(2000));
@@ -13,13 +16,25 @@ int list_devices() {
 	int ret = l0->GetDeviceList(devices); // this API fills the vector with pairs including details about the devices (path and serial number)
 	if (ret) {
 		cerr << "\nError while searching for SEcube devices! Quit." << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			sendErrorToGUI<Response_DEV_LIST>(sock, resp, -1, "Error while searching for SEcube devices!");
+		}
+
 		return -1;
 	}
 
 	int numdevices = l0->GetNumberDevices(); // this API checks how many SEcube devices are connected to the PC
 	if (numdevices == 0) {
 		cerr << "\nNo SEcube devices found! Quit." << endl;
-		return 0;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			sendErrorToGUI<Response_DEV_LIST>(sock, resp, -1, "No SEcube devices found!");
+		}
+
+		return -1;
 	}
 	cout << "Number of SEcube devices found: " << numdevices << endl;
 	int index = 0;
@@ -29,8 +44,36 @@ int list_devices() {
 	for (pair<string, string> p : devices) {
 		cout << index << "\t" << p.first << "\t\t" << p.second << endl;
 		cout << "------------------------------------------------------------------------------------" << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			strcpy(resp.paths[index], p.first.c_str());
+			strcpy(resp.serials[index], p.second.c_str());
+		}
+
 		index++;
 	}
+
+	// For GUI interfacing:
+	if(gui_server_on) {
+
+		std::stringstream ss; // any stream can be used
+
+		{
+			cereal::BinaryOutputArchive oarchive(ss); // Create an output archive
+
+			// Prepare response to GUI:
+			resp.err_code = 0;
+			resp.num_devices=numdevices;
+			oarchive(resp);
+
+		} // archive goes out of scope, ensuring all contents are flushed
+
+		// Send response to GUI:
+		send(sock, ss.str().c_str(), ss.str().length(), 0);
+	}
+
+
 	//I think these strings should be passed to the GUI with a socket, to let the user choose the correct SEcube.
 	//In this way the GUI will generate a number that can be passed to the login function.
 	return numdevices;
@@ -38,13 +81,21 @@ int list_devices() {
 
 // List all the stored keys inside the SEcube device
 // returns: number of stored keys inside the SEcube device, or -1 in case of error.
-int list_keys() {
+int list_keys(int sock) {
+
+	Response_LIST_KEYS resp;
 
 	vector<pair<uint32_t, uint16_t>> keys;
 	try{
 		l1->L1KeyList(keys);
 	} catch (...) {
 		cout << "Unexpected error trying to list the stored keys..." << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			sendErrorToGUI<Response_LIST_KEYS>(sock, resp, -1, "Unexpected error trying to list the stored keys...");
+		}
+
 		return -1;
 	}
 
@@ -55,8 +106,34 @@ int list_keys() {
 		int cnt = 0;
 		for(pair<uint32_t, uint16_t> k : keys){
 			cout << cnt << ") Key ID " << k.first << " - length: " << 8*k.second << " bit" << endl;
+
+			// For GUI interfacing:
+			if(gui_server_on) {
+				resp.key_ids[cnt] = k.first;
+				resp.key_sizes[cnt] = k.second;
+			}
+
 			cnt++;
 		}
+	}
+
+	// For GUI interfacing:
+	if(gui_server_on) {
+
+		std::stringstream ss; // any stream can be used
+
+		{
+			cereal::BinaryOutputArchive oarchive(ss); // Create an output archive
+
+			// Prepare response to GUI:
+			resp.err_code = 0;
+			resp.num_keys = keys.size();
+			oarchive(resp);
+
+		} // archive goes out of scope, ensuring all contents are flushed
+
+		// Send response to GUI:
+		send(sock, ss.str().c_str(), ss.str().length(), 0);
 	}
 
 	return keys.size();

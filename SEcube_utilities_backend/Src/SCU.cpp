@@ -1,6 +1,7 @@
 #include <thread> // thread::sleep_for
 #include <fstream>
 #include <iostream>
+#include <unistd.h>
 
 #include "../Inc/decryption.h"
 #include "../Inc/encryption.h"
@@ -10,12 +11,18 @@
 #include "../sefile/SEfile.h"
 #include "../sqlite/sqlite3.h"
 
+#include "../cereal/archives/binary.hpp"
+
 typedef unsigned int uint;
 
 using namespace std;
 
 unique_ptr<L0> l0;
 unique_ptr<L1> l1;
+
+// Global variable for allowing the backend to work as a server for the GUI
+// If true the GUI server is on
+int gui_server_on = false;
 
 int main(int argc, char *argv[]) {
 	l0 = make_unique<L0>();
@@ -32,6 +39,9 @@ int main(int argc, char *argv[]) {
 	uint32_t keyID = 0;
 	string alg;
 	utility utility;
+
+	int s1 = -1; // Socket used for GUI interfacing
+	std::stringstream ss; // any stream can be used
 
 	int cur = 1;
 	while (cur < argc) {
@@ -88,6 +98,11 @@ int main(int argc, char *argv[]) {
 			} else
 				return 0;
 		}
+		//Gui Server
+		if (strcmp(argv[cur], "-gui_server") == 0) {
+			//utility = GUI_SERVER;
+			gui_server_on = true;
+		}
 		//User(s) ID(s)
 		if (strcmp(argv[cur], "-u") == 0) {
 			if (argc > cur + 1) {
@@ -138,24 +153,50 @@ int main(int argc, char *argv[]) {
 	/* Actions */
 	switch (utility) {
 	case ENCRYPTION:
+
+		// Connect to the GUI:
+		if(gui_server_on){
+			s1 = network(comm_port);
+		}
+
 		login(new_pin, deviceID);
 		if (keyID != 0)
-			encryption(path, keyID, alg);
+			encryption(s1, path, keyID, alg);
 		else {
 			if (!read_sekey_update_path(*l0.get(), l1.get())) {
 				cout << "Update the sekey path!" << endl;
+
+				// For GUI interfacing:
+				if(gui_server_on) {
+					Response_GENERIC resp;
+					sendErrorToGUI<Response_GENERIC>(s1, resp, -1, "Update the sekey path!");
+				}
+
 				return -1;
 			}
 			if (find_key(keyID, user, group)) {
 				if(sekey_start(*l0, l1.get()) != 0){
 					cout << "Error starting SEkey!" << endl;
+
+					// For GUI interfacing:
+					if(gui_server_on) {
+						Response_GENERIC resp;
+						sendErrorToGUI<Response_GENERIC>(s1, resp, -1, "Error starting SEkey!");
+					}
+
 					return -1;
 				}
-				encryption(path, keyID, alg);
+				encryption(s1, path, keyID, alg);
 				sekey_stop();
 			}
 		}
 		logout();
+
+		// Clean GUI connection:
+		if(gui_server_on){
+			closeAndCleanConnection(s1);
+		}
+
 		break;
 	case DECRYPTION:
 		login(new_pin, deviceID);
@@ -195,12 +236,36 @@ int main(int argc, char *argv[]) {
 		logout();
 		break;
 	case DEV_LIST:
-		list_devices();
+
+		// Connect to the GUI:
+		if(gui_server_on){
+			s1 = network(comm_port);
+		}
+
+		list_devices(s1);
+
+		// Clean GUI connection:
+		if(gui_server_on){
+			closeAndCleanConnection(s1);
+		}
+
 		break;
 	case K_LIST:
+
+		// Connect to the GUI:
+		if(gui_server_on){
+			s1 = network(comm_port);
+		}
+
 		login(new_pin, deviceID);
-		list_keys();
+		list_keys(s1);
 		logout();
+
+		// Clean GUI connection:
+		if(gui_server_on){
+			closeAndCleanConnection(s1);
+		}
+
 		break;
 	case UPDATE_PATH:
 		login(new_pin, deviceID);
@@ -211,6 +276,7 @@ int main(int argc, char *argv[]) {
 		cout << "Path correctly updated!" << endl;
 		logout();
 		break;
+
 	default:
 		cout << "[ERROR] Something went wrong! Quit." << endl;
 		return -1;
@@ -218,4 +284,3 @@ int main(int argc, char *argv[]) {
 	}
 	return 0;
 }
-

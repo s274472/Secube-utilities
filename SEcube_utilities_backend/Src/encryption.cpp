@@ -1,9 +1,12 @@
 #include "../Inc/encryption.h"
+#include "../Inc/GUI_interface.h"
 
 extern unique_ptr<L0> l0;
 extern unique_ptr<L1> l1;
 
-int encryption( string filename, uint32_t keyID, string encAlgo ) {
+int encryption( int sock, string filename, uint32_t keyID, string encAlgo ) {
+
+	Response_GENERIC resp;
 
 	int encAlgoID;
 
@@ -26,6 +29,12 @@ int encryption( string filename, uint32_t keyID, string encAlgo ) {
 	} else {
 
 		cout << "Invalid encryption algorithm!" << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Invalid encryption algorithm!");
+		}
+
 		//l1->L1Logout();
 		return -1;
 	}
@@ -81,6 +90,12 @@ int encryption( string filename, uint32_t keyID, string encAlgo ) {
 	} else {
 
 		cout << "Error encrypting the file!" << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Error encrypting the file!");
+		}
+
 		return -1;
 	}
 
@@ -89,6 +104,11 @@ int encryption( string filename, uint32_t keyID, string encAlgo ) {
 	file1.secure_close();
 
 	cout << "File correctly encrypted!" << endl;
+
+	// For GUI interfacing:
+	if(gui_server_on) {
+		sendErrorToGUI<Response_GENERIC>(sock, resp, 0, "File correctly encrypted!"); // In this case err_code = 0 means everything went correctly
+	}
 
 	return 0;
 }
