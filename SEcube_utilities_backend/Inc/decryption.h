@@ -10,5 +10,6 @@ using namespace std;
 #define BUFF_SIZE 1048576
 
 int decryption(string);
+int decryption_w_encrypted_filename(string);
 
 #endif

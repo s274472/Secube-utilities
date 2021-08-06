@@ -210,7 +210,7 @@ int main(int argc, char *argv[]) {
 				return -1;
 			}
 		}
-		decryption(path);
+		decryption_w_encrypted_filename(path);
 		if (decrypt_with_sekey)
 			sekey_stop();
 		logout();
