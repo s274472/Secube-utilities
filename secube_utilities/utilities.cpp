@@ -52,10 +52,24 @@ void Utilities::on_deviceListButton_clicked()
 {
     //This launches a cmd.exe line command window, modifies the PATH for the current window,
     //adding the secube installation path, and then launches the backend
+
+    /*
+
+    OLD VERSION WITH THE CMD OPENED
     std::thread server = std::thread([]() {
        system("secube_cmd.exe -dl -gui_server");
     });
     server.detach();
+
+    */
+
+    STARTUPINFOA si;
+    PROCESS_INFORMATION pi;
+    ZeroMemory( &si, sizeof(si) );
+    si.cb = sizeof(si);
+    ZeroMemory( &pi, sizeof(pi) );
+
+    CreateProcessA("secube_cmd.exe", "secube_cmd.exe -dl -gui_server", NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
 
     // Connect to backend server:
     int sock = connectToBackend();
