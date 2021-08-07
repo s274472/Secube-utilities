@@ -5,7 +5,6 @@
 
 #include "backend_interface.h"
 #include <iostream>
-#include <thread>
 #include "cereal/archives/binary.hpp"
 #include <windows.h>
 
@@ -50,75 +49,22 @@ void Utilities::on_browseButton_clicked()
 
 void Utilities::on_deviceListButton_clicked()
 {
-    //This launches a cmd.exe line command window, modifies the PATH for the current window,
-    //adding the secube installation path, and then launches the backend
+    // Send request and wait for response:
+    Response_DEV_LIST resp;
+    resp = sendRequestToBackend<Response_DEV_LIST>("secube_cmd.exe -dl -gui_server");
 
-    /*
-
-    OLD VERSION WITH THE CMD OPENED
-    std::thread server = std::thread([]() {
-       system("secube_cmd.exe -dl -gui_server");
-    });
-    server.detach();
-
-    */
-
-    STARTUPINFOA si;
-    PROCESS_INFORMATION pi;
-    ZeroMemory( &si, sizeof(si) );
-    si.cb = sizeof(si);
-    ZeroMemory( &pi, sizeof(pi) );
-
-    CreateProcessA("secube_cmd.exe", "secube_cmd.exe -dl -gui_server", NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
-
-    // Connect to backend server:
-    int sock = connectToBackend();
-
-    // Wait for response from backend:
-    bool quit = false;
-    int res = -1;
-    char request[BUFLEN] = {0};
-    char reply[BUFLEN] = {0};
-    std::stringstream ss; // any stream can be used
-
-    while (!quit) {
-        memset(request, 0, BUFLEN);
-        memset(reply, 0, BUFLEN);
-        res = recv(sock, request, BUFLEN, 0);
-        if (res < 0) {
-            cout << "[LOG] [Client] Error reading GUI request!" << endl;
-        } else { // process request depending on type
-            cout << "[LOG] [Client] Received " << res << " bytes." << endl;
-            Response_DEV_LIST resp;
-
-            std::stringstream ss;
-            ss.write((char*)request, res);
-            cereal::BinaryInputArchive iarchive(ss);
-            iarchive(resp); // Read the data from the archive
-
-            // Update UI:
-            if(resp.err_code<0) {
-                cout << resp.err_msg << endl;
-                QMessageBox::information(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
-            }
-            else {
-                int i = 0;
-                for(i=0; i<resp.num_devices;i++) {
-                    cout << resp.serials[i] << endl;
-                }
-            }
-
-            quit = true;
+    // Update UI:
+    if(resp.err_code<0) {
+        cout << resp.err_msg << endl;
+        QMessageBox::information(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+    else {
+        int i = 0;
+        for(i=0; i<resp.num_devices;i++) {
+            cout << resp.serials[i] << endl;
         }
     }
 
-    // Close the socket:
-    closesocket(sock);
-
-    // Cleanup winsock:
-    WSACleanup();
-
-    cout << "[LOG] [Client] Disconnected." << endl;
 }
 
 
@@ -297,6 +243,19 @@ void Utilities::on_decrypt_button_clicked()
 
 void Utilities::on_listkeys_button_clicked()
 {
+
+    // Send request and wait for response:
+    Response_LIST_KEYS resp;
+    resp = sendRequestToBackend<Response_LIST_KEYS>("secube_cmd.exe -kl -gui_server");
+
+    // Update UI:
+    if(resp.err_code<0) {
+        cout << resp.err_msg << endl;
+        QMessageBox::information(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+    else {
+        //Something
+    }
 
 }
 

@@ -257,7 +257,14 @@ int main(int argc, char *argv[]) {
 			s1 = network(comm_port);
 		}
 
-		login(new_pin, deviceID);
+		{
+			int err = login(new_pin, deviceID);
+			if( (err<0) && (gui_server_on) ) {
+				Response_LIST_KEYS resp;
+				sendErrorToGUI<Response_LIST_KEYS>(s1, resp, -1, "Error during login!");
+			}
+		}
+
 		list_keys(s1);
 		logout();
 
