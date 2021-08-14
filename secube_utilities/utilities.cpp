@@ -254,7 +254,10 @@ void Utilities::on_listkeys_button_clicked()
         QMessageBox::information(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
-        //Something
+        int i = 0;
+        for(i=0; i<resp.num_keys;i++) {
+            cout << resp.key_ids[i] << endl;
+        }
     }
 
 }
