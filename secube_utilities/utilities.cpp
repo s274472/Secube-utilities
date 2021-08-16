@@ -244,10 +244,14 @@ void Utilities::on_decrypt_button_clicked()
 void Utilities::on_listkeys_button_clicked()
 {
 
-    QString keyslist_command = "secube_cmd.exe -dev 0 -kl -p ";
-    keyslist_command += ui->pin_line->text();
+    // Prepare command:
+    QString keyslist_command = "secube_cmd.exe -kl -p ";
+    keyslist_command += ui->pin_line->text() + " ";
+    keyslist_command += "-dev ";
+    keyslist_command += ui->device_line->text();
     keyslist_command += " -gui_server";
-    cout << keyslist_command.toUtf8().constData() << endl;
+    cout << keyslist_command.toUtf8().constData() << endl; // For Debug
+
     // Send request and wait for response:
     Response_LIST_KEYS resp;
     resp = sendRequestToBackend<Response_LIST_KEYS>(keyslist_command.toUtf8().constData());

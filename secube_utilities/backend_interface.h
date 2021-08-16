@@ -95,7 +95,7 @@ Response sendRequestToBackend(string cmd) {
         memset(reply, 0, BUFLEN);
         res = recv(sock, request, BUFLEN, 0);
         if (res < 0) {
-            cout << "[LOG] [Client] Error reading GUI request!" << endl;
+            cout << "[LOG] [Client] Error reading response from backend!" << endl;
             quit=true;
         } else { // process request depending on type
             cout << "[LOG] [Client] Received " << res << " bytes." << endl;

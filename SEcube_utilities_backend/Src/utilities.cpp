@@ -47,6 +47,7 @@ int list_devices(int sock) {
 
 		// For GUI interfacing:
 		if(gui_server_on) {
+			// Prepare response to GUI:
 			strcpy(resp.paths[index], p.first.c_str());
 			strcpy(resp.serials[index], p.second.c_str());
 		}
@@ -57,20 +58,10 @@ int list_devices(int sock) {
 	// For GUI interfacing:
 	if(gui_server_on) {
 
-		std::stringstream ss; // any stream can be used
-
-		{
-			cereal::BinaryOutputArchive oarchive(ss); // Create an output archive
-
-			// Prepare response to GUI:
-			resp.err_code = 0;
-			resp.num_devices=numdevices;
-			oarchive(resp);
-
-		} // archive goes out of scope, ensuring all contents are flushed
-
-		// Send response to GUI:
-		send(sock, ss.str().c_str(), ss.str().length(), 0);
+		// Prepare response to GUI:
+		resp.err_code = 0;
+		resp.num_devices=numdevices;
+		sendResponseToGUI<Response_DEV_LIST>(sock, resp);
 	}
 
 
@@ -83,7 +74,7 @@ int list_devices(int sock) {
 // returns: number of stored keys inside the SEcube device, or -1 in case of error.
 int list_keys(int sock) {
 
-	Response_LIST_KEYS resp;
+	Response_LIST_KEYS resp; // Response to GUI, used if gui_server_on
 
 	vector<pair<uint32_t, uint16_t>> keys;
 	try{
@@ -109,6 +100,7 @@ int list_keys(int sock) {
 
 			// For GUI interfacing:
 			if(gui_server_on) {
+				// Prepare response to GUI:
 				resp.key_ids[cnt] = k.first;
 				resp.key_sizes[cnt] = k.second;
 			}
@@ -119,21 +111,10 @@ int list_keys(int sock) {
 
 	// For GUI interfacing:
 	if(gui_server_on) {
-
-		std::stringstream ss; // any stream can be used
-
-		{
-			cereal::BinaryOutputArchive oarchive(ss); // Create an output archive
-
-			// Prepare response to GUI:
-			resp.err_code = 0;
-			resp.num_keys = keys.size();
-			oarchive(resp);
-
-		} // archive goes out of scope, ensuring all contents are flushed
-
-		// Send response to GUI:
-		send(sock, ss.str().c_str(), ss.str().length(), 0);
+		// Prepare response to GUI:
+		resp.err_code = 0;
+		resp.num_keys = keys.size();
+		sendResponseToGUI<Response_LIST_KEYS>(sock, resp);
 	}
 
 	return keys.size();

@@ -41,7 +41,6 @@ int main(int argc, char *argv[]) {
 	utility utility;
 
 	int s1 = -1; // Socket used for GUI interfacing
-	std::stringstream ss; // any stream can be used
 
 	int cur = 1;
 	while (cur < argc) {
@@ -159,7 +158,15 @@ int main(int argc, char *argv[]) {
 			s1 = network(comm_port);
 		}
 
-		login(new_pin, deviceID);
+		{
+			int err = login(new_pin, deviceID);
+			// For GUI interfacing:
+			if( (err<0) && (gui_server_on) ) {
+				Response_GENERIC resp;
+				sendErrorToGUI<Response_GENERIC>(s1, resp, -1, "Error during login!");
+			}
+		}
+
 		if (keyID != 0)
 			encryption(s1, path, keyID, alg);
 		else {
@@ -259,6 +266,7 @@ int main(int argc, char *argv[]) {
 
 		{
 			int err = login(new_pin, deviceID);
+			// For GUI interfacing:
 			if( (err<0) && (gui_server_on) ) {
 				Response_LIST_KEYS resp;
 				sendErrorToGUI<Response_LIST_KEYS>(s1, resp, -1, "Error during login!");

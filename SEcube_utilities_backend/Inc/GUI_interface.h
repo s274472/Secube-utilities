@@ -89,5 +89,24 @@ void sendErrorToGUI(int sock, Response resp, int err_code, string err_msg) {
 	return;
 }
 
+template <class Response>
+void sendResponseToGUI(int sock, Response resp) {
+
+	std::stringstream ss; // any stream can be used
+
+	{
+		cereal::BinaryOutputArchive oarchive(ss); // Create an output archive
+
+		// Prepare response to GUI:
+		oarchive(resp);
+
+	} // archive goes out of scope, ensuring all contents are flushed
+
+	// Send response to GUI:
+	send(sock, ss.str().c_str(), ss.str().length(), 0);
+
+	return;
+}
+
 
 #endif /* INC_GUI_INTERFACE_H_ */

@@ -31,6 +31,6 @@ RESOURCES += \
 DISTFILES += \
     ../../../../../logo (1)/logo_large.png
 
-#AR LIBS += "C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\x86_64-w64-mingw32\lib\libws2_32.a"
-LIBS += "C:\mingw64\x86_64-w64-mingw32\lib\libws2_32.a"
+LIBS += "C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\x86_64-w64-mingw32\lib\libws2_32.a"
+#LIBS += "C:\mingw64\x86_64-w64-mingw32\lib\libws2_32.a"
 LIBS += -lwsock32
