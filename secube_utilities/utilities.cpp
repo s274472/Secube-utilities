@@ -244,9 +244,13 @@ void Utilities::on_decrypt_button_clicked()
 void Utilities::on_listkeys_button_clicked()
 {
 
+    QString keyslist_command = "secube_cmd.exe -dev 0 -kl -p ";
+    keyslist_command += ui->pin_line->text();
+    keyslist_command += " -gui_server";
+    cout << keyslist_command.toUtf8().constData() << endl;
     // Send request and wait for response:
     Response_LIST_KEYS resp;
-    resp = sendRequestToBackend<Response_LIST_KEYS>("secube_cmd.exe -kl -gui_server");
+    resp = sendRequestToBackend<Response_LIST_KEYS>(keyslist_command.toUtf8().constData());
 
     // Update UI:
     if(resp.err_code<0) {
@@ -265,6 +269,6 @@ void Utilities::on_listkeys_button_clicked()
 
 void Utilities::on_encrypt_button_clicked()
 {
-    ui ->textEdit ->setText("Ciao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\n");
+    //ui ->textEdit ->setText("Ciao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\n");
 }
 

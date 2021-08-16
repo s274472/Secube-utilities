@@ -43,7 +43,7 @@ public:
     QLabel *label_6;
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
-    QTextEdit *textEdit;
+    QTextEdit *devices_textEdit_1;
     QLineEdit *pin_line;
     QLabel *label;
     QLineEdit *key_line;
@@ -168,10 +168,10 @@ public:
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
         scrollAreaWidgetContents->setGeometry(QRect(0, 0, 429, 109));
-        textEdit = new QTextEdit(scrollAreaWidgetContents);
-        textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setGeometry(QRect(0, 0, 431, 111));
-        textEdit->setReadOnly(true);
+        devices_textEdit_1 = new QTextEdit(scrollAreaWidgetContents);
+        devices_textEdit_1->setObjectName(QString::fromUtf8("devices_textEdit_1"));
+        devices_textEdit_1->setGeometry(QRect(0, 0, 431, 111));
+        devices_textEdit_1->setReadOnly(true);
         scrollArea->setWidget(scrollAreaWidgetContents);
         pin_line = new QLineEdit(tab_1);
         pin_line->setObjectName(QString::fromUtf8("pin_line"));
