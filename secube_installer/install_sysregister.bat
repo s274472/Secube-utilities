@@ -2,6 +2,12 @@ echo off
 
 REM is a command used to express comments, those lines will not be executed
 
+REM ----------------------------------------------------------------------------------------------
+
+REM Add the secube program directory to PATH, in order to run secube_cmd.exe from everywhere
+setx path "%path%;'%ProgramFiles%'\secube"
+
+
 REM -------------------------------------------------------------------------------------------
 
 REM Elevate privileges
