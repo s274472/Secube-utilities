@@ -1,4 +1,5 @@
 #include "../Inc/decryption.h"
+#include "../Inc/GUI_interface.h"
 
 extern unique_ptr<L0> l0;
 extern unique_ptr<L1> l1;
@@ -40,7 +41,9 @@ int decryption(string filename) {
 	return 0;
 }
 
-int decryption_w_encrypted_filename(string filename) {
+int decryption_w_encrypted_filename(int sock, string filename) {
+
+	Response_GENERIC resp;
 
 	// Print the title:
 	cout << "SEcube decrypt utility" << endl << endl;
@@ -72,6 +75,12 @@ int decryption_w_encrypted_filename(string filename) {
 	} else {
 
 		cout << "Error decrypting the file!" << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Error decrypting the file!");
+		}
+
 		return -1;
 	}
 
@@ -80,6 +89,11 @@ int decryption_w_encrypted_filename(string filename) {
 	outFile.close();
 
 	cout << "File correctly decrypted!" << endl;
+
+	// For GUI interfacing:
+	if(gui_server_on) {
+		sendErrorToGUI<Response_GENERIC>(sock, resp, 0, "File correctly decrypted!"); // In this case err_code = 0 means everything went correctly
+	}
 
 	return 0;
 }

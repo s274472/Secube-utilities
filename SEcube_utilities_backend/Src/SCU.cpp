@@ -99,7 +99,6 @@ int main(int argc, char *argv[]) {
 		}
 		//Gui Server
 		if (strcmp(argv[cur], "-gui_server") == 0) {
-			//utility = GUI_SERVER;
 			gui_server_on = true;
 		}
 		//User(s) ID(s)
@@ -158,6 +157,7 @@ int main(int argc, char *argv[]) {
 			s1 = network(comm_port);
 		}
 
+		// Login:
 		{
 			int err = login(new_pin, deviceID);
 			// For GUI interfacing:
@@ -197,6 +197,7 @@ int main(int argc, char *argv[]) {
 				sekey_stop();
 			}
 		}
+
 		logout();
 
 		// Clean GUI connection:
@@ -206,21 +207,57 @@ int main(int argc, char *argv[]) {
 
 		break;
 	case DECRYPTION:
-		login(new_pin, deviceID);
+
+		// Connect to the GUI:
+		if(gui_server_on){
+			s1 = network(comm_port);
+		}
+
+		// Login:
+		{
+			int err = login(new_pin, deviceID);
+			// For GUI interfacing:
+			if( (err<0) && (gui_server_on) ) {
+				Response_GENERIC resp;
+				sendErrorToGUI<Response_GENERIC>(s1, resp, -1, "Error during login!");
+			}
+		}
+
 		if (decrypt_with_sekey) {
 			if (!read_sekey_update_path(*l0.get(), l1.get())) {
 				cout << "Update the sekey path!" << endl;
+
+				// For GUI interfacing:
+				if(gui_server_on) {
+					Response_GENERIC resp;
+					sendErrorToGUI<Response_GENERIC>(s1, resp, -1, "Update the sekey path!");
+				}
+
 				return -1;
 			}
 			if(sekey_start(*l0, l1.get()) != 0){
 				cout << "Error starting SEkey!" << endl;
+
+				// For GUI interfacing:
+				if(gui_server_on) {
+					Response_GENERIC resp;
+					sendErrorToGUI<Response_GENERIC>(s1, resp, -1, "Error starting SEkey!");
+				}
+
 				return -1;
 			}
 		}
-		decryption_w_encrypted_filename(path);
+		decryption_w_encrypted_filename(s1, path);
 		if (decrypt_with_sekey)
 			sekey_stop();
+
 		logout();
+
+		// Clean GUI connection:
+		if(gui_server_on){
+			closeAndCleanConnection(s1);
+		}
+
 		break;
 	case DIGEST:
 		login(new_pin, deviceID);

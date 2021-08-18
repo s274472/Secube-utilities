@@ -56,6 +56,7 @@ public:
     QLabel *label_7;
     QComboBox *comboBox;
     QProgressBar *progressBar_3;
+    QLabel *label_21;
     QWidget *tab_2;
     QLabel *label_9;
     QLineEdit *lineEdit;
@@ -215,6 +216,9 @@ public:
         progressBar_3->setObjectName(QString::fromUtf8("progressBar_3"));
         progressBar_3->setGeometry(QRect(10, 410, 118, 23));
         progressBar_3->setValue(0);
+        label_21 = new QLabel(tab_1);
+        label_21->setObjectName(QString::fromUtf8("label_21"));
+        label_21->setGeometry(QRect(380, 410, 221, 21));
         tabWidget->addTab(tab_1, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
@@ -425,6 +429,7 @@ public:
         comboBox->setItemText(0, QCoreApplication::translate("Utilities", "AES_HMACSHA256", nullptr));
         comboBox->setItemText(1, QCoreApplication::translate("Utilities", "AES (not available)", nullptr));
 
+        label_21->setText(QCoreApplication::translate("Utilities", "Before listing keys, please insert your pin!", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_1), QCoreApplication::translate("Utilities", "Encryption", nullptr));
         label_9->setText(QCoreApplication::translate("Utilities", "File:", nullptr));
         browseButton_2->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));

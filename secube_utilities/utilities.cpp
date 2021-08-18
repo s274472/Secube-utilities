@@ -237,24 +237,62 @@ void Utilities::on_deviceListButton_2_clicked()
 
 void Utilities::on_decrypt_button_clicked()
 {
+    // Prepare command:
+    QString command = "secube_cmd.exe -gui_server -d ";
 
+    if( ui->pin_line->text().size()>0 ) {
+        command += "-p";
+        command += " " + ui->pin_line->text() + " ";
+    }
+
+    if( ui->device_line->text().size()>0 ) {
+        command += "-dev";
+        command += " " + ui->device_line->text() + " ";
+    }
+
+    if( ui->file_line->text().size()>0 ) {
+        command += "-f";
+        command += " " + ui->file_line->text() + " ";
+    }
+
+    cout << command.toUtf8().constData() << endl; // For Debug
+
+    // Send request and wait for response:
+    Response_GENERIC resp;
+    resp = sendRequestToBackend<Response_GENERIC>(command.toUtf8().constData());
+
+    // Update UI:
+    if(resp.err_code<0) {
+        cout << resp.err_msg << endl;
+        QMessageBox::information(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+    else {
+        cout << resp.err_msg << endl;
+        QMessageBox::information(0, QString("Done!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
 }
 
 
 void Utilities::on_listkeys_button_clicked()
 {
-
     // Prepare command:
-    QString keyslist_command = "secube_cmd.exe -kl -p ";
-    keyslist_command += ui->pin_line->text() + " ";
-    keyslist_command += "-dev ";
-    keyslist_command += ui->device_line->text();
-    keyslist_command += " -gui_server";
-    cout << keyslist_command.toUtf8().constData() << endl; // For Debug
+    QString command = "secube_cmd.exe -gui_server -kl ";
+
+    if( ui->pin_line->text().size()>0 ) {
+        command += "-p";
+        command += " " + ui->pin_line->text() + " ";
+    }
+
+    if( ui->device_line->text().size()>0 ) {
+        command += "-dev";
+        command += " " + ui->device_line->text() + " ";
+    }
+
+    cout << command.toUtf8().constData() << endl; // For Debug
 
     // Send request and wait for response:
     Response_LIST_KEYS resp;
-    resp = sendRequestToBackend<Response_LIST_KEYS>(keyslist_command.toUtf8().constData());
+    resp = sendRequestToBackend<Response_LIST_KEYS>(command.toUtf8().constData());
 
     // Update UI:
     if(resp.err_code<0) {
@@ -273,6 +311,60 @@ void Utilities::on_listkeys_button_clicked()
 
 void Utilities::on_encrypt_button_clicked()
 {
-    //ui ->textEdit ->setText("Ciao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\nCiao\n");
+    // Prepare command:
+    QString command = "secube_cmd.exe -gui_server -e ";
+
+    if( ui->pin_line->text().size()>0 ) {
+        command += "-p";
+        command += " " + ui->pin_line->text() + " ";
+    }
+
+    if( ui->device_line->text().size()>0 ) {
+        command += "-dev";
+        command += " " + ui->device_line->text() + " ";
+    }
+
+    if( ui->file_line->text().size()>0 ) {
+        command += "-f";
+        command += " " + ui->file_line->text() + " ";
+    }
+
+    if( ui->key_line->isEnabled() && ui->key_line->text().size()>0 ) {
+        command += "-k";
+        command += " " + ui->key_line->text() + " ";
+    }
+
+    if( ui->group_line->isEnabled() && ui->group_line->text().size()>0 ){
+        command += "-g";
+        command += " " + ui->group_line->text() + " ";
+    }
+
+    if( ui->user_line->isEnabled() && ui->user_line->text().size()>0 ){
+        command += "-u";
+        command += " " + ui->user_line->text() + " ";
+    }
+
+    if(ui->comboBox->currentIndex()==0) {
+        command += "-aes_hmac ";
+    } else {
+        command += "-aes ";
+    }
+
+    cout << command.toUtf8().constData() << endl; // For Debug
+
+    // Send request and wait for response:
+    Response_GENERIC resp;
+    resp = sendRequestToBackend<Response_GENERIC>(command.toUtf8().constData());
+
+    // Update UI:
+    if(resp.err_code<0) {
+        cout << resp.err_msg << endl;
+        QMessageBox::information(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+    else {
+        cout << resp.err_msg << endl;
+        QMessageBox::information(0, QString("Done!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+
 }
 
