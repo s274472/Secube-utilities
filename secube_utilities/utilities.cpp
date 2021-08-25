@@ -56,7 +56,7 @@ void Utilities::on_deviceListButton_clicked()
     // Update UI:
     if(resp.err_code<0) {
         cout << resp.err_msg << endl;
-        QMessageBox::information(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+        QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
         int i = 0;
@@ -232,6 +232,22 @@ void Utilities::on_digest_button_clicked()
 void Utilities::on_deviceListButton_2_clicked()
 {
 
+    // Send request and wait for response:
+    Response_DEV_LIST resp;
+    resp = sendRequestToBackend<Response_DEV_LIST>("secube_cmd.exe -dl -gui_server");
+
+    // Update UI:
+    if(resp.err_code<0) {
+        cout << resp.err_msg << endl;
+        QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+    else {
+        int i = 0;
+        for(i=0; i<resp.num_devices;i++) {
+            cout << resp.serials[i] << endl;
+        }
+    }
+
 }
 
 
@@ -264,7 +280,7 @@ void Utilities::on_decrypt_button_clicked()
     // Update UI:
     if(resp.err_code<0) {
         cout << resp.err_msg << endl;
-        QMessageBox::information(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+        QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
         cout << resp.err_msg << endl;
@@ -297,7 +313,7 @@ void Utilities::on_listkeys_button_clicked()
     // Update UI:
     if(resp.err_code<0) {
         cout << resp.err_msg << endl;
-        QMessageBox::information(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+        QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
         int i = 0;
@@ -359,7 +375,7 @@ void Utilities::on_encrypt_button_clicked()
     // Update UI:
     if(resp.err_code<0) {
         cout << resp.err_msg << endl;
-        QMessageBox::information(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+        QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
         cout << resp.err_msg << endl;
