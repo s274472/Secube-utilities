@@ -399,7 +399,7 @@
        <string>File:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="file_line_Decryption">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -435,7 +435,7 @@
        <string>Device ID:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_2">
+     <widget class="QLineEdit" name="device_line_Decryption">
       <property name="geometry">
        <rect>
         <x>70</x>
@@ -458,7 +458,7 @@
        <string>PIN:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_3">
+     <widget class="QLineEdit" name="pin_line_Decryption">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -494,7 +494,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="deviceListButton_2">
+     <widget class="QPushButton" name="deviceListButton_Decryption">
       <property name="geometry">
        <rect>
         <x>600</x>

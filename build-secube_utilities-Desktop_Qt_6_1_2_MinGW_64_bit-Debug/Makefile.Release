@@ -564,53 +564,6 @@ release/utilities.o: ../secube_utilities/utilities.cpp ../secube_utilities/utili
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtabwidget.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qicon.h \
 		ui_utilities.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtCore/QVariant \
-		../../../../Qt/6.1.2/mingw81_64/include/QtGui/QIcon \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QApplication \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qapplication.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qcoreapplication.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qeventloop.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qguiapplication.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qinputmethod.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qlocale.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QCheckBox \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qcheckbox.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractbutton.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QComboBox \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qcombobox.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qstyleoption.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractspinbox.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qvalidator.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qregularexpression.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qslider.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractslider.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qstyle.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtabbar.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qrubberband.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qframe.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qabstractitemmodel.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QLabel \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qlabel.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qpicture.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qtextdocument.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QLineEdit \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qlineedit.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qtextcursor.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qtextformat.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qpen.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qtextoption.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QProgressBar \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qprogressbar.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QPushButton \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qpushbutton.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QScrollArea \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qscrollarea.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QTabWidget \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QTextEdit \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtextedit.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QWidget \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QFileDialog \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qfiledialog.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qdir.h \
@@ -619,6 +572,7 @@ release/utilities.o: ../secube_utilities/utilities.cpp ../secube_utilities/utili
 		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qfileinfo.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qdatetime.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qcalendar.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qlocale.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qdialog.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QMessageBox \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qmessagebox.h \

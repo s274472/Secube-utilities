@@ -113,7 +113,7 @@ void Utilities::on_browseButton_2_clicked()
     //Open a dialog to choose the file, save the path in the target_file variable
     target_file = QFileDialog::getOpenFileName();
     //And update the content of the "File" form.
-    ui -> lineEdit -> setText(target_file);
+    ui -> file_line_Decryption -> setText(target_file);
 }
 
 
@@ -229,7 +229,7 @@ void Utilities::on_digest_button_clicked()
 }
 
 
-void Utilities::on_deviceListButton_2_clicked()
+void Utilities::on_deviceListButton_Decryption_clicked()
 {
 
     // Send request and wait for response:
@@ -256,19 +256,19 @@ void Utilities::on_decrypt_button_clicked()
     // Prepare command:
     QString command = "secube_cmd.exe -gui_server -d ";
 
-    if( ui->pin_line->text().size()>0 ) {
+    if( ui->pin_line_Decryption->text().size()>0 ) {
         command += "-p";
-        command += " " + ui->pin_line->text() + " ";
+        command += " " + ui->pin_line_Decryption->text() + " ";
     }
 
-    if( ui->device_line->text().size()>0 ) {
+    if( ui->device_line_Decryption->text().size()>0 ) {
         command += "-dev";
-        command += " " + ui->device_line->text() + " ";
+        command += " " + ui->device_line_Decryption->text() + " ";
     }
 
-    if( ui->file_line->text().size()>0 ) {
+    if( ui->file_line_Decryption->text().size()>0 ) {
         command += "-f";
-        command += " " + ui->file_line->text() + " ";
+        command += " " + ui->file_line_Decryption->text() + " ";
     }
 
     cout << command.toUtf8().constData() << endl; // For Debug

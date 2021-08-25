@@ -52,7 +52,7 @@ private slots:
 
     void on_digest_button_clicked();
 
-    void on_deviceListButton_2_clicked();
+    void on_deviceListButton_Decryption_clicked();
 
     void on_decrypt_button_clicked();
 
