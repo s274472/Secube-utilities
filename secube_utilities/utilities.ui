@@ -58,7 +58,7 @@
      <bool>true</bool>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab_1">
      <attribute name="title">
@@ -609,7 +609,7 @@
        <string>Device ID:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_5">
+     <widget class="QLineEdit" name="device_line_Digest">
       <property name="geometry">
        <rect>
         <x>70</x>
@@ -632,7 +632,7 @@
        <string>PIN:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_6">
+     <widget class="QLineEdit" name="pin_line_Digest">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -668,7 +668,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="deviceListButton_3">
+     <widget class="QPushButton" name="deviceListButton_Digest">
       <property name="geometry">
        <rect>
         <x>600</x>
@@ -812,7 +812,7 @@
        </property>
       </widget>
      </widget>
-     <widget class="QPushButton" name="listkeys_button_2">
+     <widget class="QPushButton" name="listkeys_button_Digest">
       <property name="geometry">
        <rect>
         <x>620</x>

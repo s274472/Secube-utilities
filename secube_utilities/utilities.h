@@ -22,6 +22,16 @@ private slots:
 
     void on_deviceListButton_clicked();
 
+    void on_deviceListButton_Digest_clicked();
+
+    void on_deviceListButton_Decryption_clicked();
+
+    void on_deviceListButton_4_clicked();
+
+    void on_listkeys_button_clicked();
+
+    void on_listkeys_button_Digest_clicked();
+
     void on_group_line_textChanged(const QString &arg1);
 
     void on_user_line_textChanged(const QString &arg1);
@@ -42,21 +52,11 @@ private slots:
 
     void on_browseButton_4_clicked();
 
-    void on_deviceListButton_4_clicked();
-
     void on_updatePath_button_clicked();
-
-    void on_deviceListButton_3_clicked();
-
-    void on_listkeys_button_2_clicked();
 
     void on_digest_button_clicked();
 
-    void on_deviceListButton_Decryption_clicked();
-
     void on_decrypt_button_clicked();
-
-    void on_listkeys_button_clicked();
 
     void on_encrypt_button_clicked();
 

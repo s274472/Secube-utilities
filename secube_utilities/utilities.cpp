@@ -46,29 +46,6 @@ void Utilities::on_browseButton_clicked()
     ui -> file_line -> setText(target_file);
 }
 
-
-void Utilities::on_deviceListButton_clicked()
-{
-    // Send request and wait for response:
-    Response_DEV_LIST resp;
-    resp = sendRequestToBackend<Response_DEV_LIST>("secube_cmd.exe -dl -gui_server");
-
-    // Update UI:
-    if(resp.err_code<0) {
-        cout << resp.err_msg << endl;
-        QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
-    }
-    else {
-        int i = 0;
-        for(i=0; i<resp.num_devices;i++) {
-            cout << resp.serials[i] << endl;
-        }
-    }
-
-}
-
-
-
 void Utilities::on_group_line_textChanged(const QString &arg1)
 {
     if(arg1.isEmpty())
@@ -210,24 +187,30 @@ void Utilities::on_updatePath_button_clicked()
 
 }
 
-
-void Utilities::on_deviceListButton_3_clicked()
-{
-
-}
-
-
-void Utilities::on_listkeys_button_2_clicked()
-{
-
-}
-
-
 void Utilities::on_digest_button_clicked()
 {
 
 }
 
+void Utilities::on_deviceListButton_clicked()
+{
+    // Send request and wait for response:
+    Response_DEV_LIST resp;
+    resp = sendRequestToBackend<Response_DEV_LIST>("secube_cmd.exe -dl -gui_server");
+
+    // Update UI:
+    if(resp.err_code<0) {
+        cout << resp.err_msg << endl;
+        QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+    else {
+        int i = 0;
+        for(i=0; i<resp.num_devices;i++) {
+            cout << resp.serials[i] << endl;
+        }
+    }
+
+}
 
 void Utilities::on_deviceListButton_Decryption_clicked()
 {
@@ -245,6 +228,98 @@ void Utilities::on_deviceListButton_Decryption_clicked()
         int i = 0;
         for(i=0; i<resp.num_devices;i++) {
             cout << resp.serials[i] << endl;
+        }
+    }
+
+}
+
+void Utilities::on_deviceListButton_Digest_clicked()
+{
+
+    // Send request and wait for response:
+    Response_DEV_LIST resp;
+    resp = sendRequestToBackend<Response_DEV_LIST>("secube_cmd.exe -dl -gui_server");
+
+    // Update UI:
+    if(resp.err_code<0) {
+        cout << resp.err_msg << endl;
+        QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+    else {
+        int i = 0;
+        for(i=0; i<resp.num_devices;i++) {
+            cout << resp.serials[i] << endl;
+        }
+    }
+
+}
+
+void Utilities::on_listkeys_button_clicked()
+{
+    // Prepare command:
+    QString command = "secube_cmd.exe -gui_server -kl ";
+
+    if( ui->pin_line->text().size()>0 ) {
+        command += "-p";
+        command += " " + ui->pin_line->text() + " ";
+    }
+
+    if( ui->device_line->text().size()>0 ) {
+        command += "-dev";
+        command += " " + ui->device_line->text() + " ";
+    }
+
+    cout << command.toUtf8().constData() << endl; // For Debug
+
+    // Send request and wait for response:
+    Response_LIST_KEYS resp;
+    resp = sendRequestToBackend<Response_LIST_KEYS>(command.toUtf8().constData());
+
+    // Update UI:
+    if(resp.err_code<0) {
+        cout << resp.err_msg << endl;
+        QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+    else {
+        int i = 0;
+        for(i=0; i<resp.num_keys;i++) {
+            cout << resp.key_ids[i] << endl;
+        }
+    }
+
+}
+
+void Utilities::on_listkeys_button_Digest_clicked()
+{
+
+    // Prepare command:
+    QString command = "secube_cmd.exe -gui_server -kl ";
+
+    if( ui->pin_line_Digest->text().size()>0 ) {
+        command += "-p";
+        command += " " + ui->pin_line_Digest->text() + " ";
+    }
+
+    if( ui->device_line_Digest->text().size()>0 ) {
+        command += "-dev";
+        command += " " + ui->device_line_Digest->text() + " ";
+    }
+
+    cout << command.toUtf8().constData() << endl; // For Debug
+
+    // Send request and wait for response:
+    Response_LIST_KEYS resp;
+    resp = sendRequestToBackend<Response_LIST_KEYS>(command.toUtf8().constData());
+
+    // Update UI:
+    if(resp.err_code<0) {
+        cout << resp.err_msg << endl;
+        QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+    else {
+        int i = 0;
+        for(i=0; i<resp.num_keys;i++) {
+            cout << resp.key_ids[i] << endl;
         }
     }
 
@@ -287,43 +362,6 @@ void Utilities::on_decrypt_button_clicked()
         QMessageBox::information(0, QString("Done!"), QString(resp.err_msg), QMessageBox::Ok);
     }
 }
-
-
-void Utilities::on_listkeys_button_clicked()
-{
-    // Prepare command:
-    QString command = "secube_cmd.exe -gui_server -kl ";
-
-    if( ui->pin_line->text().size()>0 ) {
-        command += "-p";
-        command += " " + ui->pin_line->text() + " ";
-    }
-
-    if( ui->device_line->text().size()>0 ) {
-        command += "-dev";
-        command += " " + ui->device_line->text() + " ";
-    }
-
-    cout << command.toUtf8().constData() << endl; // For Debug
-
-    // Send request and wait for response:
-    Response_LIST_KEYS resp;
-    resp = sendRequestToBackend<Response_LIST_KEYS>(command.toUtf8().constData());
-
-    // Update UI:
-    if(resp.err_code<0) {
-        cout << resp.err_msg << endl;
-        QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
-    }
-    else {
-        int i = 0;
-        for(i=0; i<resp.num_keys;i++) {
-            cout << resp.key_ids[i] << endl;
-        }
-    }
-
-}
-
 
 void Utilities::on_encrypt_button_clicked()
 {

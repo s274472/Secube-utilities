@@ -76,12 +76,12 @@ public:
     QLineEdit *lineEdit_4;
     QPushButton *browseButton_3;
     QLabel *label_13;
-    QLineEdit *lineEdit_5;
+    QLineEdit *device_line_Digest;
     QLabel *label_14;
-    QLineEdit *lineEdit_6;
+    QLineEdit *pin_line_Digest;
     QScrollArea *scrollArea_4;
     QWidget *scrollAreaWidgetContents_4;
-    QPushButton *deviceListButton_3;
+    QPushButton *deviceListButton_Digest;
     QLabel *label_15;
     QLineEdit *lineEdit_7;
     QLabel *label_16;
@@ -92,7 +92,7 @@ public:
     QComboBox *comboBox_2;
     QScrollArea *scrollArea_5;
     QWidget *scrollAreaWidgetContents_5;
-    QPushButton *listkeys_button_2;
+    QPushButton *listkeys_button_Digest;
     QPushButton *digest_button;
     QProgressBar *progressBar;
     QWidget *tab_4;
@@ -282,16 +282,16 @@ public:
         label_13 = new QLabel(tab_3);
         label_13->setObjectName(QString::fromUtf8("label_13"));
         label_13->setGeometry(QRect(10, 80, 61, 16));
-        lineEdit_5 = new QLineEdit(tab_3);
-        lineEdit_5->setObjectName(QString::fromUtf8("lineEdit_5"));
-        lineEdit_5->setGeometry(QRect(70, 80, 171, 21));
+        device_line_Digest = new QLineEdit(tab_3);
+        device_line_Digest->setObjectName(QString::fromUtf8("device_line_Digest"));
+        device_line_Digest->setGeometry(QRect(70, 80, 171, 21));
         label_14 = new QLabel(tab_3);
         label_14->setObjectName(QString::fromUtf8("label_14"));
         label_14->setGeometry(QRect(10, 120, 47, 16));
-        lineEdit_6 = new QLineEdit(tab_3);
-        lineEdit_6->setObjectName(QString::fromUtf8("lineEdit_6"));
-        lineEdit_6->setGeometry(QRect(40, 120, 181, 21));
-        lineEdit_6->setEchoMode(QLineEdit::Password);
+        pin_line_Digest = new QLineEdit(tab_3);
+        pin_line_Digest->setObjectName(QString::fromUtf8("pin_line_Digest"));
+        pin_line_Digest->setGeometry(QRect(40, 120, 181, 21));
+        pin_line_Digest->setEchoMode(QLineEdit::Password);
         scrollArea_4 = new QScrollArea(tab_3);
         scrollArea_4->setObjectName(QString::fromUtf8("scrollArea_4"));
         scrollArea_4->setGeometry(QRect(270, 90, 431, 111));
@@ -300,9 +300,9 @@ public:
         scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
         scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 429, 109));
         scrollArea_4->setWidget(scrollAreaWidgetContents_4);
-        deviceListButton_3 = new QPushButton(tab_3);
-        deviceListButton_3->setObjectName(QString::fromUtf8("deviceListButton_3"));
-        deviceListButton_3->setGeometry(QRect(600, 210, 101, 23));
+        deviceListButton_Digest = new QPushButton(tab_3);
+        deviceListButton_Digest->setObjectName(QString::fromUtf8("deviceListButton_Digest"));
+        deviceListButton_Digest->setGeometry(QRect(600, 210, 101, 23));
         label_15 = new QLabel(tab_3);
         label_15->setObjectName(QString::fromUtf8("label_15"));
         label_15->setGeometry(QRect(10, 170, 55, 16));
@@ -337,9 +337,9 @@ public:
         scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
         scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 429, 129));
         scrollArea_5->setWidget(scrollAreaWidgetContents_5);
-        listkeys_button_2 = new QPushButton(tab_3);
-        listkeys_button_2->setObjectName(QString::fromUtf8("listkeys_button_2"));
-        listkeys_button_2->setGeometry(QRect(620, 410, 80, 25));
+        listkeys_button_Digest = new QPushButton(tab_3);
+        listkeys_button_Digest->setObjectName(QString::fromUtf8("listkeys_button_Digest"));
+        listkeys_button_Digest->setGeometry(QRect(620, 410, 80, 25));
         digest_button = new QPushButton(tab_3);
         digest_button->setObjectName(QString::fromUtf8("digest_button"));
         digest_button->setGeometry(QRect(0, 440, 711, 23));
@@ -400,7 +400,7 @@ public:
 
         retranslateUi(Utilities);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(Utilities);
@@ -446,7 +446,7 @@ public:
         browseButton_3->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
         label_13->setText(QCoreApplication::translate("Utilities", "Device ID:", nullptr));
         label_14->setText(QCoreApplication::translate("Utilities", "PIN:", nullptr));
-        deviceListButton_3->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
+        deviceListButton_Digest->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
         label_15->setText(QCoreApplication::translate("Utilities", "Group:", nullptr));
 #if QT_CONFIG(tooltip)
         lineEdit_7->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>If specified, find keys automatically. Insert it as G+the number of the group (e.g., G10).</p></body></html>", nullptr));
@@ -460,7 +460,7 @@ public:
         comboBox_2->setItemText(0, QCoreApplication::translate("Utilities", "HMAC-SHA-256", nullptr));
         comboBox_2->setItemText(1, QCoreApplication::translate("Utilities", "SHA-256", nullptr));
 
-        listkeys_button_2->setText(QCoreApplication::translate("Utilities", "List keys...", nullptr));
+        listkeys_button_Digest->setText(QCoreApplication::translate("Utilities", "List keys...", nullptr));
         digest_button->setText(QCoreApplication::translate("Utilities", "Compute Digest", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("Utilities", "Digest", nullptr));
         label_8->setText(QCoreApplication::translate("Utilities", "Path:", nullptr));
