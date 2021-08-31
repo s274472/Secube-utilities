@@ -6,6 +6,7 @@
 #include <thread> // thread::sleep_for
 #include <fstream>
 #include <iostream>
+#include "../Inc/GUI_interface.h"
 
 using namespace std;
 

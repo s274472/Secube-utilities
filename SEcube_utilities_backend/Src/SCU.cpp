@@ -260,24 +260,61 @@ int main(int argc, char *argv[]) {
 
 		break;
 	case DIGEST:
-		login(new_pin, deviceID);
+
+		// Connect to the GUI:
+		if(gui_server_on){
+			s1 = network(comm_port);
+		}
+
+		// Login:
+		{
+			int err = login(new_pin, deviceID);
+			// For GUI interfacing:
+			if( (err<0) && (gui_server_on) ) {
+				Response_GENERIC resp;
+				sendErrorToGUI<Response_GENERIC>(s1, resp, -1, "Error during login!");
+			}
+		}
+
+
 		if (keyID != 0)
-		digest(path, keyID, alg); //algorithms : 0) SHA-256 (no key required) 1) HMAC-SHA-256
+			digest(s1, path, keyID, alg); //algorithms : 0) SHA-256 (no key required) 1) HMAC-SHA-256
 		else {
 			if (!read_sekey_update_path(*l0.get(), l1.get())) {
 				cout << "Update the sekey path!" << endl;
+
+				// For GUI interfacing:
+				if(gui_server_on) {
+					Response_GENERIC resp;
+					sendErrorToGUI<Response_GENERIC>(s1, resp, -1, "Update the sekey path!");
+				}
+
 				return -1;
 			}
 			if (find_key(keyID, user, group)) {
 				if(sekey_start(*l0, l1.get()) != 0){
 					cout << "Error starting SEkey!" << endl;
+
+					// For GUI interfacing:
+					if(gui_server_on) {
+						Response_GENERIC resp;
+						sendErrorToGUI<Response_GENERIC>(s1, resp, -1, "Error starting SEkey!");
+					}
+
 					return -1;
 				}
-				digest(path, keyID, alg);
+				digest(s1, path, keyID, alg);
 				sekey_stop();
 			}
 		}
+
 		logout();
+
+		// Clean GUI connection:
+		if(gui_server_on){
+			closeAndCleanConnection(s1);
+		}
+
 		break;
 	case DEV_LIST:
 

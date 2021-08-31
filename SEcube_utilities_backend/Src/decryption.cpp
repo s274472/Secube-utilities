@@ -1,5 +1,4 @@
 #include "../Inc/decryption.h"
-#include "../Inc/GUI_interface.h"
 
 extern unique_ptr<L0> l0;
 extern unique_ptr<L1> l1;
@@ -43,7 +42,7 @@ int decryption(string filename) {
 
 int decryption_w_encrypted_filename(int sock, string filename) {
 
-	Response_GENERIC resp;
+	Response_GENERIC resp; // Response to GUI, used if gui_server_on
 
 	// Print the title:
 	cout << "SEcube decrypt utility" << endl << endl;

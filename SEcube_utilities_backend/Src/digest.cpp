@@ -4,7 +4,9 @@ extern unique_ptr<L1> l1;
 
 //algorithms : 0) SHA-256 (no key required) 1) HMAC-SHA-256
 
-int digest(string filename, uint32_t keyID, string algo) {
+int digest(int sock, string filename, uint32_t keyID, string algo) {
+
+	Response_GENERIC resp; // Response to GUI, used if gui_server_on
 
 	int algo_number;
 
@@ -18,6 +20,12 @@ int digest(string filename, uint32_t keyID, string algo) {
 	}
 	else {
 		cout << "Invalid algorithm. Quit." << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Invalid encryption algorithm!");
+		}
+
 		return -1;
 	}
 
@@ -38,6 +46,12 @@ int digest(string filename, uint32_t keyID, string algo) {
 	}
 	else {
 		cout << "\nError opening file. Quit\n" << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Error opening file!");
+		}
+
 		return -1;
 	}
 
@@ -88,14 +102,30 @@ int digest(string filename, uint32_t keyID, string algo) {
 			// notice that, after calling the L1Digest() function, our digest will be stored inside the Digest object
 			default:
 				cout << "Input error...quit." << endl;
+
+				// For GUI interfacing:
+				if(gui_server_on) {
+					sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Input error!");
+				}
+
 				l1->L1Logout();
 				return -1;
 		}
 
 		this_thread::sleep_for(chrono::milliseconds(1000));
 		cout << "\n\nThe hex value of the digest is:" << endl;
+
+		char digest[B5_SHA256_DIGEST_SIZE]; // String that will store the digest in hex format
+
 		for(uint8_t i : data_digest.digest){
 			printf("%02x ", i);
+			sprintf(digest, "%02x ", i);
+		}
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+
+			sendErrorToGUI<Response_GENERIC>(sock, resp, 0, digest); // In this case err_code = 0 means everything went correctly
 		}
 
 		// print also recomputed digest (if any)

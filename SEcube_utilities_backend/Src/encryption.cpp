@@ -1,12 +1,11 @@
 #include "../Inc/encryption.h"
-#include "../Inc/GUI_interface.h"
 
 extern unique_ptr<L0> l0;
 extern unique_ptr<L1> l1;
 
 int encryption( int sock, string filename, uint32_t keyID, string encAlgo ) {
 
-	Response_GENERIC resp;
+	Response_GENERIC resp; // Response to GUI, used if gui_server_on
 
 	int encAlgoID;
 

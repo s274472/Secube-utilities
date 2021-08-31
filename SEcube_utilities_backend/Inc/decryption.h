@@ -4,6 +4,7 @@
 #include "../sefile/environment.h"
 #include <thread> // thread::sleep_for
 #include <fstream>
+#include "../Inc/GUI_interface.h"
 
 using namespace std;
 
