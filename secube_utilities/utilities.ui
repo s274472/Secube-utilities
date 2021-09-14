@@ -230,7 +230,7 @@
         <x>10</x>
         <y>280</y>
         <width>55</width>
-        <height>16</height>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
@@ -268,8 +268,8 @@
        <rect>
         <x>10</x>
         <y>330</y>
-        <width>61</width>
-        <height>16</height>
+        <width>101</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
@@ -367,6 +367,28 @@
        </property>
       </column>
      </widget>
+     <zorder>listkeys_button</zorder>
+     <zorder>label_3</zorder>
+     <zorder>browseButton</zorder>
+     <zorder>deviceListButton</zorder>
+     <zorder>label_5</zorder>
+     <zorder>label_6</zorder>
+     <zorder>label</zorder>
+     <zorder>encrypt_button</zorder>
+     <zorder>label_4</zorder>
+     <zorder>label_2</zorder>
+     <zorder>label_7</zorder>
+     <zorder>progressBar_3</zorder>
+     <zorder>label_21</zorder>
+     <zorder>keys_treeWidget_Encryption</zorder>
+     <zorder>devices_treeWidget_Encryption</zorder>
+     <zorder>file_line</zorder>
+     <zorder>device_line</zorder>
+     <zorder>pin_line</zorder>
+     <zorder>group_line</zorder>
+     <zorder>user_line</zorder>
+     <zorder>key_line</zorder>
+     <zorder>comboBox</zorder>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -704,7 +726,7 @@
         <x>10</x>
         <y>280</y>
         <width>55</width>
-        <height>16</height>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
@@ -726,8 +748,8 @@
        <rect>
         <x>10</x>
         <y>330</y>
-        <width>61</width>
-        <height>16</height>
+        <width>81</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
@@ -850,6 +872,27 @@
        </property>
       </column>
      </widget>
+     <zorder>label_12</zorder>
+     <zorder>file_line_Digest</zorder>
+     <zorder>browseButton_3</zorder>
+     <zorder>label_13</zorder>
+     <zorder>device_line_Digest</zorder>
+     <zorder>label_14</zorder>
+     <zorder>pin_line_Digest</zorder>
+     <zorder>deviceListButton_Digest</zorder>
+     <zorder>label_15</zorder>
+     <zorder>group_line_Digest</zorder>
+     <zorder>label_16</zorder>
+     <zorder>user_line_Digest</zorder>
+     <zorder>label_17</zorder>
+     <zorder>key_line_Digest</zorder>
+     <zorder>label_18</zorder>
+     <zorder>listkeys_button_Digest</zorder>
+     <zorder>digest_button</zorder>
+     <zorder>progressBar</zorder>
+     <zorder>devices_treeWidget_Digest</zorder>
+     <zorder>keys_treeWidget_Digest</zorder>
+     <zorder>algorithm_comboBox_Digest</zorder>
     </widget>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
@@ -860,7 +903,7 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>47</width>
+        <width>151</width>
         <height>21</height>
        </rect>
       </property>
@@ -871,9 +914,9 @@
      <widget class="QLineEdit" name="path_line_UpdatePath">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>50</x>
         <y>10</y>
-        <width>671</width>
+        <width>661</width>
         <height>20</height>
        </rect>
       </property>
@@ -1004,6 +1047,17 @@
        </property>
       </column>
      </widget>
+     <zorder>label_8</zorder>
+     <zorder>browseButton_4</zorder>
+     <zorder>label_19</zorder>
+     <zorder>device_line_UpdatePath</zorder>
+     <zorder>label_20</zorder>
+     <zorder>pin_line_UpdatePath</zorder>
+     <zorder>deviceListButton_UpdatePath</zorder>
+     <zorder>progressBar_4</zorder>
+     <zorder>updatePath_button</zorder>
+     <zorder>devices_treeWidget_UpdatePath</zorder>
+     <zorder>path_line_UpdatePath</zorder>
     </widget>
    </widget>
   </widget>
