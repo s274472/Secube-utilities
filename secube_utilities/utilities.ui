@@ -175,42 +175,6 @@
        <string>User(s):</string>
       </property>
      </widget>
-     <widget class="QScrollArea" name="scrollArea">
-      <property name="geometry">
-       <rect>
-        <x>270</x>
-        <y>90</y>
-        <width>431</width>
-        <height>111</height>
-       </rect>
-      </property>
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>429</width>
-         <height>109</height>
-        </rect>
-       </property>
-       <widget class="QTextEdit" name="devices_textEdit_1">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>431</width>
-          <height>111</height>
-         </rect>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </widget>
-     </widget>
      <widget class="QLineEdit" name="pin_line">
       <property name="geometry">
        <rect>
@@ -259,29 +223,6 @@
       <property name="text">
        <string>Encrypt</string>
       </property>
-     </widget>
-     <widget class="QScrollArea" name="scrollArea_2">
-      <property name="geometry">
-       <rect>
-        <x>270</x>
-        <y>270</y>
-        <width>431</width>
-        <height>131</height>
-       </rect>
-      </property>
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents_2">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>429</width>
-         <height>129</height>
-        </rect>
-       </property>
-      </widget>
      </widget>
      <widget class="QLabel" name="label_4">
       <property name="geometry">
@@ -381,6 +322,51 @@
        <string>Before listing keys, please insert your pin!</string>
       </property>
      </widget>
+     <widget class="QTreeWidget" name="keys_treeWidget_Encryption">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>270</y>
+        <width>431</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Key ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Key Size</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTreeWidget" name="devices_treeWidget_Encryption">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>90</y>
+        <width>431</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Device ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Device Path</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Device Serial</string>
+       </property>
+      </column>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -471,29 +457,6 @@
        <enum>QLineEdit::Password</enum>
       </property>
      </widget>
-     <widget class="QScrollArea" name="scrollArea_3">
-      <property name="geometry">
-       <rect>
-        <x>270</x>
-        <y>90</y>
-        <width>431</width>
-        <height>111</height>
-       </rect>
-      </property>
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents_3">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>429</width>
-         <height>109</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
      <widget class="QPushButton" name="deviceListButton_Decryption">
       <property name="geometry">
        <rect>
@@ -554,6 +517,31 @@
       <property name="value">
        <number>0</number>
       </property>
+     </widget>
+     <widget class="QTreeWidget" name="devices_treeWidget_Decryption">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>90</y>
+        <width>431</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Device ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Device Path</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Device Serial</string>
+       </property>
+      </column>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
@@ -644,29 +632,6 @@
       <property name="echoMode">
        <enum>QLineEdit::Password</enum>
       </property>
-     </widget>
-     <widget class="QScrollArea" name="scrollArea_4">
-      <property name="geometry">
-       <rect>
-        <x>270</x>
-        <y>90</y>
-        <width>431</width>
-        <height>111</height>
-       </rect>
-      </property>
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents_4">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>429</width>
-         <height>109</height>
-        </rect>
-       </property>
-      </widget>
      </widget>
      <widget class="QPushButton" name="deviceListButton_Digest">
       <property name="geometry">
@@ -789,29 +754,6 @@
        </property>
       </item>
      </widget>
-     <widget class="QScrollArea" name="scrollArea_5">
-      <property name="geometry">
-       <rect>
-        <x>270</x>
-        <y>270</y>
-        <width>431</width>
-        <height>131</height>
-       </rect>
-      </property>
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents_5">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>429</width>
-         <height>129</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
      <widget class="QPushButton" name="listkeys_button_Digest">
       <property name="geometry">
        <rect>
@@ -862,6 +804,51 @@
       <property name="textDirection">
        <enum>QProgressBar::TopToBottom</enum>
       </property>
+     </widget>
+     <widget class="QTreeWidget" name="devices_treeWidget_Digest">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>90</y>
+        <width>431</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Device ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Device Path</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Device Serial</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTreeWidget" name="keys_treeWidget_Digest">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>270</y>
+        <width>431</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Key ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Key Size</string>
+       </property>
+      </column>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_4">
@@ -953,29 +940,6 @@
        <enum>QLineEdit::Password</enum>
       </property>
      </widget>
-     <widget class="QScrollArea" name="scrollArea_6">
-      <property name="geometry">
-       <rect>
-        <x>270</x>
-        <y>90</y>
-        <width>431</width>
-        <height>111</height>
-       </rect>
-      </property>
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents_6">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>429</width>
-         <height>109</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
      <widget class="QPushButton" name="deviceListButton_UpdatePath">
       <property name="geometry">
        <rect>
@@ -1014,6 +978,31 @@
       <property name="text">
        <string>Update SEKey path</string>
       </property>
+     </widget>
+     <widget class="QTreeWidget" name="devices_treeWidget_UpdatePath">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>90</y>
+        <width>431</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Device ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Device Path</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Device Serial</string>
+       </property>
+      </column>
      </widget>
     </widget>
    </widget>

@@ -2,6 +2,7 @@
 #define UTILITIES_H
 
 #include <QMainWindow>
+#include <QTreeWidgetItem>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Utilities; }
@@ -59,6 +60,18 @@ private slots:
     void on_decrypt_button_clicked();
 
     void on_encrypt_button_clicked();
+
+    void on_devices_treeWidget_Decryption_itemClicked(QTreeWidgetItem *item);
+
+    void on_devices_treeWidget_Encryption_itemClicked(QTreeWidgetItem *item);
+
+    void on_devices_treeWidget_Digest_itemClicked(QTreeWidgetItem *item);
+
+    void on_devices_treeWidget_UpdatePath_itemClicked(QTreeWidgetItem *item);
+
+    void on_keys_treeWidget_Encryption_itemClicked(QTreeWidgetItem *item);
+
+    void on_keys_treeWidget_Digest_itemClicked(QTreeWidgetItem *item);
 
 private:
     Ui::Utilities *ui;

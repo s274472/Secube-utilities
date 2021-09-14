@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -21,7 +22,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTextEdit>
+#include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -41,15 +42,10 @@ public:
     QLineEdit *device_line;
     QLineEdit *file_line;
     QLabel *label_6;
-    QScrollArea *scrollArea;
-    QWidget *scrollAreaWidgetContents;
-    QTextEdit *devices_textEdit_1;
     QLineEdit *pin_line;
     QLabel *label;
     QLineEdit *key_line;
     QPushButton *encrypt_button;
-    QScrollArea *scrollArea_2;
-    QWidget *scrollAreaWidgetContents_2;
     QLabel *label_4;
     QLineEdit *group_line;
     QLabel *label_2;
@@ -57,6 +53,8 @@ public:
     QComboBox *comboBox;
     QProgressBar *progressBar_3;
     QLabel *label_21;
+    QTreeWidget *keys_treeWidget_Encryption;
+    QTreeWidget *devices_treeWidget_Encryption;
     QWidget *tab_2;
     QLabel *label_9;
     QLineEdit *file_line_Decryption;
@@ -65,12 +63,11 @@ public:
     QLineEdit *device_line_Decryption;
     QLabel *label_11;
     QLineEdit *pin_line_Decryption;
-    QScrollArea *scrollArea_3;
-    QWidget *scrollAreaWidgetContents_3;
     QPushButton *deviceListButton_Decryption;
     QCheckBox *checkBox;
     QPushButton *decrypt_button;
     QProgressBar *progressBar_2;
+    QTreeWidget *devices_treeWidget_Decryption;
     QWidget *tab_3;
     QLabel *label_12;
     QLineEdit *file_line_Digest;
@@ -79,8 +76,6 @@ public:
     QLineEdit *device_line_Digest;
     QLabel *label_14;
     QLineEdit *pin_line_Digest;
-    QScrollArea *scrollArea_4;
-    QWidget *scrollAreaWidgetContents_4;
     QPushButton *deviceListButton_Digest;
     QLabel *label_15;
     QLineEdit *group_line_Digest;
@@ -90,11 +85,11 @@ public:
     QLineEdit *key_line_Digest;
     QLabel *label_18;
     QComboBox *algorithm_comboBox_Digest;
-    QScrollArea *scrollArea_5;
-    QWidget *scrollAreaWidgetContents_5;
     QPushButton *listkeys_button_Digest;
     QPushButton *digest_button;
     QProgressBar *progressBar;
+    QTreeWidget *devices_treeWidget_Digest;
+    QTreeWidget *keys_treeWidget_Digest;
     QWidget *tab_4;
     QLabel *label_8;
     QLineEdit *path_line_UpdatePath;
@@ -103,11 +98,10 @@ public:
     QLineEdit *device_line_UpdatePath;
     QLabel *label_20;
     QLineEdit *pin_line_UpdatePath;
-    QScrollArea *scrollArea_6;
-    QWidget *scrollAreaWidgetContents_6;
     QPushButton *deviceListButton_UpdatePath;
     QProgressBar *progressBar_4;
     QPushButton *updatePath_button;
+    QTreeWidget *devices_treeWidget_UpdatePath;
 
     void setupUi(QMainWindow *Utilities)
     {
@@ -162,18 +156,6 @@ public:
         label_6 = new QLabel(tab_1);
         label_6->setObjectName(QString::fromUtf8("label_6"));
         label_6->setGeometry(QRect(10, 220, 55, 16));
-        scrollArea = new QScrollArea(tab_1);
-        scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
-        scrollArea->setGeometry(QRect(270, 90, 431, 111));
-        scrollArea->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 429, 109));
-        devices_textEdit_1 = new QTextEdit(scrollAreaWidgetContents);
-        devices_textEdit_1->setObjectName(QString::fromUtf8("devices_textEdit_1"));
-        devices_textEdit_1->setGeometry(QRect(0, 0, 431, 111));
-        devices_textEdit_1->setReadOnly(true);
-        scrollArea->setWidget(scrollAreaWidgetContents);
         pin_line = new QLineEdit(tab_1);
         pin_line->setObjectName(QString::fromUtf8("pin_line"));
         pin_line->setGeometry(QRect(40, 120, 181, 21));
@@ -187,14 +169,6 @@ public:
         encrypt_button = new QPushButton(tab_1);
         encrypt_button->setObjectName(QString::fromUtf8("encrypt_button"));
         encrypt_button->setGeometry(QRect(0, 440, 711, 23));
-        scrollArea_2 = new QScrollArea(tab_1);
-        scrollArea_2->setObjectName(QString::fromUtf8("scrollArea_2"));
-        scrollArea_2->setGeometry(QRect(270, 270, 431, 131));
-        scrollArea_2->setWidgetResizable(true);
-        scrollAreaWidgetContents_2 = new QWidget();
-        scrollAreaWidgetContents_2->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_2"));
-        scrollAreaWidgetContents_2->setGeometry(QRect(0, 0, 429, 129));
-        scrollArea_2->setWidget(scrollAreaWidgetContents_2);
         label_4 = new QLabel(tab_1);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         label_4->setGeometry(QRect(10, 280, 55, 16));
@@ -219,6 +193,12 @@ public:
         label_21 = new QLabel(tab_1);
         label_21->setObjectName(QString::fromUtf8("label_21"));
         label_21->setGeometry(QRect(380, 410, 221, 21));
+        keys_treeWidget_Encryption = new QTreeWidget(tab_1);
+        keys_treeWidget_Encryption->setObjectName(QString::fromUtf8("keys_treeWidget_Encryption"));
+        keys_treeWidget_Encryption->setGeometry(QRect(270, 270, 431, 131));
+        devices_treeWidget_Encryption = new QTreeWidget(tab_1);
+        devices_treeWidget_Encryption->setObjectName(QString::fromUtf8("devices_treeWidget_Encryption"));
+        devices_treeWidget_Encryption->setGeometry(QRect(270, 90, 431, 111));
         tabWidget->addTab(tab_1, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
@@ -244,14 +224,6 @@ public:
         pin_line_Decryption->setObjectName(QString::fromUtf8("pin_line_Decryption"));
         pin_line_Decryption->setGeometry(QRect(40, 120, 181, 21));
         pin_line_Decryption->setEchoMode(QLineEdit::Password);
-        scrollArea_3 = new QScrollArea(tab_2);
-        scrollArea_3->setObjectName(QString::fromUtf8("scrollArea_3"));
-        scrollArea_3->setGeometry(QRect(270, 90, 431, 111));
-        scrollArea_3->setWidgetResizable(true);
-        scrollAreaWidgetContents_3 = new QWidget();
-        scrollAreaWidgetContents_3->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_3"));
-        scrollAreaWidgetContents_3->setGeometry(QRect(0, 0, 429, 109));
-        scrollArea_3->setWidget(scrollAreaWidgetContents_3);
         deviceListButton_Decryption = new QPushButton(tab_2);
         deviceListButton_Decryption->setObjectName(QString::fromUtf8("deviceListButton_Decryption"));
         deviceListButton_Decryption->setGeometry(QRect(600, 210, 101, 23));
@@ -267,6 +239,9 @@ public:
         progressBar_2->setObjectName(QString::fromUtf8("progressBar_2"));
         progressBar_2->setGeometry(QRect(10, 410, 118, 23));
         progressBar_2->setValue(0);
+        devices_treeWidget_Decryption = new QTreeWidget(tab_2);
+        devices_treeWidget_Decryption->setObjectName(QString::fromUtf8("devices_treeWidget_Decryption"));
+        devices_treeWidget_Decryption->setGeometry(QRect(270, 90, 431, 111));
         tabWidget->addTab(tab_2, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QString::fromUtf8("tab_3"));
@@ -292,14 +267,6 @@ public:
         pin_line_Digest->setObjectName(QString::fromUtf8("pin_line_Digest"));
         pin_line_Digest->setGeometry(QRect(40, 120, 181, 21));
         pin_line_Digest->setEchoMode(QLineEdit::Password);
-        scrollArea_4 = new QScrollArea(tab_3);
-        scrollArea_4->setObjectName(QString::fromUtf8("scrollArea_4"));
-        scrollArea_4->setGeometry(QRect(270, 90, 431, 111));
-        scrollArea_4->setWidgetResizable(true);
-        scrollAreaWidgetContents_4 = new QWidget();
-        scrollAreaWidgetContents_4->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_4"));
-        scrollAreaWidgetContents_4->setGeometry(QRect(0, 0, 429, 109));
-        scrollArea_4->setWidget(scrollAreaWidgetContents_4);
         deviceListButton_Digest = new QPushButton(tab_3);
         deviceListButton_Digest->setObjectName(QString::fromUtf8("deviceListButton_Digest"));
         deviceListButton_Digest->setGeometry(QRect(600, 210, 101, 23));
@@ -329,14 +296,6 @@ public:
         algorithm_comboBox_Digest->addItem(QString());
         algorithm_comboBox_Digest->setObjectName(QString::fromUtf8("algorithm_comboBox_Digest"));
         algorithm_comboBox_Digest->setGeometry(QRect(80, 326, 171, 24));
-        scrollArea_5 = new QScrollArea(tab_3);
-        scrollArea_5->setObjectName(QString::fromUtf8("scrollArea_5"));
-        scrollArea_5->setGeometry(QRect(270, 270, 431, 131));
-        scrollArea_5->setWidgetResizable(true);
-        scrollAreaWidgetContents_5 = new QWidget();
-        scrollAreaWidgetContents_5->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_5"));
-        scrollAreaWidgetContents_5->setGeometry(QRect(0, 0, 429, 129));
-        scrollArea_5->setWidget(scrollAreaWidgetContents_5);
         listkeys_button_Digest = new QPushButton(tab_3);
         listkeys_button_Digest->setObjectName(QString::fromUtf8("listkeys_button_Digest"));
         listkeys_button_Digest->setGeometry(QRect(620, 410, 80, 25));
@@ -351,6 +310,12 @@ public:
         progressBar->setOrientation(Qt::Horizontal);
         progressBar->setInvertedAppearance(false);
         progressBar->setTextDirection(QProgressBar::TopToBottom);
+        devices_treeWidget_Digest = new QTreeWidget(tab_3);
+        devices_treeWidget_Digest->setObjectName(QString::fromUtf8("devices_treeWidget_Digest"));
+        devices_treeWidget_Digest->setGeometry(QRect(270, 90, 431, 111));
+        keys_treeWidget_Digest = new QTreeWidget(tab_3);
+        keys_treeWidget_Digest->setObjectName(QString::fromUtf8("keys_treeWidget_Digest"));
+        keys_treeWidget_Digest->setGeometry(QRect(270, 270, 431, 131));
         tabWidget->addTab(tab_3, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QString::fromUtf8("tab_4"));
@@ -376,14 +341,6 @@ public:
         pin_line_UpdatePath->setObjectName(QString::fromUtf8("pin_line_UpdatePath"));
         pin_line_UpdatePath->setGeometry(QRect(40, 120, 181, 21));
         pin_line_UpdatePath->setEchoMode(QLineEdit::Password);
-        scrollArea_6 = new QScrollArea(tab_4);
-        scrollArea_6->setObjectName(QString::fromUtf8("scrollArea_6"));
-        scrollArea_6->setGeometry(QRect(270, 90, 431, 111));
-        scrollArea_6->setWidgetResizable(true);
-        scrollAreaWidgetContents_6 = new QWidget();
-        scrollAreaWidgetContents_6->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_6"));
-        scrollAreaWidgetContents_6->setGeometry(QRect(0, 0, 429, 109));
-        scrollArea_6->setWidget(scrollAreaWidgetContents_6);
         deviceListButton_UpdatePath = new QPushButton(tab_4);
         deviceListButton_UpdatePath->setObjectName(QString::fromUtf8("deviceListButton_UpdatePath"));
         deviceListButton_UpdatePath->setGeometry(QRect(600, 210, 101, 23));
@@ -394,6 +351,9 @@ public:
         updatePath_button = new QPushButton(tab_4);
         updatePath_button->setObjectName(QString::fromUtf8("updatePath_button"));
         updatePath_button->setGeometry(QRect(0, 440, 711, 23));
+        devices_treeWidget_UpdatePath = new QTreeWidget(tab_4);
+        devices_treeWidget_UpdatePath->setObjectName(QString::fromUtf8("devices_treeWidget_UpdatePath"));
+        devices_treeWidget_UpdatePath->setGeometry(QRect(270, 90, 431, 111));
         tabWidget->addTab(tab_4, QString());
         centralwidget->setWidget(tabWidget);
         Utilities->setCentralWidget(centralwidget);
@@ -430,6 +390,13 @@ public:
         comboBox->setItemText(1, QCoreApplication::translate("Utilities", "AES (not available)", nullptr));
 
         label_21->setText(QCoreApplication::translate("Utilities", "Before listing keys, please insert your pin!", nullptr));
+        QTreeWidgetItem *___qtreewidgetitem = keys_treeWidget_Encryption->headerItem();
+        ___qtreewidgetitem->setText(1, QCoreApplication::translate("Utilities", "Key Size", nullptr));
+        ___qtreewidgetitem->setText(0, QCoreApplication::translate("Utilities", "Key ID", nullptr));
+        QTreeWidgetItem *___qtreewidgetitem1 = devices_treeWidget_Encryption->headerItem();
+        ___qtreewidgetitem1->setText(2, QCoreApplication::translate("Utilities", "Device Serial", nullptr));
+        ___qtreewidgetitem1->setText(1, QCoreApplication::translate("Utilities", "Device Path", nullptr));
+        ___qtreewidgetitem1->setText(0, QCoreApplication::translate("Utilities", "Device ID", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_1), QCoreApplication::translate("Utilities", "Encryption", nullptr));
         label_9->setText(QCoreApplication::translate("Utilities", "File:", nullptr));
         browseButton_2->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
@@ -441,6 +408,10 @@ public:
 #endif // QT_CONFIG(tooltip)
         checkBox->setText(QCoreApplication::translate("Utilities", "Use SEKey", nullptr));
         decrypt_button->setText(QCoreApplication::translate("Utilities", "Decrypt", nullptr));
+        QTreeWidgetItem *___qtreewidgetitem2 = devices_treeWidget_Decryption->headerItem();
+        ___qtreewidgetitem2->setText(2, QCoreApplication::translate("Utilities", "Device Serial", nullptr));
+        ___qtreewidgetitem2->setText(1, QCoreApplication::translate("Utilities", "Device Path", nullptr));
+        ___qtreewidgetitem2->setText(0, QCoreApplication::translate("Utilities", "Device ID", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("Utilities", "Decryption", nullptr));
         label_12->setText(QCoreApplication::translate("Utilities", "File:", nullptr));
         browseButton_3->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
@@ -462,6 +433,13 @@ public:
 
         listkeys_button_Digest->setText(QCoreApplication::translate("Utilities", "List keys...", nullptr));
         digest_button->setText(QCoreApplication::translate("Utilities", "Compute Digest", nullptr));
+        QTreeWidgetItem *___qtreewidgetitem3 = devices_treeWidget_Digest->headerItem();
+        ___qtreewidgetitem3->setText(2, QCoreApplication::translate("Utilities", "Device Serial", nullptr));
+        ___qtreewidgetitem3->setText(1, QCoreApplication::translate("Utilities", "Device Path", nullptr));
+        ___qtreewidgetitem3->setText(0, QCoreApplication::translate("Utilities", "Device ID", nullptr));
+        QTreeWidgetItem *___qtreewidgetitem4 = keys_treeWidget_Digest->headerItem();
+        ___qtreewidgetitem4->setText(1, QCoreApplication::translate("Utilities", "Key Size", nullptr));
+        ___qtreewidgetitem4->setText(0, QCoreApplication::translate("Utilities", "Key ID", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("Utilities", "Digest", nullptr));
         label_8->setText(QCoreApplication::translate("Utilities", "Path:", nullptr));
         browseButton_4->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
@@ -469,6 +447,10 @@ public:
         label_20->setText(QCoreApplication::translate("Utilities", "PIN:", nullptr));
         deviceListButton_UpdatePath->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
         updatePath_button->setText(QCoreApplication::translate("Utilities", "Update SEKey path", nullptr));
+        QTreeWidgetItem *___qtreewidgetitem5 = devices_treeWidget_UpdatePath->headerItem();
+        ___qtreewidgetitem5->setText(2, QCoreApplication::translate("Utilities", "Device Serial", nullptr));
+        ___qtreewidgetitem5->setText(1, QCoreApplication::translate("Utilities", "Device Path", nullptr));
+        ___qtreewidgetitem5->setText(0, QCoreApplication::translate("Utilities", "Device ID", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("Utilities", "Update SEKey path", nullptr));
     } // retranslateUi
 

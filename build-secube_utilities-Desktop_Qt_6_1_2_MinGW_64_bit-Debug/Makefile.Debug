@@ -253,6 +253,26 @@ debug/moc_utilities.cpp: ../secube_utilities/utilities.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtGui/QTransform \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtabwidget.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qicon.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QTreeWidgetItem \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtreewidget.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtreeview.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qstyleoption.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qlocale.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qvalidator.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qregularexpression.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qslider.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractslider.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qstyle.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtabbar.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtreewidgetitemiterator.h \
 		debug/moc_predefs.h \
 		../../../../Qt/6.1.2/mingw81_64/bin/moc.exe
 	C:\Qt\6.1.2\mingw81_64\bin\moc.exe $(DEFINES) --include C:/Users/Andreaa/Secube-utilities/build-secube_utilities-Desktop_Qt_6_1_2_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.1.2/mingw81_64/mkspecs/win32-g++ -IC:/Users/Andreaa/Secube-utilities/secube_utilities -IC:/Qt/6.1.2/mingw81_64/include -IC:/Qt/6.1.2/mingw81_64/include/QtWidgets -IC:/Qt/6.1.2/mingw81_64/include/QtGui -IC:/Qt/6.1.2/mingw81_64/include/QtCore -I. -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -IC:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -IC:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ..\secube_utilities\utilities.h -o debug\moc_utilities.cpp
@@ -410,13 +430,32 @@ debug/main.o: ../secube_utilities/main.cpp ../secube_utilities/utilities.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtGui/QTransform \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtabwidget.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qicon.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QTreeWidgetItem \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtreewidget.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtreeview.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qstyleoption.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qlocale.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qvalidator.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qregularexpression.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qslider.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractslider.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qstyle.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtabbar.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtreewidgetitemiterator.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QApplication \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qapplication.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qcoreapplication.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qeventloop.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qguiapplication.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qinputmethod.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qlocale.h
+		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qinputmethod.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\secube_utilities\main.cpp
 
 debug/backend_interface.o: ../secube_utilities/backend_interface.cpp ../secube_utilities/backend_interface.h \
@@ -563,6 +602,26 @@ debug/utilities.o: ../secube_utilities/utilities.cpp ../secube_utilities/utiliti
 		../../../../Qt/6.1.2/mingw81_64/include/QtGui/QTransform \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtabwidget.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qicon.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QTreeWidgetItem \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtreewidget.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtreeview.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qframe.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qstyleoption.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qlocale.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qvalidator.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qregularexpression.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qslider.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractslider.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qstyle.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtabbar.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qtreewidgetitemiterator.h \
 		ui_utilities.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QFileDialog \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qfiledialog.h \
@@ -572,7 +631,6 @@ debug/utilities.o: ../secube_utilities/utilities.cpp ../secube_utilities/utiliti
 		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qfileinfo.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qdatetime.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qcalendar.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qlocale.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qdialog.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QMessageBox \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qmessagebox.h \

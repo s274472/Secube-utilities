@@ -58,7 +58,6 @@ void Utilities::on_group_line_textChanged(const QString &arg1)
     }
 }
 
-
 void Utilities::on_user_line_textChanged(const QString &arg1)
 {
     if(arg1.isEmpty())
@@ -177,6 +176,9 @@ void Utilities::on_browseButton_4_clicked()
 
 void Utilities::on_deviceListButton_clicked()
 {
+    // Clear the list:
+    ui->devices_treeWidget_Encryption->clear();
+
     // Send request and wait for response:
     Response_DEV_LIST resp;
     resp = sendRequestToBackend<Response_DEV_LIST>("secube_cmd.exe -dl -gui_server");
@@ -190,6 +192,12 @@ void Utilities::on_deviceListButton_clicked()
         int i = 0;
         for(i=0; i<resp.num_devices;i++) {
             cout << resp.serials[i] << endl;
+
+            QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->devices_treeWidget_Encryption);
+            treeItem->setText(0, QString::number(i) );
+            treeItem->setText(1, resp.paths[i] );
+            treeItem->setText(2, resp.serials[i] );
+            ui->devices_treeWidget_Encryption->addTopLevelItem(treeItem);
         }
     }
 
@@ -197,6 +205,9 @@ void Utilities::on_deviceListButton_clicked()
 
 void Utilities::on_deviceListButton_Decryption_clicked()
 {
+    // Clear the list:
+    ui->devices_treeWidget_Decryption->clear();
+
 
     // Send request and wait for response:
     Response_DEV_LIST resp;
@@ -208,9 +219,16 @@ void Utilities::on_deviceListButton_Decryption_clicked()
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
+
         int i = 0;
         for(i=0; i<resp.num_devices;i++) {
             cout << resp.serials[i] << endl;
+
+            QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->devices_treeWidget_Decryption);
+            treeItem->setText(0, QString::number(i) );
+            treeItem->setText(1, resp.paths[i] );
+            treeItem->setText(2, resp.serials[i] );
+            ui->devices_treeWidget_Decryption->addTopLevelItem(treeItem);
         }
     }
 
@@ -219,6 +237,9 @@ void Utilities::on_deviceListButton_Decryption_clicked()
 void Utilities::on_deviceListButton_Digest_clicked()
 {
 
+    // Clear the list:
+    ui->devices_treeWidget_Digest->clear();
+
     // Send request and wait for response:
     Response_DEV_LIST resp;
     resp = sendRequestToBackend<Response_DEV_LIST>("secube_cmd.exe -dl -gui_server");
@@ -232,6 +253,12 @@ void Utilities::on_deviceListButton_Digest_clicked()
         int i = 0;
         for(i=0; i<resp.num_devices;i++) {
             cout << resp.serials[i] << endl;
+
+            QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->devices_treeWidget_Digest);
+            treeItem->setText(0, QString::number(i) );
+            treeItem->setText(1, resp.paths[i] );
+            treeItem->setText(2, resp.serials[i] );
+            ui->devices_treeWidget_Digest->addTopLevelItem(treeItem);
         }
     }
 
@@ -240,6 +267,9 @@ void Utilities::on_deviceListButton_Digest_clicked()
 void Utilities::on_deviceListButton_UpdatePath_clicked()
 {
 
+    // Clear the list:
+    ui->devices_treeWidget_UpdatePath->clear();
+
     // Send request and wait for response:
     Response_DEV_LIST resp;
     resp = sendRequestToBackend<Response_DEV_LIST>("secube_cmd.exe -dl -gui_server");
@@ -253,6 +283,12 @@ void Utilities::on_deviceListButton_UpdatePath_clicked()
         int i = 0;
         for(i=0; i<resp.num_devices;i++) {
             cout << resp.serials[i] << endl;
+
+            QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->devices_treeWidget_UpdatePath);
+            treeItem->setText(0, QString::number(i) );
+            treeItem->setText(1, resp.paths[i] );
+            treeItem->setText(2, resp.serials[i] );
+            ui->devices_treeWidget_UpdatePath->addTopLevelItem(treeItem);
         }
     }
 
@@ -261,6 +297,9 @@ void Utilities::on_deviceListButton_UpdatePath_clicked()
 
 void Utilities::on_listkeys_button_clicked()
 {
+    // Clear the list:
+    ui->keys_treeWidget_Encryption->clear();
+
     // Prepare command:
     QString command = "secube_cmd.exe -gui_server -kl ";
 
@@ -286,9 +325,15 @@ void Utilities::on_listkeys_button_clicked()
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
+
         int i = 0;
         for(i=0; i<resp.num_keys;i++) {
             cout << resp.key_ids[i] << endl;
+
+            QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->keys_treeWidget_Encryption);
+            treeItem->setText(0, QString::number(resp.key_ids[i]) );
+            treeItem->setText(1, QString::number(resp.key_sizes[i]) );
+            ui->keys_treeWidget_Encryption->addTopLevelItem(treeItem);
         }
     }
 
@@ -296,6 +341,9 @@ void Utilities::on_listkeys_button_clicked()
 
 void Utilities::on_listkeys_button_Digest_clicked()
 {
+
+    // Clear the list:
+    ui->keys_treeWidget_Digest->clear();
 
     // Prepare command:
     QString command = "secube_cmd.exe -gui_server -kl ";
@@ -325,6 +373,11 @@ void Utilities::on_listkeys_button_Digest_clicked()
         int i = 0;
         for(i=0; i<resp.num_keys;i++) {
             cout << resp.key_ids[i] << endl;
+
+            QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->keys_treeWidget_Digest);
+            treeItem->setText(0, QString::number(resp.key_ids[i]) );
+            treeItem->setText(1, QString::number(resp.key_sizes[i]) );
+            ui->keys_treeWidget_Digest->addTopLevelItem(treeItem);
         }
     }
 
@@ -366,6 +419,7 @@ void Utilities::on_decrypt_button_clicked()
         cout << resp.err_msg << endl;
         QMessageBox::information(0, QString("Done!"), QString(resp.err_msg), QMessageBox::Ok);
     }
+
 }
 
 void Utilities::on_encrypt_button_clicked()
@@ -526,3 +580,39 @@ void Utilities::on_updatePath_button_clicked()
 
 }
 
+void Utilities::on_devices_treeWidget_Encryption_itemClicked(QTreeWidgetItem *item){
+
+    // Update the device line with the selected ID:
+    ui->device_line->setText(item->data(0, Qt::DisplayRole).toString());
+}
+
+void Utilities::on_devices_treeWidget_Decryption_itemClicked(QTreeWidgetItem *item){
+
+    // Update the device line with the selected ID:
+    ui->device_line_Decryption->setText(item->data(0, Qt::DisplayRole).toString());
+}
+
+
+void Utilities::on_devices_treeWidget_Digest_itemClicked(QTreeWidgetItem *item){
+
+    // Update the device line with the selected ID:
+    ui->device_line_Digest->setText(item->data(0, Qt::DisplayRole).toString());
+}
+
+void Utilities::on_devices_treeWidget_UpdatePath_itemClicked(QTreeWidgetItem *item){
+
+    // Update the device line with the selected ID:
+    ui->device_line_UpdatePath->setText(item->data(0, Qt::DisplayRole).toString());
+}
+
+void Utilities::on_keys_treeWidget_Encryption_itemClicked(QTreeWidgetItem *item){
+
+    // Update the key line with the selected ID:
+    ui->key_line->setText( item->data(0, Qt::DisplayRole).toString() ) ;
+}
+
+void Utilities::on_keys_treeWidget_Digest_itemClicked(QTreeWidgetItem *item){
+
+    // Update the key line with the selected ID:
+    ui->key_line_Digest->setText( item->data(0, Qt::DisplayRole).toString() ) ;
+}
