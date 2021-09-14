@@ -97,15 +97,15 @@ public:
     QProgressBar *progressBar;
     QWidget *tab_4;
     QLabel *label_8;
-    QLineEdit *lineEdit_10;
+    QLineEdit *path_line_UpdatePath;
     QPushButton *browseButton_4;
     QLabel *label_19;
-    QLineEdit *lineEdit_11;
+    QLineEdit *device_line_UpdatePath;
     QLabel *label_20;
-    QLineEdit *lineEdit_12;
+    QLineEdit *pin_line_UpdatePath;
     QScrollArea *scrollArea_6;
     QWidget *scrollAreaWidgetContents_6;
-    QPushButton *deviceListButton_4;
+    QPushButton *deviceListButton_UpdatePath;
     QProgressBar *progressBar_4;
     QPushButton *updatePath_button;
 
@@ -357,25 +357,25 @@ public:
         label_8 = new QLabel(tab_4);
         label_8->setObjectName(QString::fromUtf8("label_8"));
         label_8->setGeometry(QRect(10, 10, 47, 21));
-        lineEdit_10 = new QLineEdit(tab_4);
-        lineEdit_10->setObjectName(QString::fromUtf8("lineEdit_10"));
-        lineEdit_10->setGeometry(QRect(40, 10, 671, 20));
+        path_line_UpdatePath = new QLineEdit(tab_4);
+        path_line_UpdatePath->setObjectName(QString::fromUtf8("path_line_UpdatePath"));
+        path_line_UpdatePath->setGeometry(QRect(40, 10, 671, 20));
         browseButton_4 = new QPushButton(tab_4);
         browseButton_4->setObjectName(QString::fromUtf8("browseButton_4"));
         browseButton_4->setGeometry(QRect(630, 40, 75, 23));
         label_19 = new QLabel(tab_4);
         label_19->setObjectName(QString::fromUtf8("label_19"));
         label_19->setGeometry(QRect(10, 80, 61, 16));
-        lineEdit_11 = new QLineEdit(tab_4);
-        lineEdit_11->setObjectName(QString::fromUtf8("lineEdit_11"));
-        lineEdit_11->setGeometry(QRect(70, 80, 171, 21));
+        device_line_UpdatePath = new QLineEdit(tab_4);
+        device_line_UpdatePath->setObjectName(QString::fromUtf8("device_line_UpdatePath"));
+        device_line_UpdatePath->setGeometry(QRect(70, 80, 171, 21));
         label_20 = new QLabel(tab_4);
         label_20->setObjectName(QString::fromUtf8("label_20"));
         label_20->setGeometry(QRect(10, 120, 47, 16));
-        lineEdit_12 = new QLineEdit(tab_4);
-        lineEdit_12->setObjectName(QString::fromUtf8("lineEdit_12"));
-        lineEdit_12->setGeometry(QRect(40, 120, 181, 21));
-        lineEdit_12->setEchoMode(QLineEdit::Password);
+        pin_line_UpdatePath = new QLineEdit(tab_4);
+        pin_line_UpdatePath->setObjectName(QString::fromUtf8("pin_line_UpdatePath"));
+        pin_line_UpdatePath->setGeometry(QRect(40, 120, 181, 21));
+        pin_line_UpdatePath->setEchoMode(QLineEdit::Password);
         scrollArea_6 = new QScrollArea(tab_4);
         scrollArea_6->setObjectName(QString::fromUtf8("scrollArea_6"));
         scrollArea_6->setGeometry(QRect(270, 90, 431, 111));
@@ -384,9 +384,9 @@ public:
         scrollAreaWidgetContents_6->setObjectName(QString::fromUtf8("scrollAreaWidgetContents_6"));
         scrollAreaWidgetContents_6->setGeometry(QRect(0, 0, 429, 109));
         scrollArea_6->setWidget(scrollAreaWidgetContents_6);
-        deviceListButton_4 = new QPushButton(tab_4);
-        deviceListButton_4->setObjectName(QString::fromUtf8("deviceListButton_4"));
-        deviceListButton_4->setGeometry(QRect(600, 210, 101, 23));
+        deviceListButton_UpdatePath = new QPushButton(tab_4);
+        deviceListButton_UpdatePath->setObjectName(QString::fromUtf8("deviceListButton_UpdatePath"));
+        deviceListButton_UpdatePath->setGeometry(QRect(600, 210, 101, 23));
         progressBar_4 = new QProgressBar(tab_4);
         progressBar_4->setObjectName(QString::fromUtf8("progressBar_4"));
         progressBar_4->setGeometry(QRect(10, 410, 118, 23));
@@ -400,7 +400,7 @@ public:
 
         retranslateUi(Utilities);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(Utilities);
@@ -467,7 +467,7 @@ public:
         browseButton_4->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
         label_19->setText(QCoreApplication::translate("Utilities", "Device ID:", nullptr));
         label_20->setText(QCoreApplication::translate("Utilities", "PIN:", nullptr));
-        deviceListButton_4->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
+        deviceListButton_UpdatePath->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
         updatePath_button->setText(QCoreApplication::translate("Utilities", "Update SEKey path", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("Utilities", "Update SEKey path", nullptr));
     } // retranslateUi

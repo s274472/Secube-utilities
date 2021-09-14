@@ -172,19 +172,7 @@ void Utilities::on_browseButton_4_clicked()
     //Open a dialog to choose the path, save the path in the target_file variable
     target_file = QFileDialog::getExistingDirectory();
     //And update the content of the "Path" form.
-    ui -> lineEdit_10 -> setText(target_file);
-}
-
-
-void Utilities::on_deviceListButton_4_clicked()
-{
-
-}
-
-
-void Utilities::on_updatePath_button_clicked()
-{
-
+    ui -> path_line_UpdatePath -> setText(target_file);
 }
 
 void Utilities::on_deviceListButton_clicked()
@@ -246,6 +234,28 @@ void Utilities::on_deviceListButton_Digest_clicked()
             cout << resp.serials[i] << endl;
         }
     }
+
+}
+
+void Utilities::on_deviceListButton_UpdatePath_clicked()
+{
+
+    // Send request and wait for response:
+    Response_DEV_LIST resp;
+    resp = sendRequestToBackend<Response_DEV_LIST>("secube_cmd.exe -dl -gui_server");
+
+    // Update UI:
+    if(resp.err_code<0) {
+        cout << resp.err_msg << endl;
+        QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+    else {
+        int i = 0;
+        for(i=0; i<resp.num_devices;i++) {
+            cout << resp.serials[i] << endl;
+        }
+    }
+
 
 }
 
@@ -457,6 +467,45 @@ void Utilities::on_digest_button_clicked()
         command += "-hmac ";
     } else {
         command += "-sha ";
+    }
+
+    cout << command.toUtf8().constData() << endl; // For Debug
+
+    // Send request and wait for response:
+    Response_GENERIC resp;
+    resp = sendRequestToBackend<Response_GENERIC>(command.toUtf8().constData());
+
+    // Update UI:
+    if(resp.err_code<0) {
+        cout << resp.err_msg << endl;
+        QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+    else {
+        cout << resp.err_msg << endl;
+        QMessageBox::information(0, QString("Done!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+
+}
+
+void Utilities::on_updatePath_button_clicked()
+{
+
+    // Prepare command:
+    QString command = "secube_cmd.exe -gui_server -update_path ";
+
+    if( ui->path_line_UpdatePath->text().size()>0 ) {
+        command += "-f";
+        command += " " + ui->path_line_UpdatePath->text() + " ";
+    }
+
+    if( ui->pin_line_UpdatePath->text().size()>0 ) {
+        command += "-p";
+        command += " " + ui->pin_line_UpdatePath->text() + " ";
+    }
+
+    if( ui->device_line_UpdatePath->text().size()>0 ) {
+        command += "-dev";
+        command += " " + ui->device_line_UpdatePath->text() + " ";
     }
 
     cout << command.toUtf8().constData() << endl; // For Debug

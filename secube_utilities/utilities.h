@@ -26,7 +26,7 @@ private slots:
 
     void on_deviceListButton_Decryption_clicked();
 
-    void on_deviceListButton_4_clicked();
+    void on_deviceListButton_UpdatePath_clicked();
 
     void on_listkeys_button_clicked();
 

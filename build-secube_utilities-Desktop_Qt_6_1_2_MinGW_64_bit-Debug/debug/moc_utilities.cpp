@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Utilities_t {
     const uint offsetsAndSize[50];
-    char stringdata0[618];
+    char stringdata0[627];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_Utilities_t, stringdata0) + ofs), len 
@@ -35,32 +35,32 @@ QT_MOC_LITERAL(34, 0), // ""
 QT_MOC_LITERAL(35, 27), // "on_deviceListButton_clicked"
 QT_MOC_LITERAL(63, 34), // "on_deviceListButton_Digest_cl..."
 QT_MOC_LITERAL(98, 38), // "on_deviceListButton_Decryptio..."
-QT_MOC_LITERAL(137, 29), // "on_deviceListButton_4_clicked"
-QT_MOC_LITERAL(167, 26), // "on_listkeys_button_clicked"
-QT_MOC_LITERAL(194, 33), // "on_listkeys_button_Digest_cli..."
-QT_MOC_LITERAL(228, 25), // "on_group_line_textChanged"
-QT_MOC_LITERAL(254, 4), // "arg1"
-QT_MOC_LITERAL(259, 24), // "on_user_line_textChanged"
-QT_MOC_LITERAL(284, 23), // "on_key_line_textChanged"
-QT_MOC_LITERAL(308, 25), // "on_browseButton_2_clicked"
-QT_MOC_LITERAL(334, 25), // "on_browseButton_3_clicked"
-QT_MOC_LITERAL(360, 32), // "on_group_line_Digest_textChanged"
-QT_MOC_LITERAL(393, 31), // "on_user_line_Digest_textChanged"
-QT_MOC_LITERAL(425, 30), // "on_key_line_Digest_textChanged"
-QT_MOC_LITERAL(456, 23), // "on_comboBox_2_activated"
-QT_MOC_LITERAL(480, 5), // "index"
-QT_MOC_LITERAL(486, 25), // "on_browseButton_4_clicked"
-QT_MOC_LITERAL(512, 28), // "on_updatePath_button_clicked"
-QT_MOC_LITERAL(541, 24), // "on_digest_button_clicked"
-QT_MOC_LITERAL(566, 25), // "on_decrypt_button_clicked"
-QT_MOC_LITERAL(592, 25) // "on_encrypt_button_clicked"
+QT_MOC_LITERAL(137, 38), // "on_deviceListButton_UpdatePat..."
+QT_MOC_LITERAL(176, 26), // "on_listkeys_button_clicked"
+QT_MOC_LITERAL(203, 33), // "on_listkeys_button_Digest_cli..."
+QT_MOC_LITERAL(237, 25), // "on_group_line_textChanged"
+QT_MOC_LITERAL(263, 4), // "arg1"
+QT_MOC_LITERAL(268, 24), // "on_user_line_textChanged"
+QT_MOC_LITERAL(293, 23), // "on_key_line_textChanged"
+QT_MOC_LITERAL(317, 25), // "on_browseButton_2_clicked"
+QT_MOC_LITERAL(343, 25), // "on_browseButton_3_clicked"
+QT_MOC_LITERAL(369, 32), // "on_group_line_Digest_textChanged"
+QT_MOC_LITERAL(402, 31), // "on_user_line_Digest_textChanged"
+QT_MOC_LITERAL(434, 30), // "on_key_line_Digest_textChanged"
+QT_MOC_LITERAL(465, 23), // "on_comboBox_2_activated"
+QT_MOC_LITERAL(489, 5), // "index"
+QT_MOC_LITERAL(495, 25), // "on_browseButton_4_clicked"
+QT_MOC_LITERAL(521, 28), // "on_updatePath_button_clicked"
+QT_MOC_LITERAL(550, 24), // "on_digest_button_clicked"
+QT_MOC_LITERAL(575, 25), // "on_decrypt_button_clicked"
+QT_MOC_LITERAL(601, 25) // "on_encrypt_button_clicked"
 
     },
     "Utilities\0on_browseButton_clicked\0\0"
     "on_deviceListButton_clicked\0"
     "on_deviceListButton_Digest_clicked\0"
     "on_deviceListButton_Decryption_clicked\0"
-    "on_deviceListButton_4_clicked\0"
+    "on_deviceListButton_UpdatePath_clicked\0"
     "on_listkeys_button_clicked\0"
     "on_listkeys_button_Digest_clicked\0"
     "on_group_line_textChanged\0arg1\0"
@@ -152,7 +152,7 @@ void Utilities::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 1: _t->on_deviceListButton_clicked(); break;
         case 2: _t->on_deviceListButton_Digest_clicked(); break;
         case 3: _t->on_deviceListButton_Decryption_clicked(); break;
-        case 4: _t->on_deviceListButton_4_clicked(); break;
+        case 4: _t->on_deviceListButton_UpdatePath_clicked(); break;
         case 5: _t->on_listkeys_button_clicked(); break;
         case 6: _t->on_listkeys_button_Digest_clicked(); break;
         case 7: _t->on_group_line_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;

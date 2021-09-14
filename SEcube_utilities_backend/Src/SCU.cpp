@@ -358,6 +358,11 @@ int main(int argc, char *argv[]) {
 		break;
 	case UPDATE_PATH:
 
+		// Connect to the GUI:
+		if(gui_server_on){
+			s1 = network(comm_port);
+		}
+
 		// Login:
 		{
 			int err = login(new_pin, deviceID);
