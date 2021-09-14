@@ -573,7 +573,7 @@
        <string>File:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_4">
+     <widget class="QLineEdit" name="file_line_Digest">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -694,7 +694,7 @@
        <string>Group:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_7">
+     <widget class="QLineEdit" name="group_line_Digest">
       <property name="geometry">
        <rect>
         <x>57</x>
@@ -720,7 +720,7 @@
        <string>User(s):</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_8">
+     <widget class="QLineEdit" name="user_line_Digest">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -746,7 +746,7 @@
        <string>Key:</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEdit_9">
+     <widget class="QLineEdit" name="key_line_Digest">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -769,7 +769,7 @@
        <string>Algorithm:</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="comboBox_2">
+     <widget class="QComboBox" name="algorithm_comboBox_Digest">
       <property name="geometry">
        <rect>
         <x>80</x>

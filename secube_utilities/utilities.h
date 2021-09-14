@@ -42,11 +42,11 @@ private slots:
 
     void on_browseButton_3_clicked();
 
-    void on_lineEdit_7_textChanged(const QString &arg1);
+    void on_group_line_Digest_textChanged(const QString &arg1);
 
-    void on_lineEdit_8_textChanged(const QString &arg1);
+    void on_user_line_Digest_textChanged(const QString &arg1);
 
-    void on_lineEdit_9_textChanged(const QString &arg1);
+    void on_key_line_Digest_textChanged(const QString &arg1);
 
     void on_comboBox_2_activated(int index);
 

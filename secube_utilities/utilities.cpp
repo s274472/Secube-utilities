@@ -99,48 +99,48 @@ void Utilities::on_browseButton_3_clicked()
     //Open a dialog to choose the file, save the path in the target_file variable
     target_file = QFileDialog::getOpenFileName();
     //And update the content of the "File" form.
-    ui -> lineEdit_4 -> setText(target_file);
+    ui -> file_line_Digest -> setText(target_file);
 }
 
 
-void Utilities::on_lineEdit_7_textChanged(const QString &arg1)
+void Utilities::on_group_line_Digest_textChanged(const QString &arg1)
 {
     if(arg1.isEmpty())
     {
-        ui ->lineEdit_7 ->setModified(false);
-        ui ->lineEdit_8 ->setEnabled(true);
-        ui ->lineEdit_9 ->setEnabled(true);
+        ui ->group_line_Digest ->setModified(false);
+        ui ->user_line_Digest ->setEnabled(true);
+        ui ->key_line_Digest ->setEnabled(true);
     } else {
-         ui ->lineEdit_8 ->setEnabled(false);
-         ui ->lineEdit_9 ->setEnabled(false);
+         ui ->user_line_Digest ->setEnabled(false);
+         ui ->key_line_Digest ->setEnabled(false);
     }
 }
 
 
-void Utilities::on_lineEdit_8_textChanged(const QString &arg1)
+void Utilities::on_user_line_Digest_textChanged(const QString &arg1)
 {
     if(arg1.isEmpty())
     {
-        ui ->lineEdit_8 ->setModified(false);
-        ui ->lineEdit_7 ->setEnabled(true);
-        ui ->lineEdit_9 ->setEnabled(true);
+        ui ->user_line_Digest ->setModified(false);
+        ui ->group_line_Digest ->setEnabled(true);
+        ui ->key_line_Digest ->setEnabled(true);
     } else {
-         ui ->lineEdit_7 ->setEnabled(false);
-         ui ->lineEdit_9 ->setEnabled(false);
+         ui ->group_line_Digest ->setEnabled(false);
+         ui ->key_line_Digest ->setEnabled(false);
     }
 }
 
 
-void Utilities::on_lineEdit_9_textChanged(const QString &arg1)
+void Utilities::on_key_line_Digest_textChanged(const QString &arg1)
 {
     if(arg1.isEmpty())
     {
-        ui ->lineEdit_9 ->setModified(false);
-        ui ->lineEdit_7 ->setEnabled(true);
-        ui ->lineEdit_8 ->setEnabled(true);
+        ui ->key_line_Digest ->setModified(false);
+        ui ->group_line_Digest ->setEnabled(true);
+        ui ->user_line_Digest ->setEnabled(true);
     } else {
-         ui ->lineEdit_7 ->setEnabled(false);
-         ui ->lineEdit_8 ->setEnabled(false);
+         ui ->group_line_Digest ->setEnabled(false);
+         ui ->user_line_Digest ->setEnabled(false);
     }
 }
 
@@ -149,20 +149,20 @@ void Utilities::on_comboBox_2_activated(int index)
 {
     if(index == 1)
     {
-        ui ->lineEdit_7 ->setEnabled(false);
-        ui ->lineEdit_8 ->setEnabled(false);
-        ui ->lineEdit_9 ->setEnabled(false);
-    } else if(ui ->lineEdit_7 ->isModified()||ui ->lineEdit_8 ->isModified()||ui ->lineEdit_9 ->isModified()) {
-        if(ui ->lineEdit_7 ->isModified())
-        ui ->lineEdit_7 ->setEnabled(true);
-        if(ui ->lineEdit_8 ->isModified())
-        ui ->lineEdit_8 ->setEnabled(true);
-        if(ui ->lineEdit_9 ->isModified())
-        ui ->lineEdit_9 ->setEnabled(true);
+        ui ->group_line_Digest ->setEnabled(false);
+        ui ->user_line_Digest ->setEnabled(false);
+        ui ->key_line_Digest ->setEnabled(false);
+    } else if(ui ->group_line_Digest ->isModified()||ui ->user_line_Digest ->isModified()||ui ->key_line_Digest ->isModified()) {
+        if(ui ->group_line_Digest ->isModified())
+        ui ->group_line_Digest ->setEnabled(true);
+        if(ui ->user_line_Digest ->isModified())
+        ui ->user_line_Digest ->setEnabled(true);
+        if(ui ->key_line_Digest ->isModified())
+        ui ->key_line_Digest ->setEnabled(true);
     } else {
-        ui ->lineEdit_7 ->setEnabled(true);
-        ui ->lineEdit_8 ->setEnabled(true);
-        ui ->lineEdit_9 ->setEnabled(true);
+        ui ->group_line_Digest ->setEnabled(true);
+        ui ->user_line_Digest ->setEnabled(true);
+        ui ->key_line_Digest ->setEnabled(true);
     }
 }
 
@@ -183,11 +183,6 @@ void Utilities::on_deviceListButton_4_clicked()
 
 
 void Utilities::on_updatePath_button_clicked()
-{
-
-}
-
-void Utilities::on_digest_button_clicked()
 {
 
 }
@@ -402,6 +397,66 @@ void Utilities::on_encrypt_button_clicked()
         command += "-aes_hmac ";
     } else {
         command += "-aes ";
+    }
+
+    cout << command.toUtf8().constData() << endl; // For Debug
+
+    // Send request and wait for response:
+    Response_GENERIC resp;
+    resp = sendRequestToBackend<Response_GENERIC>(command.toUtf8().constData());
+
+    // Update UI:
+    if(resp.err_code<0) {
+        cout << resp.err_msg << endl;
+        QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+    else {
+        cout << resp.err_msg << endl;
+        QMessageBox::information(0, QString("Done!"), QString(resp.err_msg), QMessageBox::Ok);
+    }
+
+}
+
+void Utilities::on_digest_button_clicked()
+{
+
+    // Prepare command:
+    QString command = "secube_cmd.exe -gui_server -di ";
+
+    if( ui->pin_line_Digest->text().size()>0 ) {
+        command += "-p";
+        command += " " + ui->pin_line_Digest->text() + " ";
+    }
+
+    if( ui->device_line_Digest->text().size()>0 ) {
+        command += "-dev";
+        command += " " + ui->device_line_Digest->text() + " ";
+    }
+
+    if( ui->file_line_Digest->text().size()>0 ) {
+        command += "-f";
+        command += " " + ui->file_line_Digest->text() + " ";
+    }
+
+    if( ui->key_line_Digest->isEnabled() && ui->key_line_Digest->text().size()>0 ) {
+        command += "-k";
+        command += " " + ui->key_line_Digest->text() + " ";
+    }
+
+    if( ui->group_line_Digest->isEnabled() && ui->group_line_Digest->text().size()>0 ){
+        command += "-g";
+        command += " " + ui->group_line_Digest->text() + " ";
+    }
+
+    if( ui->user_line_Digest->isEnabled() && ui->user_line_Digest->text().size()>0 ){
+        command += "-u";
+        command += " " + ui->user_line_Digest->text() + " ";
+    }
+
+    if(ui->algorithm_comboBox_Digest->currentIndex()==0) {
+        command += "-hmac ";
+    } else {
+        command += "-sha ";
     }
 
     cout << command.toUtf8().constData() << endl; // For Debug

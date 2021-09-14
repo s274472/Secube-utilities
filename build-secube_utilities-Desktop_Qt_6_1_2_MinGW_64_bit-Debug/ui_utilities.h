@@ -73,7 +73,7 @@ public:
     QProgressBar *progressBar_2;
     QWidget *tab_3;
     QLabel *label_12;
-    QLineEdit *lineEdit_4;
+    QLineEdit *file_line_Digest;
     QPushButton *browseButton_3;
     QLabel *label_13;
     QLineEdit *device_line_Digest;
@@ -83,13 +83,13 @@ public:
     QWidget *scrollAreaWidgetContents_4;
     QPushButton *deviceListButton_Digest;
     QLabel *label_15;
-    QLineEdit *lineEdit_7;
+    QLineEdit *group_line_Digest;
     QLabel *label_16;
-    QLineEdit *lineEdit_8;
+    QLineEdit *user_line_Digest;
     QLabel *label_17;
-    QLineEdit *lineEdit_9;
+    QLineEdit *key_line_Digest;
     QLabel *label_18;
-    QComboBox *comboBox_2;
+    QComboBox *algorithm_comboBox_Digest;
     QScrollArea *scrollArea_5;
     QWidget *scrollAreaWidgetContents_5;
     QPushButton *listkeys_button_Digest;
@@ -273,9 +273,9 @@ public:
         label_12 = new QLabel(tab_3);
         label_12->setObjectName(QString::fromUtf8("label_12"));
         label_12->setGeometry(QRect(10, 10, 47, 21));
-        lineEdit_4 = new QLineEdit(tab_3);
-        lineEdit_4->setObjectName(QString::fromUtf8("lineEdit_4"));
-        lineEdit_4->setGeometry(QRect(40, 10, 671, 20));
+        file_line_Digest = new QLineEdit(tab_3);
+        file_line_Digest->setObjectName(QString::fromUtf8("file_line_Digest"));
+        file_line_Digest->setGeometry(QRect(40, 10, 671, 20));
         browseButton_3 = new QPushButton(tab_3);
         browseButton_3->setObjectName(QString::fromUtf8("browseButton_3"));
         browseButton_3->setGeometry(QRect(630, 40, 75, 23));
@@ -306,29 +306,29 @@ public:
         label_15 = new QLabel(tab_3);
         label_15->setObjectName(QString::fromUtf8("label_15"));
         label_15->setGeometry(QRect(10, 170, 55, 16));
-        lineEdit_7 = new QLineEdit(tab_3);
-        lineEdit_7->setObjectName(QString::fromUtf8("lineEdit_7"));
-        lineEdit_7->setGeometry(QRect(57, 167, 113, 24));
+        group_line_Digest = new QLineEdit(tab_3);
+        group_line_Digest->setObjectName(QString::fromUtf8("group_line_Digest"));
+        group_line_Digest->setGeometry(QRect(57, 167, 113, 24));
         label_16 = new QLabel(tab_3);
         label_16->setObjectName(QString::fromUtf8("label_16"));
         label_16->setGeometry(QRect(10, 220, 55, 16));
-        lineEdit_8 = new QLineEdit(tab_3);
-        lineEdit_8->setObjectName(QString::fromUtf8("lineEdit_8"));
-        lineEdit_8->setGeometry(QRect(60, 217, 201, 24));
+        user_line_Digest = new QLineEdit(tab_3);
+        user_line_Digest->setObjectName(QString::fromUtf8("user_line_Digest"));
+        user_line_Digest->setGeometry(QRect(60, 217, 201, 24));
         label_17 = new QLabel(tab_3);
         label_17->setObjectName(QString::fromUtf8("label_17"));
         label_17->setGeometry(QRect(10, 280, 55, 16));
-        lineEdit_9 = new QLineEdit(tab_3);
-        lineEdit_9->setObjectName(QString::fromUtf8("lineEdit_9"));
-        lineEdit_9->setGeometry(QRect(40, 277, 151, 24));
+        key_line_Digest = new QLineEdit(tab_3);
+        key_line_Digest->setObjectName(QString::fromUtf8("key_line_Digest"));
+        key_line_Digest->setGeometry(QRect(40, 277, 151, 24));
         label_18 = new QLabel(tab_3);
         label_18->setObjectName(QString::fromUtf8("label_18"));
         label_18->setGeometry(QRect(10, 330, 61, 16));
-        comboBox_2 = new QComboBox(tab_3);
-        comboBox_2->addItem(QString());
-        comboBox_2->addItem(QString());
-        comboBox_2->setObjectName(QString::fromUtf8("comboBox_2"));
-        comboBox_2->setGeometry(QRect(80, 326, 171, 24));
+        algorithm_comboBox_Digest = new QComboBox(tab_3);
+        algorithm_comboBox_Digest->addItem(QString());
+        algorithm_comboBox_Digest->addItem(QString());
+        algorithm_comboBox_Digest->setObjectName(QString::fromUtf8("algorithm_comboBox_Digest"));
+        algorithm_comboBox_Digest->setGeometry(QRect(80, 326, 171, 24));
         scrollArea_5 = new QScrollArea(tab_3);
         scrollArea_5->setObjectName(QString::fromUtf8("scrollArea_5"));
         scrollArea_5->setGeometry(QRect(270, 270, 431, 131));
@@ -449,16 +449,16 @@ public:
         deviceListButton_Digest->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
         label_15->setText(QCoreApplication::translate("Utilities", "Group:", nullptr));
 #if QT_CONFIG(tooltip)
-        lineEdit_7->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>If specified, find keys automatically. Insert it as G+the number of the group (e.g., G10).</p></body></html>", nullptr));
+        group_line_Digest->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>If specified, find keys automatically. Insert it as G+the number of the group (e.g., G10).</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
         label_16->setText(QCoreApplication::translate("Utilities", "User(s):", nullptr));
 #if QT_CONFIG(tooltip)
-        lineEdit_8->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>If specified, find keys automatically. Insert it as U+the number of the user (e.g., U10). Put list of users between &quot; &quot;, each one separated by space.</p></body></html>", nullptr));
+        user_line_Digest->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>If specified, find keys automatically. Insert it as U+the number of the user (e.g., U10). Put list of users between &quot; &quot;, each one separated by space.</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
         label_17->setText(QCoreApplication::translate("Utilities", "Key:", nullptr));
         label_18->setText(QCoreApplication::translate("Utilities", "Algorithm:", nullptr));
-        comboBox_2->setItemText(0, QCoreApplication::translate("Utilities", "HMAC-SHA-256", nullptr));
-        comboBox_2->setItemText(1, QCoreApplication::translate("Utilities", "SHA-256", nullptr));
+        algorithm_comboBox_Digest->setItemText(0, QCoreApplication::translate("Utilities", "HMAC-SHA-256", nullptr));
+        algorithm_comboBox_Digest->setItemText(1, QCoreApplication::translate("Utilities", "SHA-256", nullptr));
 
         listkeys_button_Digest->setText(QCoreApplication::translate("Utilities", "List keys...", nullptr));
         digest_button->setText(QCoreApplication::translate("Utilities", "Compute Digest", nullptr));

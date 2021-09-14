@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Utilities_t {
     const uint offsetsAndSize[50];
-    char stringdata0[600];
+    char stringdata0[618];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_Utilities_t, stringdata0) + ofs), len 
@@ -44,16 +44,16 @@ QT_MOC_LITERAL(259, 24), // "on_user_line_textChanged"
 QT_MOC_LITERAL(284, 23), // "on_key_line_textChanged"
 QT_MOC_LITERAL(308, 25), // "on_browseButton_2_clicked"
 QT_MOC_LITERAL(334, 25), // "on_browseButton_3_clicked"
-QT_MOC_LITERAL(360, 25), // "on_lineEdit_7_textChanged"
-QT_MOC_LITERAL(386, 25), // "on_lineEdit_8_textChanged"
-QT_MOC_LITERAL(412, 25), // "on_lineEdit_9_textChanged"
-QT_MOC_LITERAL(438, 23), // "on_comboBox_2_activated"
-QT_MOC_LITERAL(462, 5), // "index"
-QT_MOC_LITERAL(468, 25), // "on_browseButton_4_clicked"
-QT_MOC_LITERAL(494, 28), // "on_updatePath_button_clicked"
-QT_MOC_LITERAL(523, 24), // "on_digest_button_clicked"
-QT_MOC_LITERAL(548, 25), // "on_decrypt_button_clicked"
-QT_MOC_LITERAL(574, 25) // "on_encrypt_button_clicked"
+QT_MOC_LITERAL(360, 32), // "on_group_line_Digest_textChanged"
+QT_MOC_LITERAL(393, 31), // "on_user_line_Digest_textChanged"
+QT_MOC_LITERAL(425, 30), // "on_key_line_Digest_textChanged"
+QT_MOC_LITERAL(456, 23), // "on_comboBox_2_activated"
+QT_MOC_LITERAL(480, 5), // "index"
+QT_MOC_LITERAL(486, 25), // "on_browseButton_4_clicked"
+QT_MOC_LITERAL(512, 28), // "on_updatePath_button_clicked"
+QT_MOC_LITERAL(541, 24), // "on_digest_button_clicked"
+QT_MOC_LITERAL(566, 25), // "on_decrypt_button_clicked"
+QT_MOC_LITERAL(592, 25) // "on_encrypt_button_clicked"
 
     },
     "Utilities\0on_browseButton_clicked\0\0"
@@ -68,9 +68,9 @@ QT_MOC_LITERAL(574, 25) // "on_encrypt_button_clicked"
     "on_key_line_textChanged\0"
     "on_browseButton_2_clicked\0"
     "on_browseButton_3_clicked\0"
-    "on_lineEdit_7_textChanged\0"
-    "on_lineEdit_8_textChanged\0"
-    "on_lineEdit_9_textChanged\0"
+    "on_group_line_Digest_textChanged\0"
+    "on_user_line_Digest_textChanged\0"
+    "on_key_line_Digest_textChanged\0"
     "on_comboBox_2_activated\0index\0"
     "on_browseButton_4_clicked\0"
     "on_updatePath_button_clicked\0"
@@ -160,9 +160,9 @@ void Utilities::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 9: _t->on_key_line_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 10: _t->on_browseButton_2_clicked(); break;
         case 11: _t->on_browseButton_3_clicked(); break;
-        case 12: _t->on_lineEdit_7_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 13: _t->on_lineEdit_8_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 14: _t->on_lineEdit_9_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 12: _t->on_group_line_Digest_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 13: _t->on_user_line_Digest_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 14: _t->on_key_line_Digest_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 15: _t->on_comboBox_2_activated((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 16: _t->on_browseButton_4_clicked(); break;
         case 17: _t->on_updatePath_button_clicked(); break;
