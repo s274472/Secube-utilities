@@ -201,7 +201,8 @@ Makefile: ../secube_utilities/secube_utilities.pro ../../../../Qt/6.1.2/mingw81_
 		../../../../Qt/6.1.2/mingw81_64/lib/Qt6Core.prl \
 		../../../../Qt/6.1.2/mingw81_64/lib/Qt6EntryPoint.prl \
 		../../../../Qt/6.1.2/mingw81_64/mkspecs/features/build_pass.prf \
-		../secube_utilities/MyResources.qrc
+		../secube_utilities/MyResources.qrc \
+		../secube_utilities/qdarkstyle/dark/style.qrc
 	$(QMAKE) -o Makefile ..\secube_utilities\secube_utilities.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 ../../../../Qt/6.1.2/mingw81_64/mkspecs/features/spec_pre.prf:
 ../../../../Qt/6.1.2/mingw81_64/mkspecs/features/device_config.prf:
@@ -335,6 +336,7 @@ Makefile: ../secube_utilities/secube_utilities.pro ../../../../Qt/6.1.2/mingw81_
 ../../../../Qt/6.1.2/mingw81_64/lib/Qt6EntryPoint.prl:
 ../../../../Qt/6.1.2/mingw81_64/mkspecs/features/build_pass.prf:
 ../secube_utilities/MyResources.qrc:
+../secube_utilities/qdarkstyle/dark/style.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\secube_utilities\secube_utilities.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 

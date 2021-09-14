@@ -28,6 +28,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     MyResources.qrc
 
+RESOURCES += qdarkstyle/dark/style.qrc
+
 DISTFILES += \
     ../../../../../logo (1)/logo_large.png
 
