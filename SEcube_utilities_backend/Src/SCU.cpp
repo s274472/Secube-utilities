@@ -357,12 +357,36 @@ int main(int argc, char *argv[]) {
 
 		break;
 	case UPDATE_PATH:
-		login(new_pin, deviceID);
+
+		// Login:
+		{
+			int err = login(new_pin, deviceID);
+			// For GUI interfacing:
+			if( (err<0) && (gui_server_on) ) {
+				Response_GENERIC resp;
+				sendErrorToGUI<Response_GENERIC>(s1, resp, -1, "Error during login!");
+			}
+		}
+
 		if (!set_sekey_update_path(update_path, *l0.get(), l1.get())) {
 			cout << "Error setting the new path!" << endl;
+
+			// For GUI interfacing:
+			if(gui_server_on) {
+				Response_GENERIC resp;
+				sendErrorToGUI<Response_GENERIC>(s1, resp, -1, "Error setting the new path!");
+			}
+
 			return -1;
 		}
 		cout << "Path correctly updated!" << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			Response_GENERIC resp;
+			sendErrorToGUI<Response_GENERIC>(s1, resp, 0, "Path correctly updated!"); // In this case err_code = 0 means everything went correctly
+		}
+
 		logout();
 		break;
 
