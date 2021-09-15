@@ -2,7 +2,13 @@
 #define UTILITIES_H_
 #include "../sefile/environment.h"
 #include "../sekey/SEkey.h"
-#include "../Inc/GUI_interface.h"
+
+#ifdef __linux__
+    #include "../Inc/linux_GUI_interface.h"
+#elif _WIN32
+	#include "../Inc/GUI_interface.h"
+#endif
+
 #include <thread> // thread::sleep_for
 #include <fstream>
 #include <iostream>

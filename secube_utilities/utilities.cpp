@@ -3,10 +3,14 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-#include "backend_interface.h"
+#ifdef __linux__
+    #include "linux_backend_interface.h"
+#elif _WIN32
+    #include "backend_interface.h"
+#endif
+
 #include <iostream>
 #include "cereal/archives/binary.hpp"
-#include <windows.h>
 
 QString target_file;
 

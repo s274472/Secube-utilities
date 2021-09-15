@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #include "../Inc/GUI_interface.h"
 
 int network(int listenPort){
@@ -27,9 +29,15 @@ int network(int listenPort){
 	address.sin_family = AF_INET;
 	address.sin_port = htons(listenPort);
 	address.sin_addr.s_addr = inet_addr("127.0.0.1");
+
+	int yes=1;
+	if( setsockopt(s0, SOL_SOCKET, SO_REUSEADDR, (char*)&yes, sizeof(yes)) < 0 ) {
+		cout << "[LOG] [Server] setsockopt failed! Error: " << errno << endl;
+	}
+
 	int res = bind(s0, (struct sockaddr*) &address, sizeof(address));
 	if (res < 0) {
-		cout << "[LOG] [Server] Error binding socket!" << endl;
+		cout << "[LOG] [Server] Error binding socket! error number: " << errno << endl;
 		return -1;
 	}
 
@@ -66,3 +74,5 @@ void closeAndCleanConnection(int sock) {
 
 	return;
 }
+
+#endif

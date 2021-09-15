@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #ifndef BACKEND_INTERFACE_H
 #define BACKEND_INTERFACE_H
 
@@ -12,7 +14,7 @@
 
 #define BUFLEN 1024*100 // dimension of input/output buffer for communicating with the GUI
 #define comm_port 1235
-#define STR_SIZE 50
+#define STR_SIZE 150
 #define ARR_SIZE 20
 
 using namespace std;
@@ -121,3 +123,4 @@ Response sendRequestToBackend(string cmd) {
 }
 
 #endif // BACKEND_INTERFACE_H
+#endif

@@ -11,10 +11,12 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     backend_interface.cpp \
+    linux_backend_interface.cpp \
     utilities.cpp
 
 HEADERS += \
     backend_interface.h \
+    linux_backend_interface.h \
     utilities.h
 
 FORMS += \

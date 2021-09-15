@@ -4,7 +4,12 @@
 #include "../sefile/environment.h"
 #include <thread> // thread::sleep_for
 #include <fstream>
-#include "../Inc/GUI_interface.h"
+
+#ifdef __linux__
+    #include "../Inc/linux_GUI_interface.h"
+#elif _WIN32
+	#include "../Inc/GUI_interface.h"
+#endif
 
 using namespace std;
 

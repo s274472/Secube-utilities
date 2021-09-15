@@ -1,8 +1,10 @@
+#ifdef _WIN32
+
 #ifndef INC_GUI_INTERFACE_H_
 #define INC_GUI_INTERFACE_H_
 
 #define BUFLEN 1024*100 // dimension of input/output buffer for communicating with the GUI
-#define STR_SIZE 50
+#define STR_SIZE 150
 #define ARR_SIZE 20
 #define comm_port 1235
 
@@ -110,3 +112,4 @@ void sendResponseToGUI(int sock, Response resp) {
 
 
 #endif /* INC_GUI_INTERFACE_H_ */
+#endif

@@ -117,9 +117,15 @@ int digest(int sock, string filename, uint32_t keyID, string algo) {
 
 		char digest[B5_SHA256_DIGEST_SIZE]; // String that will store the digest in hex format
 
+		int j=0;
 		for(uint8_t i : data_digest.digest){
 			printf("%02x ", i);
-			sprintf(digest, "%02x ", i);
+			if(j==0) {
+				sprintf(digest, "%02x ", i);
+			}
+			else
+				sprintf(digest+strlen(digest), "%02x ", i);
+			j++;
 		}
 
 		// For GUI interfacing:

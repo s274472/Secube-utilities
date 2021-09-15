@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #include "backend_interface.h"
 
 Backend_Interface::Backend_Interface()
@@ -52,3 +54,4 @@ int connectToBackend() {
 
     return sock;
 }
+#endif
