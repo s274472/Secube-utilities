@@ -58,7 +58,7 @@
      <bool>true</bool>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_1">
      <attribute name="title">
@@ -68,7 +68,7 @@
       <property name="geometry">
        <rect>
         <x>620</x>
-        <y>410</y>
+        <y>400</y>
         <width>80</width>
         <height>25</height>
        </rect>
@@ -80,14 +80,14 @@
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>80</y>
-        <width>61</width>
-        <height>16</height>
+        <x>0</x>
+        <y>120</y>
+        <width>71</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>Device ID:</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Device ID:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QPushButton" name="browseButton">
@@ -119,9 +119,9 @@
      <widget class="QLineEdit" name="user_line">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>217</y>
-        <width>201</width>
+        <x>80</x>
+        <y>310</y>
+        <width>171</width>
         <height>24</height>
        </rect>
       </property>
@@ -132,21 +132,21 @@
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>170</y>
-        <width>55</width>
-        <height>16</height>
+        <x>0</x>
+        <y>270</y>
+        <width>71</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>Group:</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Group:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="device_line">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>80</y>
+        <x>80</x>
+        <y>120</y>
         <width>171</width>
         <height>21</height>
        </rect>
@@ -165,22 +165,22 @@
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>220</y>
-        <width>55</width>
-        <height>16</height>
+        <x>0</x>
+        <y>310</y>
+        <width>71</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>User(s):</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;User(s):&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="pin_line">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>120</y>
-        <width>181</width>
+        <x>80</x>
+        <y>160</y>
+        <width>171</width>
         <height>21</height>
        </rect>
       </property>
@@ -204,9 +204,9 @@
      <widget class="QLineEdit" name="key_line">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>277</y>
-        <width>151</width>
+        <x>80</x>
+        <y>350</y>
+        <width>171</width>
         <height>24</height>
        </rect>
       </property>
@@ -227,22 +227,22 @@
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>280</y>
-        <width>55</width>
+        <x>0</x>
+        <y>350</y>
+        <width>71</width>
         <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>Key:</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Key:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="group_line">
       <property name="geometry">
        <rect>
-        <x>57</x>
-        <y>167</y>
-        <width>113</width>
+        <x>80</x>
+        <y>270</y>
+        <width>171</width>
         <height>24</height>
        </rect>
       </property>
@@ -253,34 +253,34 @@
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>120</y>
-        <width>47</width>
-        <height>16</height>
+        <x>0</x>
+        <y>160</y>
+        <width>71</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>PIN:</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;PIN:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_7">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>330</y>
-        <width>101</width>
+        <x>0</x>
+        <y>400</y>
+        <width>71</width>
         <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>Algorithm:</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Algorithm:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QComboBox" name="comboBox">
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>326</y>
+        <y>396</y>
         <width>171</width>
         <height>24</height>
        </rect>
@@ -296,37 +296,24 @@
        </property>
       </item>
      </widget>
-     <widget class="QProgressBar" name="progressBar_3">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>410</y>
-        <width>118</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-     </widget>
      <widget class="QLabel" name="label_21">
       <property name="geometry">
        <rect>
-        <x>380</x>
-        <y>410</y>
-        <width>221</width>
-        <height>21</height>
+        <x>290</x>
+        <y>400</y>
+        <width>321</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="text">
-       <string>Before listing keys, please insert your pin!</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Before listing keys, please insert your pin!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QTreeWidget" name="keys_treeWidget_Encryption">
       <property name="geometry">
        <rect>
         <x>270</x>
-        <y>270</y>
+        <y>260</y>
         <width>431</width>
         <height>131</height>
        </rect>
@@ -368,17 +355,10 @@
       </column>
      </widget>
      <zorder>listkeys_button</zorder>
-     <zorder>label_3</zorder>
      <zorder>browseButton</zorder>
      <zorder>deviceListButton</zorder>
-     <zorder>label_5</zorder>
-     <zorder>label_6</zorder>
      <zorder>label</zorder>
      <zorder>encrypt_button</zorder>
-     <zorder>label_4</zorder>
-     <zorder>label_2</zorder>
-     <zorder>label_7</zorder>
-     <zorder>progressBar_3</zorder>
      <zorder>label_21</zorder>
      <zorder>keys_treeWidget_Encryption</zorder>
      <zorder>devices_treeWidget_Encryption</zorder>
@@ -389,6 +369,12 @@
      <zorder>user_line</zorder>
      <zorder>key_line</zorder>
      <zorder>comboBox</zorder>
+     <zorder>label_3</zorder>
+     <zorder>label_2</zorder>
+     <zorder>label_5</zorder>
+     <zorder>label_6</zorder>
+     <zorder>label_4</zorder>
+     <zorder>label_7</zorder>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
@@ -433,21 +419,21 @@
      <widget class="QLabel" name="label_10">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>80</y>
-        <width>61</width>
-        <height>16</height>
+        <x>0</x>
+        <y>120</y>
+        <width>71</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>Device ID:</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Device ID:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="device_line_Decryption">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>80</y>
+        <x>80</x>
+        <y>120</y>
         <width>171</width>
         <height>21</height>
        </rect>
@@ -456,22 +442,22 @@
      <widget class="QLabel" name="label_11">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>120</y>
-        <width>47</width>
-        <height>16</height>
+        <x>0</x>
+        <y>160</y>
+        <width>71</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>PIN:</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;PIN:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="pin_line_Decryption">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>120</y>
-        <width>181</width>
+        <x>80</x>
+        <y>160</y>
+        <width>171</width>
         <height>21</height>
        </rect>
       </property>
@@ -525,19 +511,6 @@
       </property>
       <property name="text">
        <string>Decrypt</string>
-      </property>
-     </widget>
-     <widget class="QProgressBar" name="progressBar_2">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>410</y>
-        <width>118</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="value">
-       <number>0</number>
       </property>
      </widget>
      <widget class="QTreeWidget" name="devices_treeWidget_Decryption">
@@ -609,21 +582,21 @@
      <widget class="QLabel" name="label_13">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>80</y>
-        <width>61</width>
-        <height>16</height>
+        <x>0</x>
+        <y>120</y>
+        <width>71</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>Device ID:</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Device ID:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="device_line_Digest">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>80</y>
+        <x>80</x>
+        <y>120</y>
         <width>171</width>
         <height>21</height>
        </rect>
@@ -632,22 +605,22 @@
      <widget class="QLabel" name="label_14">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>120</y>
-        <width>47</width>
-        <height>16</height>
+        <x>0</x>
+        <y>160</y>
+        <width>71</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>PIN:</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;PIN:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="pin_line_Digest">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>120</y>
-        <width>181</width>
+        <x>80</x>
+        <y>160</y>
+        <width>171</width>
         <height>21</height>
        </rect>
       </property>
@@ -672,21 +645,21 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>170</y>
-        <width>55</width>
-        <height>16</height>
+        <y>270</y>
+        <width>61</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>Group:</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Group:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="group_line_Digest">
       <property name="geometry">
        <rect>
-        <x>57</x>
-        <y>167</y>
-        <width>113</width>
+        <x>80</x>
+        <y>270</y>
+        <width>171</width>
         <height>24</height>
        </rect>
       </property>
@@ -697,22 +670,22 @@
      <widget class="QLabel" name="label_16">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>220</y>
-        <width>55</width>
-        <height>16</height>
+        <x>0</x>
+        <y>310</y>
+        <width>71</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>User(s):</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;User(s):&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="user_line_Digest">
       <property name="geometry">
        <rect>
-        <x>60</x>
-        <y>217</y>
-        <width>201</width>
+        <x>80</x>
+        <y>310</y>
+        <width>171</width>
         <height>24</height>
        </rect>
       </property>
@@ -723,22 +696,22 @@
      <widget class="QLabel" name="label_17">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>280</y>
-        <width>55</width>
+        <x>0</x>
+        <y>350</y>
+        <width>71</width>
         <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>Key:</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Key:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="key_line_Digest">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>277</y>
-        <width>151</width>
+        <x>80</x>
+        <y>350</y>
+        <width>171</width>
         <height>24</height>
        </rect>
       </property>
@@ -746,21 +719,21 @@
      <widget class="QLabel" name="label_18">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>330</y>
-        <width>81</width>
+        <x>0</x>
+        <y>400</y>
+        <width>71</width>
         <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>Algorithm:</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Algorithm:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QComboBox" name="algorithm_comboBox_Digest">
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>326</y>
+        <y>396</y>
         <width>171</width>
         <height>24</height>
        </rect>
@@ -780,7 +753,7 @@
       <property name="geometry">
        <rect>
         <x>620</x>
-        <y>410</y>
+        <y>400</y>
         <width>80</width>
         <height>25</height>
        </rect>
@@ -800,31 +773,6 @@
       </property>
       <property name="text">
        <string>Compute Digest</string>
-      </property>
-     </widget>
-     <widget class="QProgressBar" name="progressBar">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>410</y>
-        <width>118</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-      <property name="textVisible">
-       <bool>true</bool>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="invertedAppearance">
-       <bool>false</bool>
-      </property>
-      <property name="textDirection">
-       <enum>QProgressBar::TopToBottom</enum>
       </property>
      </widget>
      <widget class="QTreeWidget" name="devices_treeWidget_Digest">
@@ -856,7 +804,7 @@
       <property name="geometry">
        <rect>
         <x>270</x>
-        <y>270</y>
+        <y>260</y>
         <width>431</width>
         <height>131</height>
        </rect>
@@ -871,6 +819,19 @@
         <string>Key Size</string>
        </property>
       </column>
+     </widget>
+     <widget class="QLabel" name="label_22">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>400</y>
+        <width>321</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Before listing keys, please insert your pin!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
      </widget>
      <zorder>label_12</zorder>
      <zorder>file_line_Digest</zorder>
@@ -889,10 +850,10 @@
      <zorder>label_18</zorder>
      <zorder>listkeys_button_Digest</zorder>
      <zorder>digest_button</zorder>
-     <zorder>progressBar</zorder>
      <zorder>devices_treeWidget_Digest</zorder>
      <zorder>keys_treeWidget_Digest</zorder>
      <zorder>algorithm_comboBox_Digest</zorder>
+     <zorder>label_22</zorder>
     </widget>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
@@ -937,21 +898,21 @@
      <widget class="QLabel" name="label_19">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>80</y>
-        <width>61</width>
-        <height>16</height>
+        <x>0</x>
+        <y>120</y>
+        <width>71</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>Device ID:</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Device ID:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="device_line_UpdatePath">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>80</y>
+        <x>80</x>
+        <y>120</y>
         <width>171</width>
         <height>21</height>
        </rect>
@@ -960,22 +921,22 @@
      <widget class="QLabel" name="label_20">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>120</y>
-        <width>47</width>
-        <height>16</height>
+        <x>0</x>
+        <y>160</y>
+        <width>71</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
-       <string>PIN:</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;PIN:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="pin_line_UpdatePath">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>120</y>
-        <width>181</width>
+        <x>80</x>
+        <y>160</y>
+        <width>171</width>
         <height>21</height>
        </rect>
       </property>
@@ -994,19 +955,6 @@
       </property>
       <property name="text">
        <string>List devices...</string>
-      </property>
-     </widget>
-     <widget class="QProgressBar" name="progressBar_4">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>410</y>
-        <width>118</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="value">
-       <number>0</number>
       </property>
      </widget>
      <widget class="QPushButton" name="updatePath_button">
@@ -1054,7 +1002,6 @@
      <zorder>label_20</zorder>
      <zorder>pin_line_UpdatePath</zorder>
      <zorder>deviceListButton_UpdatePath</zorder>
-     <zorder>progressBar_4</zorder>
      <zorder>updatePath_button</zorder>
      <zorder>devices_treeWidget_UpdatePath</zorder>
      <zorder>path_line_UpdatePath</zorder>
