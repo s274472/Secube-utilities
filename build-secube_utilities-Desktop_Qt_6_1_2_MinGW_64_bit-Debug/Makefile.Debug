@@ -678,7 +678,8 @@ debug/main.o: ../secube_utilities/main.cpp ../secube_utilities/utilities.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtGui/qinputmethod.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtCore/QFile \
 		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qfile.h \
-		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qfiledevice.h
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/qfiledevice.h \
+		../../../../Qt/6.1.2/mingw81_64/include/QtCore/QTextStream
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\secube_utilities\main.cpp
 
 debug/backend_interface.o: ../secube_utilities/backend_interface.cpp ../secube_utilities/backend_interface.h \
@@ -695,7 +696,7 @@ debug/backend_interface.o: ../secube_utilities/backend_interface.cpp ../secube_u
 		../secube_utilities/cereal/types/common.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\backend_interface.o ..\secube_utilities\backend_interface.cpp
 
-debug/linux_backend_interface.o: ../secube_utilities/linux_backend_interface.cpp ../secube_utilities/backend_interface.h \
+debug/linux_backend_interface.o: ../secube_utilities/linux_backend_interface.cpp ../secube_utilities/linux_backend_interface.h \
 		../secube_utilities/cereal/archives/binary.hpp \
 		../secube_utilities/cereal/cereal.hpp \
 		../secube_utilities/cereal/macros.hpp \
@@ -905,7 +906,7 @@ debug/utilities.o: ../secube_utilities/utilities.cpp ../secube_utilities/utiliti
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qdialog.h \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/QMessageBox \
 		../../../../Qt/6.1.2/mingw81_64/include/QtWidgets/qmessagebox.h \
-		../secube_utilities/backend_interface.h \
+		../secube_utilities/linux_backend_interface.h \
 		../secube_utilities/cereal/archives/binary.hpp \
 		../secube_utilities/cereal/cereal.hpp \
 		../secube_utilities/cereal/macros.hpp \
@@ -916,7 +917,8 @@ debug/utilities.o: ../secube_utilities/utilities.cpp ../secube_utilities/utiliti
 		../secube_utilities/cereal/details/static_object.hpp \
 		../secube_utilities/cereal/types/base_class.hpp \
 		../secube_utilities/cereal/details/polymorphic_impl_fwd.hpp \
-		../secube_utilities/cereal/types/common.hpp
+		../secube_utilities/cereal/types/common.hpp \
+		../secube_utilities/backend_interface.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\utilities.o ..\secube_utilities\utilities.cpp
 
 debug/qrc_MyResources.o: debug/qrc_MyResources.cpp 

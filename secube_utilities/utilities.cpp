@@ -180,6 +180,10 @@ void Utilities::on_browseButton_4_clicked()
 
 void Utilities::on_deviceListButton_clicked()
 {
+
+    ui->deviceListButton->setText("Searching...");
+    ui->deviceListButton->repaint(); // Forces update
+
     // Clear the list:
     ui->devices_treeWidget_Encryption->clear();
 
@@ -188,6 +192,7 @@ void Utilities::on_deviceListButton_clicked()
     resp = sendRequestToBackend<Response_DEV_LIST>("secube_cmd.exe -dl -gui_server");
 
     // Update UI:
+
     if(resp.err_code<0) {
         cout << resp.err_msg << endl;
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
@@ -205,10 +210,15 @@ void Utilities::on_deviceListButton_clicked()
         }
     }
 
+    ui->deviceListButton->setText("List devices...");
 }
 
 void Utilities::on_deviceListButton_Decryption_clicked()
 {
+
+    ui->deviceListButton_Decryption->setText("Searching...");
+    ui->deviceListButton_Decryption->repaint(); // Forces update
+
     // Clear the list:
     ui->devices_treeWidget_Decryption->clear();
 
@@ -236,10 +246,14 @@ void Utilities::on_deviceListButton_Decryption_clicked()
         }
     }
 
+    ui->deviceListButton_Decryption->setText("List devices...");
 }
 
 void Utilities::on_deviceListButton_Digest_clicked()
 {
+
+    ui->deviceListButton_Digest->setText("Searching...");
+    ui->deviceListButton_Digest->repaint(); // Forces update
 
     // Clear the list:
     ui->devices_treeWidget_Digest->clear();
@@ -266,10 +280,14 @@ void Utilities::on_deviceListButton_Digest_clicked()
         }
     }
 
+    ui->deviceListButton_Digest->setText("List devices...");
 }
 
 void Utilities::on_deviceListButton_UpdatePath_clicked()
 {
+
+    ui->deviceListButton_UpdatePath->setText("Searching...");
+    ui->deviceListButton_UpdatePath->repaint(); // Forces update
 
     // Clear the list:
     ui->devices_treeWidget_UpdatePath->clear();
@@ -296,11 +314,15 @@ void Utilities::on_deviceListButton_UpdatePath_clicked()
         }
     }
 
-
+    ui->deviceListButton_UpdatePath->setText("List devices...");
 }
 
 void Utilities::on_listkeys_button_clicked()
 {
+
+    ui->listkeys_button->setText("Extracting...");
+    ui->listkeys_button->repaint(); // Forces update
+
     // Clear the list:
     ui->keys_treeWidget_Encryption->clear();
 
@@ -341,10 +363,14 @@ void Utilities::on_listkeys_button_clicked()
         }
     }
 
+    ui->listkeys_button->setText("List keys...");
 }
 
 void Utilities::on_listkeys_button_Digest_clicked()
 {
+
+    ui->listkeys_button_Digest->setText("Extracting...");
+    ui->listkeys_button_Digest->repaint(); // Forces update
 
     // Clear the list:
     ui->keys_treeWidget_Digest->clear();
@@ -385,11 +411,16 @@ void Utilities::on_listkeys_button_Digest_clicked()
         }
     }
 
+    ui->listkeys_button_Digest->setText("List keys...");
 }
 
 
 void Utilities::on_decrypt_button_clicked()
 {
+
+    ui->decrypt_button->setText("Decrypting...");
+    ui->decrypt_button->repaint(); // Forces update
+
     // Prepare command:
     QString command = "secube_cmd.exe -gui_server -d ";
 
@@ -416,18 +447,24 @@ void Utilities::on_decrypt_button_clicked()
 
     // Update UI:
     if(resp.err_code<0) {
-        cout << resp.err_msg << endl;
+        ui->decrypt_button->setText("Error!");
+        ui->decrypt_button->repaint(); // Forces update
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
-        cout << resp.err_msg << endl;
+        ui->decrypt_button->setText("Done!");
+        ui->decrypt_button->repaint(); // Forces update
         QMessageBox::information(0, QString("Done!"), QString(resp.err_msg), QMessageBox::Ok);
     }
 
+    ui->decrypt_button->setText("Decrypt");
 }
 
 void Utilities::on_encrypt_button_clicked()
 {
+    ui->encrypt_button->setText("Encrypting...");
+    ui->encrypt_button->repaint(); // Forces update
+
     // Prepare command:
     QString command = "secube_cmd.exe -gui_server -e ";
 
@@ -475,18 +512,24 @@ void Utilities::on_encrypt_button_clicked()
 
     // Update UI:
     if(resp.err_code<0) {
-        cout << resp.err_msg << endl;
+        ui->encrypt_button->setText("Error!");
+        ui->encrypt_button->repaint(); // Forces update
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
-        cout << resp.err_msg << endl;
+        ui->encrypt_button->setText("Done!");
+        ui->encrypt_button->repaint(); // Forces update
         QMessageBox::information(0, QString("Done!"), QString(resp.err_msg), QMessageBox::Ok);
     }
 
+    ui->encrypt_button->setText("Encrypt");
 }
 
 void Utilities::on_digest_button_clicked()
 {
+
+    ui->digest_button->setText("Computing digest...");
+    ui->digest_button->repaint(); // Forces update
 
     // Prepare command:
     QString command = "secube_cmd.exe -gui_server -di ";
@@ -535,18 +578,25 @@ void Utilities::on_digest_button_clicked()
 
     // Update UI:
     if(resp.err_code<0) {
-        cout << resp.err_msg << endl;
+        ui->digest_button->setText("Error!");
+        ui->digest_button->repaint();
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
-        cout << resp.err_msg << endl;
+        ui->digest_button->setText("Done!");
+        ui->digest_button->repaint();
         QMessageBox::information(0, QString("Done!"), QString(resp.err_msg), QMessageBox::Ok);
     }
+
+    ui->digest_button->setText("Compute Digest");
 
 }
 
 void Utilities::on_updatePath_button_clicked()
 {
+
+    ui->updatePath_button->setText("Updating...");
+    ui->updatePath_button->repaint(); // Forces update
 
     // Prepare command:
     QString command = "secube_cmd.exe -gui_server -update_path ";
@@ -574,14 +624,17 @@ void Utilities::on_updatePath_button_clicked()
 
     // Update UI:
     if(resp.err_code<0) {
-        cout << resp.err_msg << endl;
+        ui->updatePath_button->setText("Error!");
+        ui->updatePath_button->repaint(); // Forces update
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
-        cout << resp.err_msg << endl;
+        ui->updatePath_button->setText("Done!");
+        ui->updatePath_button->repaint(); // Forces update
         QMessageBox::information(0, QString("Done!"), QString(resp.err_msg), QMessageBox::Ok);
     }
 
+    ui->updatePath_button->setText("Update SEKey path");
 }
 
 void Utilities::on_devices_treeWidget_Encryption_itemClicked(QTreeWidgetItem *item){
