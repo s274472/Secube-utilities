@@ -277,9 +277,11 @@ int main(int argc, char *argv[]) {
 		}
 
 
-		if (keyID != 0)
-			digest(s1, path, keyID, alg); //algorithms : 0) SHA-256 (no key required) 1) HMAC-SHA-256
-		else {
+		// The SHA-256 algorithm do not require a key
+		// The HMAC-SHA-256 requires a key, this needs to be or manually inserted or retrieved using SEKey
+		if ( (alg.compare("SHA-256") == 0) || (keyID!=0) ) // If the key is not needed or explicitly specified, proceed
+			digest(s1, path, keyID, alg);
+		else { // Else extract the key using SEKey
 			if (!read_sekey_update_path(*l0.get(), l1.get())) {
 				cout << "Update the sekey path!" << endl;
 
