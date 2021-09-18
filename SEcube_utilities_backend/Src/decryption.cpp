@@ -51,10 +51,24 @@ int decryption_w_encrypted_filename(int sock, string filename) {
 	SEfile file1(l1.get());
 	vector<pair<string,string>> list;
 	secure_ls(filename, list, l1.get());
-	//cout << list[0].first << endl;
-	//cout << list[0].second << endl;
 
-	filename = list[0].second;
+	int position_of_slash = -1;
+	for (int i_filename = filename.length(); i_filename>=0; i_filename--) {
+		if (filename[i_filename] == '\\' || filename[i_filename] == '/') {
+			position_of_slash = i_filename;
+			break;
+		}
+	}
+
+	if (position_of_slash == -1)
+		filename = list[0].second; //because it's relative path
+	else {
+		filename = filename.erase(position_of_slash + 1, filename.length());
+		filename = filename + list[0].second;
+	}
+
+	cout << "Will decrypt as:" << endl;
+	cout << filename << endl;
 
 	file1.secure_open((char*) filename.c_str(), SEFILE_READ, SEFILE_OPEN);
 	int pos;
