@@ -56,7 +56,13 @@ void Utilities::on_group_line_textChanged(const QString &arg1)
     {
         ui ->user_line ->setEnabled(true);
         ui ->key_line ->setEnabled(true);
+        ui ->user_line ->setPlaceholderText("");
+        ui ->key_line ->setPlaceholderText("");
+
+
     } else {
+         ui ->user_line ->setPlaceholderText("N/A");
+         ui ->key_line ->setPlaceholderText("N/A");
          ui ->user_line ->setEnabled(false);
          ui ->key_line ->setEnabled(false);
     }
@@ -68,9 +74,13 @@ void Utilities::on_user_line_textChanged(const QString &arg1)
     {
         ui ->group_line ->setEnabled(true);
         ui ->key_line ->setEnabled(true);
+        ui ->key_line ->setPlaceholderText("");
+        ui ->group_line ->setPlaceholderText("");
     } else {
          ui ->group_line ->setEnabled(false);
          ui ->key_line ->setEnabled(false);
+         ui ->group_line ->setPlaceholderText("N/A");
+         ui ->key_line ->setPlaceholderText("N/A");
     }
 }
 
@@ -81,9 +91,13 @@ void Utilities::on_key_line_textChanged(const QString &arg1)
     {
         ui ->user_line ->setEnabled(true);
         ui ->group_line ->setEnabled(true);
+        ui ->group_line ->setPlaceholderText("");
+        ui ->user_line ->setPlaceholderText("");
     } else {
          ui ->user_line ->setEnabled(false);
          ui ->group_line ->setEnabled(false);
+         ui ->user_line ->setPlaceholderText("N/A");
+         ui ->group_line ->setPlaceholderText("N/A");
     }
 }
 
@@ -113,9 +127,13 @@ void Utilities::on_group_line_Digest_textChanged(const QString &arg1)
         ui ->group_line_Digest ->setModified(false);
         ui ->user_line_Digest ->setEnabled(true);
         ui ->key_line_Digest ->setEnabled(true);
+        ui ->user_line_Digest ->setPlaceholderText("");
+        ui ->key_line_Digest ->setPlaceholderText("");
     } else {
          ui ->user_line_Digest ->setEnabled(false);
          ui ->key_line_Digest ->setEnabled(false);
+         ui ->user_line_Digest ->setPlaceholderText("N/A");
+         ui ->key_line_Digest ->setPlaceholderText("N/A");
     }
 }
 
@@ -127,9 +145,13 @@ void Utilities::on_user_line_Digest_textChanged(const QString &arg1)
         ui ->user_line_Digest ->setModified(false);
         ui ->group_line_Digest ->setEnabled(true);
         ui ->key_line_Digest ->setEnabled(true);
+        ui ->group_line_Digest ->setPlaceholderText("");
+        ui ->key_line_Digest ->setPlaceholderText("");
     } else {
          ui ->group_line_Digest ->setEnabled(false);
          ui ->key_line_Digest ->setEnabled(false);
+         ui ->group_line_Digest ->setPlaceholderText("N/A");
+         ui ->key_line_Digest ->setPlaceholderText("N/A");
     }
 }
 
@@ -141,20 +163,25 @@ void Utilities::on_key_line_Digest_textChanged(const QString &arg1)
         ui ->key_line_Digest ->setModified(false);
         ui ->group_line_Digest ->setEnabled(true);
         ui ->user_line_Digest ->setEnabled(true);
+        ui ->user_line_Digest ->setPlaceholderText("");
+        ui ->group_line_Digest ->setPlaceholderText("");
     } else {
          ui ->group_line_Digest ->setEnabled(false);
          ui ->user_line_Digest ->setEnabled(false);
+         ui ->user_line_Digest ->setPlaceholderText("N/A");
+         ui ->group_line_Digest ->setPlaceholderText("N/A");
     }
 }
 
 
-void Utilities::on_comboBox_2_activated(int index)
+void Utilities::on_algorithm_comboBox_Digest_activated(int index)
 {
     if(index == 1)
     {
         ui ->group_line_Digest ->setEnabled(false);
         ui ->user_line_Digest ->setEnabled(false);
         ui ->key_line_Digest ->setEnabled(false);
+        ui ->nonce_line_Digest ->setEnabled(false);
     } else if(ui ->group_line_Digest ->isModified()||ui ->user_line_Digest ->isModified()||ui ->key_line_Digest ->isModified()) {
         if(ui ->group_line_Digest ->isModified())
         ui ->group_line_Digest ->setEnabled(true);
@@ -162,10 +189,13 @@ void Utilities::on_comboBox_2_activated(int index)
         ui ->user_line_Digest ->setEnabled(true);
         if(ui ->key_line_Digest ->isModified())
         ui ->key_line_Digest ->setEnabled(true);
+        if(ui ->nonce_line_Digest ->isModified())
+        ui ->nonce_line_Digest ->setEnabled(true);
     } else {
         ui ->group_line_Digest ->setEnabled(true);
         ui ->user_line_Digest ->setEnabled(true);
         ui ->key_line_Digest ->setEnabled(true);
+        ui ->nonce_line_Digest ->setEnabled(true);
     }
 }
 

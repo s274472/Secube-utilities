@@ -49,8 +49,6 @@ private slots:
 
     void on_key_line_Digest_textChanged(const QString &arg1);
 
-    void on_comboBox_2_activated(int index);
-
     void on_browseButton_4_clicked();
 
     void on_updatePath_button_clicked();
@@ -72,6 +70,8 @@ private slots:
     void on_keys_treeWidget_Encryption_itemClicked(QTreeWidgetItem *item);
 
     void on_keys_treeWidget_Digest_itemClicked(QTreeWidgetItem *item);
+
+    void on_algorithm_comboBox_Digest_activated(int index);
 
 private:
     Ui::Utilities *ui;
