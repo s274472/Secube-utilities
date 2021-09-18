@@ -124,7 +124,6 @@ void Utilities::on_group_line_Digest_textChanged(const QString &arg1)
 {
     if(arg1.isEmpty())
     {
-        ui ->group_line_Digest ->setModified(false);
         ui ->user_line_Digest ->setEnabled(true);
         ui ->key_line_Digest ->setEnabled(true);
         ui ->user_line_Digest ->setPlaceholderText("");
@@ -142,7 +141,6 @@ void Utilities::on_user_line_Digest_textChanged(const QString &arg1)
 {
     if(arg1.isEmpty())
     {
-        ui ->user_line_Digest ->setModified(false);
         ui ->group_line_Digest ->setEnabled(true);
         ui ->key_line_Digest ->setEnabled(true);
         ui ->group_line_Digest ->setPlaceholderText("");
@@ -160,7 +158,6 @@ void Utilities::on_key_line_Digest_textChanged(const QString &arg1)
 {
     if(arg1.isEmpty())
     {
-        ui ->key_line_Digest ->setModified(false);
         ui ->group_line_Digest ->setEnabled(true);
         ui ->user_line_Digest ->setEnabled(true);
         ui ->user_line_Digest ->setPlaceholderText("");
@@ -182,20 +179,19 @@ void Utilities::on_algorithm_comboBox_Digest_activated(int index)
         ui ->user_line_Digest ->setEnabled(false);
         ui ->key_line_Digest ->setEnabled(false);
         ui ->nonce_line_Digest ->setEnabled(false);
-    } else if(ui ->group_line_Digest ->isModified()||ui ->user_line_Digest ->isModified()||ui ->key_line_Digest ->isModified()) {
-        if(ui ->group_line_Digest ->isModified())
-        ui ->group_line_Digest ->setEnabled(true);
-        if(ui ->user_line_Digest ->isModified())
-        ui ->user_line_Digest ->setEnabled(true);
-        if(ui ->key_line_Digest ->isModified())
-        ui ->key_line_Digest ->setEnabled(true);
-        if(ui ->nonce_line_Digest ->isModified())
-        ui ->nonce_line_Digest ->setEnabled(true);
+        ui ->user_line_Digest ->setText("N/A");
+        ui ->group_line_Digest ->setText("N/A");
+        ui ->key_line_Digest ->setText("N/A");
+        ui ->nonce_line_Digest ->setText("N/A");
     } else {
         ui ->group_line_Digest ->setEnabled(true);
         ui ->user_line_Digest ->setEnabled(true);
         ui ->key_line_Digest ->setEnabled(true);
         ui ->nonce_line_Digest ->setEnabled(true);
+        ui ->user_line_Digest ->clear();
+        ui ->group_line_Digest ->clear();
+        ui ->key_line_Digest ->clear();
+        ui ->nonce_line_Digest ->clear();
     }
 }
 
@@ -695,11 +691,13 @@ void Utilities::on_devices_treeWidget_UpdatePath_itemClicked(QTreeWidgetItem *it
 void Utilities::on_keys_treeWidget_Encryption_itemClicked(QTreeWidgetItem *item){
 
     // Update the key line with the selected ID:
+    if(ui->key_line->isEnabled() == true)
     ui->key_line->setText( item->data(0, Qt::DisplayRole).toString() ) ;
 }
 
 void Utilities::on_keys_treeWidget_Digest_itemClicked(QTreeWidgetItem *item){
 
     // Update the key line with the selected ID:
+    if(ui->key_line_Digest->isEnabled() == true)
     ui->key_line_Digest->setText( item->data(0, Qt::DisplayRole).toString() ) ;
 }
