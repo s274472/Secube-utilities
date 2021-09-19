@@ -4,7 +4,7 @@
 #define INC_GUI_INTERFACE_H_
 
 #define BUFLEN 1024*100 // dimension of input/output buffer for communicating with the GUI
-#define STR_SIZE 150
+#define STR_SIZE 250
 #define ARR_SIZE 20
 #define comm_port 1235
 

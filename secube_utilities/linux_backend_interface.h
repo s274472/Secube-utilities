@@ -19,7 +19,7 @@
 
 #define BUFLEN 1024*100 // dimension of input/output buffer for communicating with the GUI
 #define comm_port 1235
-#define STR_SIZE 150
+#define STR_SIZE 250
 #define ARR_SIZE 20
 
 using namespace std;

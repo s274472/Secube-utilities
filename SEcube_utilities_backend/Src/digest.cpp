@@ -113,25 +113,38 @@ int digest(int sock, string filename, uint32_t keyID, string algo) {
 	}
 
 	this_thread::sleep_for(chrono::milliseconds(1000));
-	cout << "\n\nThe hex value of the digest is:" << endl;
 
-	char digest[B5_SHA256_DIGEST_SIZE]; // String that will store the digest in hex format
+	string digest; // String that will store the digest in hex format
+	string nonce; // String that will store the nonce in hex format
+	char tmp[4];
+	string out_msg; // Message to be sent to the GUI
 
-	int j=0;
+	// Extract digest string in hex format:
 	for(uint8_t i : data_digest.digest){
-		printf("%02x ", i);
-		if(j==0) {
-			sprintf(digest, "%02x ", i);
+		sprintf(tmp, "%02x ", i);
+		digest += tmp;
+	}
+
+	cout << "\nThe hex value of the digest is: " << digest << endl;
+	out_msg = "digest hex: " + string(digest);
+
+	// If the algorithm selected is the HMAC-SHA-256, the nonce must be extracted:
+	if(algo.compare("HMAC-SHA-256") == 0) {
+
+		// Extract nonce string in hex format:
+		for(uint8_t i : data_digest.digest_nonce){
+			sprintf(tmp, "%02x ", i);
+			nonce += tmp;
 		}
-		else
-			sprintf(digest+strlen(digest), "%02x ", i);
-		j++;
+
+		cout << "The hex value of the nonce is: " << nonce << endl;
+		out_msg += "\n\nnonce hex: " + string(nonce);
 	}
 
 	// For GUI interfacing:
 	if(gui_server_on) {
 
-		sendErrorToGUI<Response_GENERIC>(sock, resp, 0, digest); // In this case err_code = 0 means everything went correctly
+		sendErrorToGUI<Response_GENERIC>(sock, resp, 0, out_msg); // In this case err_code = 0 means everything went correctly
 	}
 
 	return 0;
