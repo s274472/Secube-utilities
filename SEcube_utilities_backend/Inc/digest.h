@@ -11,10 +11,8 @@
 	#include "../Inc/GUI_interface.h"
 #endif
 
-#define DEBUG
-
 using namespace std;
 
-int digest(int sock, string filename, uint32_t keyID, string algo);
+int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce, std::array<uint8_t, B5_SHA256_DIGEST_SIZE> nonce);
 
 #endif /* SECUBE_UTILITIES_SECUBE_UTILITIES_BACKEND_INC_DIGEST_H_ */

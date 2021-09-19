@@ -39,9 +39,12 @@ int main(int argc, char *argv[]) {
 	uint32_t keyID = 0;
 	string alg;
 	utility utility;
+	std::array<uint8_t, B5_SHA256_DIGEST_SIZE> nonce;nonce.fill(0);
+	bool usenonce = false;
 
 	int s1 = -1; // Socket used for GUI interfacing
 
+	// Input flags parser:
 	int cur = 1;
 	while (cur < argc) {
 		//Help
@@ -100,6 +103,14 @@ int main(int argc, char *argv[]) {
 		//Gui Server
 		if (strcmp(argv[cur], "-gui_server") == 0) {
 			gui_server_on = true;
+		}
+		//Nonce
+		if (strcmp(argv[cur], "-nonce") == 0) {
+			usenonce = true;
+			char* nonce_str = argv[++cur];
+			for(int i=0; (i<strlen(nonce_str) && i<B5_SHA256_DIGEST_SIZE); i++) {
+				nonce[i] = nonce_str[i];
+			}
 		}
 		//User(s) ID(s)
 		if (strcmp(argv[cur], "-u") == 0) {
@@ -280,7 +291,7 @@ int main(int argc, char *argv[]) {
 		// The SHA-256 algorithm do not require a key
 		// The HMAC-SHA-256 requires a key, this needs to be or manually inserted or retrieved using SEKey
 		if ( (alg.compare("SHA-256") == 0) || (keyID!=0) ) // If the key is not needed or explicitly specified, proceed
-			digest(s1, path, keyID, alg);
+			digest(s1, path, keyID, alg, usenonce, nonce);
 		else { // Else extract the key using SEKey
 			if (!read_sekey_update_path(*l0.get(), l1.get())) {
 				cout << "Update the sekey path!" << endl;
@@ -305,7 +316,7 @@ int main(int argc, char *argv[]) {
 
 					return -1;
 				}
-				digest(s1, path, keyID, alg);
+				digest(s1, path, keyID, alg, usenonce, nonce);
 				sekey_stop();
 			}
 		}

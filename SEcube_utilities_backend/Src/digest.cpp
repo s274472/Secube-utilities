@@ -4,7 +4,7 @@ extern unique_ptr<L1> l1;
 
 //algorithms : 0) SHA-256 (no key required) 1) HMAC-SHA-256
 
-int digest(int sock, string filename, uint32_t keyID, string algo) {
+int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce, std::array<uint8_t, B5_SHA256_DIGEST_SIZE> nonce) {
 
 	Response_GENERIC resp; // Response to GUI, used if gui_server_on
 
@@ -59,12 +59,6 @@ int digest(int sock, string filename, uint32_t keyID, string algo) {
 	//Let's calculate the length
 	int testsize = size;
 
-	//Debug
-	#ifdef DEBUG
-	cout << "\nWe are going to compute the digest of the following string:" << endl;
-	cout << digest_input << endl;
-	#endif
-
 	//Time to do the digest
 	shared_ptr<uint8_t[]> input_data(new uint8_t[testsize]); // to be sent to digest API
 	memcpy(input_data.get(), digest_input, testsize);
@@ -72,7 +66,6 @@ int digest(int sock, string filename, uint32_t keyID, string algo) {
 
 	cout << "\nStarting digest computation..." << endl;
 	SEcube_digest data_digest;
-	SEcube_digest temp; // this is used to verify the digest in case of HMAC-SHA-256 recomputing the digest using the nonce set by the previous computation
 	switch(algo_number){
 		case 0:
 			// when using SHA-256, you don't need to set anything else than the algorithm
@@ -88,8 +81,15 @@ int digest(int sock, string filename, uint32_t keyID, string algo) {
 			 * of the digest computed on the same data with the same algorithm, and you want to recompute it
 			 * (therefore using the same nonce you used before) to see if the digest is still the same or not. */
 			data_digest.key_id = keyID; // use the selected key ID
-			data_digest.usenonce = false; // we don't want to provide a specific nonce manually
 			data_digest.algorithm = L1Algorithms::Algorithms::HMACSHA256;
+
+			if( !usenonce ) {
+				data_digest.usenonce = false; // we don't want to provide a specific nonce manually
+			} else {
+				data_digest.usenonce = true;
+				data_digest.digest_nonce = nonce;
+			}
+
 			l1->L1Digest(testsize, input_data, data_digest);
 
 			// This code was not elimiated for checking how to set the nonce:

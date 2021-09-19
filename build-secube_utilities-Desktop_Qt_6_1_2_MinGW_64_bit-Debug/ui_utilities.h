@@ -87,6 +87,8 @@ public:
     QTreeWidget *devices_treeWidget_Digest;
     QTreeWidget *keys_treeWidget_Digest;
     QLabel *label_22;
+    QLabel *label_23;
+    QLineEdit *nonce_line_Digest;
     QWidget *tab_4;
     QLabel *label_8;
     QLineEdit *path_line_UpdatePath;
@@ -162,6 +164,7 @@ public:
         key_line = new QLineEdit(tab_1);
         key_line->setObjectName(QString::fromUtf8("key_line"));
         key_line->setGeometry(QRect(80, 350, 171, 24));
+        key_line->setAutoFillBackground(false);
         encrypt_button = new QPushButton(tab_1);
         encrypt_button->setObjectName(QString::fromUtf8("encrypt_button"));
         encrypt_button->setGeometry(QRect(0, 440, 711, 23));
@@ -281,22 +284,22 @@ public:
         deviceListButton_Digest->setGeometry(QRect(600, 210, 101, 23));
         label_15 = new QLabel(tab_3);
         label_15->setObjectName(QString::fromUtf8("label_15"));
-        label_15->setGeometry(QRect(10, 270, 61, 21));
+        label_15->setGeometry(QRect(10, 230, 61, 21));
         group_line_Digest = new QLineEdit(tab_3);
         group_line_Digest->setObjectName(QString::fromUtf8("group_line_Digest"));
-        group_line_Digest->setGeometry(QRect(80, 270, 171, 24));
+        group_line_Digest->setGeometry(QRect(80, 230, 171, 24));
         label_16 = new QLabel(tab_3);
         label_16->setObjectName(QString::fromUtf8("label_16"));
-        label_16->setGeometry(QRect(0, 310, 71, 21));
+        label_16->setGeometry(QRect(0, 270, 71, 21));
         user_line_Digest = new QLineEdit(tab_3);
         user_line_Digest->setObjectName(QString::fromUtf8("user_line_Digest"));
-        user_line_Digest->setGeometry(QRect(80, 310, 171, 24));
+        user_line_Digest->setGeometry(QRect(80, 270, 171, 24));
         label_17 = new QLabel(tab_3);
         label_17->setObjectName(QString::fromUtf8("label_17"));
-        label_17->setGeometry(QRect(0, 350, 71, 21));
+        label_17->setGeometry(QRect(0, 310, 71, 21));
         key_line_Digest = new QLineEdit(tab_3);
         key_line_Digest->setObjectName(QString::fromUtf8("key_line_Digest"));
-        key_line_Digest->setGeometry(QRect(80, 350, 171, 24));
+        key_line_Digest->setGeometry(QRect(80, 310, 171, 24));
         label_18 = new QLabel(tab_3);
         label_18->setObjectName(QString::fromUtf8("label_18"));
         label_18->setGeometry(QRect(0, 400, 71, 21));
@@ -320,6 +323,12 @@ public:
         label_22 = new QLabel(tab_3);
         label_22->setObjectName(QString::fromUtf8("label_22"));
         label_22->setGeometry(QRect(290, 400, 321, 31));
+        label_23 = new QLabel(tab_3);
+        label_23->setObjectName(QString::fromUtf8("label_23"));
+        label_23->setGeometry(QRect(30, 350, 43, 21));
+        nonce_line_Digest = new QLineEdit(tab_3);
+        nonce_line_Digest->setObjectName(QString::fromUtf8("nonce_line_Digest"));
+        nonce_line_Digest->setGeometry(QRect(80, 350, 171, 24));
         tabWidget->addTab(tab_3, QString());
         label_12->raise();
         file_line_Digest->raise();
@@ -342,6 +351,8 @@ public:
         keys_treeWidget_Digest->raise();
         algorithm_comboBox_Digest->raise();
         label_22->raise();
+        label_23->raise();
+        nonce_line_Digest->raise();
         tab_4 = new QWidget();
         tab_4->setObjectName(QString::fromUtf8("tab_4"));
         label_8 = new QLabel(tab_4);
@@ -391,7 +402,7 @@ public:
 
         retranslateUi(Utilities);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(Utilities);
@@ -410,6 +421,10 @@ public:
         label_5->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">Group:</p></body></html>", nullptr));
         label_6->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">User(s):</p></body></html>", nullptr));
         label->setText(QCoreApplication::translate("Utilities", "File:", nullptr));
+#if QT_CONFIG(accessibility)
+        key_line->setAccessibleDescription(QString());
+#endif // QT_CONFIG(accessibility)
+        key_line->setText(QString());
         encrypt_button->setText(QCoreApplication::translate("Utilities", "Encrypt", nullptr));
         label_4->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">Key:</p></body></html>", nullptr));
 #if QT_CONFIG(tooltip)
@@ -472,6 +487,7 @@ public:
         ___qtreewidgetitem4->setText(1, QCoreApplication::translate("Utilities", "Key Size", nullptr));
         ___qtreewidgetitem4->setText(0, QCoreApplication::translate("Utilities", "Key ID", nullptr));
         label_22->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">Before listing keys, please insert your pin!</p></body></html>", nullptr));
+        label_23->setText(QCoreApplication::translate("Utilities", "Nonce:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("Utilities", "Digest", nullptr));
         label_8->setText(QCoreApplication::translate("Utilities", "Path:", nullptr));
         browseButton_4->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));

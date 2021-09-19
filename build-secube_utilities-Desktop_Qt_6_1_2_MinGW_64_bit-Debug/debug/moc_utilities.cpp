@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Utilities_t {
     const uint offsetsAndSize[66];
-    char stringdata0[905];
+    char stringdata0[920];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_Utilities_t, stringdata0) + ofs), len 
@@ -47,21 +47,21 @@ QT_MOC_LITERAL(343, 25), // "on_browseButton_3_clicked"
 QT_MOC_LITERAL(369, 32), // "on_group_line_Digest_textChanged"
 QT_MOC_LITERAL(402, 31), // "on_user_line_Digest_textChanged"
 QT_MOC_LITERAL(434, 30), // "on_key_line_Digest_textChanged"
-QT_MOC_LITERAL(465, 23), // "on_comboBox_2_activated"
-QT_MOC_LITERAL(489, 5), // "index"
-QT_MOC_LITERAL(495, 25), // "on_browseButton_4_clicked"
-QT_MOC_LITERAL(521, 28), // "on_updatePath_button_clicked"
-QT_MOC_LITERAL(550, 24), // "on_digest_button_clicked"
-QT_MOC_LITERAL(575, 25), // "on_decrypt_button_clicked"
-QT_MOC_LITERAL(601, 25), // "on_encrypt_button_clicked"
-QT_MOC_LITERAL(627, 44), // "on_devices_treeWidget_Decrypt..."
-QT_MOC_LITERAL(672, 16), // "QTreeWidgetItem*"
-QT_MOC_LITERAL(689, 4), // "item"
-QT_MOC_LITERAL(694, 44), // "on_devices_treeWidget_Encrypt..."
-QT_MOC_LITERAL(739, 40), // "on_devices_treeWidget_Digest_..."
-QT_MOC_LITERAL(780, 44), // "on_devices_treeWidget_UpdateP..."
-QT_MOC_LITERAL(825, 41), // "on_keys_treeWidget_Encryption..."
-QT_MOC_LITERAL(867, 37) // "on_keys_treeWidget_Digest_ite..."
+QT_MOC_LITERAL(465, 25), // "on_browseButton_4_clicked"
+QT_MOC_LITERAL(491, 28), // "on_updatePath_button_clicked"
+QT_MOC_LITERAL(520, 24), // "on_digest_button_clicked"
+QT_MOC_LITERAL(545, 25), // "on_decrypt_button_clicked"
+QT_MOC_LITERAL(571, 25), // "on_encrypt_button_clicked"
+QT_MOC_LITERAL(597, 44), // "on_devices_treeWidget_Decrypt..."
+QT_MOC_LITERAL(642, 16), // "QTreeWidgetItem*"
+QT_MOC_LITERAL(659, 4), // "item"
+QT_MOC_LITERAL(664, 44), // "on_devices_treeWidget_Encrypt..."
+QT_MOC_LITERAL(709, 40), // "on_devices_treeWidget_Digest_..."
+QT_MOC_LITERAL(750, 44), // "on_devices_treeWidget_UpdateP..."
+QT_MOC_LITERAL(795, 41), // "on_keys_treeWidget_Encryption..."
+QT_MOC_LITERAL(837, 37), // "on_keys_treeWidget_Digest_ite..."
+QT_MOC_LITERAL(875, 38), // "on_algorithm_comboBox_Digest_..."
+QT_MOC_LITERAL(914, 5) // "index"
 
     },
     "Utilities\0on_browseButton_clicked\0\0"
@@ -79,7 +79,6 @@ QT_MOC_LITERAL(867, 37) // "on_keys_treeWidget_Digest_ite..."
     "on_group_line_Digest_textChanged\0"
     "on_user_line_Digest_textChanged\0"
     "on_key_line_Digest_textChanged\0"
-    "on_comboBox_2_activated\0index\0"
     "on_browseButton_4_clicked\0"
     "on_updatePath_button_clicked\0"
     "on_digest_button_clicked\0"
@@ -91,7 +90,9 @@ QT_MOC_LITERAL(867, 37) // "on_keys_treeWidget_Digest_ite..."
     "on_devices_treeWidget_Digest_itemClicked\0"
     "on_devices_treeWidget_UpdatePath_itemClicked\0"
     "on_keys_treeWidget_Encryption_itemClicked\0"
-    "on_keys_treeWidget_Digest_itemClicked"
+    "on_keys_treeWidget_Digest_itemClicked\0"
+    "on_algorithm_comboBox_Digest_activated\0"
+    "index"
 };
 #undef QT_MOC_LITERAL
 
@@ -124,18 +125,18 @@ static const uint qt_meta_data_Utilities[] = {
       15,    1,  194,    2, 0x08,   15 /* Private */,
       16,    1,  197,    2, 0x08,   17 /* Private */,
       17,    1,  200,    2, 0x08,   19 /* Private */,
-      18,    1,  203,    2, 0x08,   21 /* Private */,
-      20,    0,  206,    2, 0x08,   23 /* Private */,
-      21,    0,  207,    2, 0x08,   24 /* Private */,
-      22,    0,  208,    2, 0x08,   25 /* Private */,
-      23,    0,  209,    2, 0x08,   26 /* Private */,
-      24,    0,  210,    2, 0x08,   27 /* Private */,
-      25,    1,  211,    2, 0x08,   28 /* Private */,
-      28,    1,  214,    2, 0x08,   30 /* Private */,
-      29,    1,  217,    2, 0x08,   32 /* Private */,
-      30,    1,  220,    2, 0x08,   34 /* Private */,
-      31,    1,  223,    2, 0x08,   36 /* Private */,
-      32,    1,  226,    2, 0x08,   38 /* Private */,
+      18,    0,  203,    2, 0x08,   21 /* Private */,
+      19,    0,  204,    2, 0x08,   22 /* Private */,
+      20,    0,  205,    2, 0x08,   23 /* Private */,
+      21,    0,  206,    2, 0x08,   24 /* Private */,
+      22,    0,  207,    2, 0x08,   25 /* Private */,
+      23,    1,  208,    2, 0x08,   26 /* Private */,
+      26,    1,  211,    2, 0x08,   28 /* Private */,
+      27,    1,  214,    2, 0x08,   30 /* Private */,
+      28,    1,  217,    2, 0x08,   32 /* Private */,
+      29,    1,  220,    2, 0x08,   34 /* Private */,
+      30,    1,  223,    2, 0x08,   36 /* Private */,
+      31,    1,  226,    2, 0x08,   38 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -153,18 +154,18 @@ static const uint qt_meta_data_Utilities[] = {
     QMetaType::Void, QMetaType::QString,   10,
     QMetaType::Void, QMetaType::QString,   10,
     QMetaType::Void, QMetaType::QString,   10,
-    QMetaType::Void, QMetaType::Int,   19,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 26,   27,
-    QMetaType::Void, 0x80000000 | 26,   27,
-    QMetaType::Void, 0x80000000 | 26,   27,
-    QMetaType::Void, 0x80000000 | 26,   27,
-    QMetaType::Void, 0x80000000 | 26,   27,
-    QMetaType::Void, 0x80000000 | 26,   27,
+    QMetaType::Void, 0x80000000 | 24,   25,
+    QMetaType::Void, 0x80000000 | 24,   25,
+    QMetaType::Void, 0x80000000 | 24,   25,
+    QMetaType::Void, 0x80000000 | 24,   25,
+    QMetaType::Void, 0x80000000 | 24,   25,
+    QMetaType::Void, 0x80000000 | 24,   25,
+    QMetaType::Void, QMetaType::Int,   32,
 
        0        // eod
 };
@@ -190,18 +191,18 @@ void Utilities::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 12: _t->on_group_line_Digest_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 13: _t->on_user_line_Digest_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 14: _t->on_key_line_Digest_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 15: _t->on_comboBox_2_activated((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 16: _t->on_browseButton_4_clicked(); break;
-        case 17: _t->on_updatePath_button_clicked(); break;
-        case 18: _t->on_digest_button_clicked(); break;
-        case 19: _t->on_decrypt_button_clicked(); break;
-        case 20: _t->on_encrypt_button_clicked(); break;
-        case 21: _t->on_devices_treeWidget_Decryption_itemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
-        case 22: _t->on_devices_treeWidget_Encryption_itemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
-        case 23: _t->on_devices_treeWidget_Digest_itemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
-        case 24: _t->on_devices_treeWidget_UpdatePath_itemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
-        case 25: _t->on_keys_treeWidget_Encryption_itemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
-        case 26: _t->on_keys_treeWidget_Digest_itemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
+        case 15: _t->on_browseButton_4_clicked(); break;
+        case 16: _t->on_updatePath_button_clicked(); break;
+        case 17: _t->on_digest_button_clicked(); break;
+        case 18: _t->on_decrypt_button_clicked(); break;
+        case 19: _t->on_encrypt_button_clicked(); break;
+        case 20: _t->on_devices_treeWidget_Decryption_itemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
+        case 21: _t->on_devices_treeWidget_Encryption_itemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
+        case 22: _t->on_devices_treeWidget_Digest_itemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
+        case 23: _t->on_devices_treeWidget_UpdatePath_itemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
+        case 24: _t->on_keys_treeWidget_Encryption_itemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
+        case 25: _t->on_keys_treeWidget_Digest_itemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
+        case 26: _t->on_algorithm_comboBox_Digest_activated((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -215,7 +216,7 @@ const QMetaObject Utilities::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_Utilities_t
 
-, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<const QString &, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<QTreeWidgetItem *, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<int, std::false_type>
 
 
 >,

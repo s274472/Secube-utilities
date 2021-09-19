@@ -596,6 +596,11 @@ void Utilities::on_digest_button_clicked()
         command += "-sha ";
     }
 
+    if(ui->nonce_line_Digest->isEnabled() && ui->nonce_line_Digest->text().size()>0 ) {
+        command += "-nonce \"" + ui->nonce_line_Digest->text();
+        command += "\"";
+    }
+
     cout << command.toUtf8().constData() << endl; // For Debug
 
     // Send request and wait for response:
