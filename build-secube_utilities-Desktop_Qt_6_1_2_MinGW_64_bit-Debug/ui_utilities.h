@@ -62,7 +62,7 @@ public:
     QLabel *label_11;
     QLineEdit *pin_line_Decryption;
     QPushButton *deviceListButton_Decryption;
-    QCheckBox *checkBox;
+    QCheckBox *useSEKey_checkBox_Decryption;
     QPushButton *decrypt_button;
     QTreeWidget *devices_treeWidget_Decryption;
     QWidget *tab_3;
@@ -243,11 +243,11 @@ public:
         deviceListButton_Decryption = new QPushButton(tab_2);
         deviceListButton_Decryption->setObjectName(QString::fromUtf8("deviceListButton_Decryption"));
         deviceListButton_Decryption->setGeometry(QRect(600, 210, 101, 23));
-        checkBox = new QCheckBox(tab_2);
-        checkBox->setObjectName(QString::fromUtf8("checkBox"));
-        checkBox->setGeometry(QRect(620, 400, 91, 22));
-        checkBox->setMouseTracking(false);
-        checkBox->setTristate(false);
+        useSEKey_checkBox_Decryption = new QCheckBox(tab_2);
+        useSEKey_checkBox_Decryption->setObjectName(QString::fromUtf8("useSEKey_checkBox_Decryption"));
+        useSEKey_checkBox_Decryption->setGeometry(QRect(620, 400, 91, 22));
+        useSEKey_checkBox_Decryption->setMouseTracking(false);
+        useSEKey_checkBox_Decryption->setTristate(false);
         decrypt_button = new QPushButton(tab_2);
         decrypt_button->setObjectName(QString::fromUtf8("decrypt_button"));
         decrypt_button->setGeometry(QRect(0, 440, 711, 23));
@@ -402,7 +402,7 @@ public:
 
         retranslateUi(Utilities);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(Utilities);
@@ -450,9 +450,9 @@ public:
         label_11->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">PIN:</p></body></html>", nullptr));
         deviceListButton_Decryption->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
 #if QT_CONFIG(tooltip)
-        checkBox->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>Checking it, SEKey will be used in order to retrieve the proper key. Otherwise, the infos in the file header will be used.</p></body></html>", nullptr));
+        useSEKey_checkBox_Decryption->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>Checking it, SEKey will be used in order to retrieve the proper key. Otherwise, the infos in the file header will be used.</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
-        checkBox->setText(QCoreApplication::translate("Utilities", "Use SEKey", nullptr));
+        useSEKey_checkBox_Decryption->setText(QCoreApplication::translate("Utilities", "Use SEKey", nullptr));
         decrypt_button->setText(QCoreApplication::translate("Utilities", "Decrypt", nullptr));
         QTreeWidgetItem *___qtreewidgetitem2 = devices_treeWidget_Decryption->headerItem();
         ___qtreewidgetitem2->setText(2, QCoreApplication::translate("Utilities", "Device Serial", nullptr));

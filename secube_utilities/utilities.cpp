@@ -448,7 +448,13 @@ void Utilities::on_decrypt_button_clicked()
     ui->decrypt_button->repaint(); // Forces update
 
     // Prepare command:
-    QString command = "secube_cmd.exe -gui_server -d ";
+    QString command = "secube_cmd.exe -gui_server ";
+
+    if( ui->useSEKey_checkBox_Decryption->isChecked() ) {
+        command += "-dk ";
+    } else {
+        command += "-d ";
+    }
 
     if( ui->pin_line_Decryption->text().size()>0 ) {
         command += "-p";
