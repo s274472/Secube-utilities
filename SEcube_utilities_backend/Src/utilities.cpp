@@ -265,6 +265,7 @@ void print_command_line() {
 	cout << "\t-aes_hmac AES_HMACSHA256 (encryption only)" << endl;
 	cout << "\t-sha SHA-256 (digest only, no key required)" << endl;
 	cout << "\t-hmac HMAC-SHA-256 (digest only)" << endl;
+	cout << "\t-nonce \"nonce string\" (if specified, the nonce for the HMAC-SHA-256 is set manually)" << endl;
 //	cout << "\t-aes AES" << endl;
 	cout
 			<< "************************************************************************"
