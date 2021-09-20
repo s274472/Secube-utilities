@@ -220,14 +220,11 @@ void Utilities::on_deviceListButton_clicked()
     // Update UI:
 
     if(resp.err_code<0) {
-        cout << resp.err_msg << endl;
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
         int i = 0;
         for(i=0; i<resp.num_devices;i++) {
-            cout << resp.serials[i] << endl;
-
             QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->devices_treeWidget_Encryption);
             treeItem->setText(0, QString::number(i) );
             treeItem->setText(1, resp.paths[i] );
@@ -255,15 +252,11 @@ void Utilities::on_deviceListButton_Decryption_clicked()
 
     // Update UI:
     if(resp.err_code<0) {
-        cout << resp.err_msg << endl;
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
-
         int i = 0;
         for(i=0; i<resp.num_devices;i++) {
-            cout << resp.serials[i] << endl;
-
             QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->devices_treeWidget_Decryption);
             treeItem->setText(0, QString::number(i) );
             treeItem->setText(1, resp.paths[i] );
@@ -290,14 +283,11 @@ void Utilities::on_deviceListButton_Digest_clicked()
 
     // Update UI:
     if(resp.err_code<0) {
-        cout << resp.err_msg << endl;
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
         int i = 0;
         for(i=0; i<resp.num_devices;i++) {
-            cout << resp.serials[i] << endl;
-
             QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->devices_treeWidget_Digest);
             treeItem->setText(0, QString::number(i) );
             treeItem->setText(1, resp.paths[i] );
@@ -324,14 +314,11 @@ void Utilities::on_deviceListButton_UpdatePath_clicked()
 
     // Update UI:
     if(resp.err_code<0) {
-        cout << resp.err_msg << endl;
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
         int i = 0;
         for(i=0; i<resp.num_devices;i++) {
-            cout << resp.serials[i] << endl;
-
             QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->devices_treeWidget_UpdatePath);
             treeItem->setText(0, QString::number(i) );
             treeItem->setText(1, resp.paths[i] );

@@ -176,10 +176,16 @@ int main(int argc, char *argv[]) {
 			// Login:
 			{
 				int err = login(new_pin, deviceID);
-				// For GUI interfacing:
-				if( (err<0) && (gui_server_on) ) {
-					Response_GENERIC resp;
-					sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Error during login!");
+				if( err<0 ) { // In case of error during login:
+					cout << "Error during login! Quit." << endl;
+
+					// For GUI interfacing:
+					if(gui_server_on){
+						Response_GENERIC resp;
+						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Error during login!");
+					}
+
+					return -1;
 				}
 			}
 
@@ -237,10 +243,16 @@ int main(int argc, char *argv[]) {
 			// Login:
 			{
 				int err = login(new_pin, deviceID);
-				// For GUI interfacing:
-				if( (err<0) && (gui_server_on) ) {
-					Response_GENERIC resp;
-					sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Error during login!");
+				if( err<0 ) { // In case of error during login:
+					cout << "Error during login! Quit." << endl;
+
+					// For GUI interfacing:
+					if(gui_server_on){
+						Response_GENERIC resp;
+						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Error during login!");
+					}
+
+					return -1;
 				}
 			}
 
@@ -295,13 +307,18 @@ int main(int argc, char *argv[]) {
 			// Login:
 			{
 				int err = login(new_pin, deviceID);
-				// For GUI interfacing:
-				if( (err<0) && (gui_server_on) ) {
-					Response_GENERIC resp;
-					sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Error during login!");
+				if( err<0 ) { // In case of error during login:
+					cout << "Error during login! Quit." << endl;
+
+					// For GUI interfacing:
+					if(gui_server_on){
+						Response_GENERIC resp;
+						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Error during login!");
+					}
+
+					return -1;
 				}
 			}
-
 
 			// The SHA-256 algorithm do not require a key
 			// The HMAC-SHA-256 requires a key, this must be or manually inserted or retrieved using SEKey
@@ -370,12 +387,19 @@ int main(int argc, char *argv[]) {
 				gui_socket = network(comm_port);
 			}
 
+			// Login:
 			{
 				int err = login(new_pin, deviceID);
-				// For GUI interfacing:
-				if( (err<0) && (gui_server_on) ) {
-					Response_LIST_KEYS resp;
-					sendErrorToGUI<Response_LIST_KEYS>(gui_socket, resp, -1, "Error during login!");
+				if( err<0 ) { // In case of error during login:
+					cout << "Error during login! Quit." << endl;
+
+					// For GUI interfacing:
+					if(gui_server_on){
+						Response_LIST_KEYS resp;
+						sendErrorToGUI<Response_LIST_KEYS>(gui_socket, resp, -1, "Error during login!");
+					}
+
+					return -1;
 				}
 			}
 
@@ -398,10 +422,16 @@ int main(int argc, char *argv[]) {
 			// Login:
 			{
 				int err = login(new_pin, deviceID);
-				// For GUI interfacing:
-				if( (err<0) && (gui_server_on) ) {
-					Response_GENERIC resp;
-					sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Error during login!");
+				if( err<0 ) { // In case of error during login:
+					cout << "Error during login! Quit." << endl;
+
+					// For GUI interfacing:
+					if(gui_server_on){
+						Response_GENERIC resp;
+						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Error during login!");
+					}
+
+					return -1;
 				}
 			}
 

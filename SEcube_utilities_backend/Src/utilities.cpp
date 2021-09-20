@@ -1,9 +1,25 @@
+/**
+ * All the available utilities are implemented here.
+ *
+ * In case the gui_server flag is provided, the output of the called utility is forwarded to the GUI via socket.
+ * For more details on how the socket communication interface with the GUI is implemented, please take a look at the
+ * GUI_interface.h and GUI_interface.cpp sources (and the related linux implementation: linux_GUI_interface.h and linux_GUI_interface.cpp).
+ */
+
 #include "../Inc/utilities.h"
 
 extern unique_ptr<L0> l0;
 extern unique_ptr<L1> l1;
 
-//algorithms : 0) SHA-256 (no key required) 1) HMAC-SHA-256
+/**
+ * Computes and prints on console the digest of the specified input file using the specified algorithm and keyID
+ * algorithms: 0) SHA-256 (no key required) - 1) HMAC-SHA-256 (key required)
+ *
+ * If usenonce is true, the provided nonce is used for the digest computation(using the HMAC-SHA-256 algorithm), otherwise the nonce
+ * is computed automatically.
+ *
+ * returns: 0 if the digest was correctly computed, -1 in case of error
+ */
 int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce, std::array<uint8_t, B5_SHA256_DIGEST_SIZE> nonce) {
 
 	Response_GENERIC resp; // Response to GUI, used if gui_server_on
@@ -12,6 +28,7 @@ int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce
 
 	cout << "SEcube digest utility" << endl << endl;
 
+	// Check if the specified algorithm is correct:
 	if(algo.compare("SHA-256") == 0) {
 		algo_number = 0;
 	}
@@ -19,11 +36,11 @@ int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce
 		algo_number = 1;
 	}
 	else {
-		cout << "Invalid algorithm. Quit." << endl;
+		cout << "Invalid algorithm! Quit." << endl;
 
 		// For GUI interfacing:
 		if(gui_server_on) {
-			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Invalid encryption algorithm!");
+			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Invalid algorithm!");
 		}
 
 		return -1;
@@ -31,8 +48,9 @@ int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce
 
 	char* digest_input;
 	vector<pair<uint32_t, uint16_t>> keys;
-	streampos size;		//pointer to a point in the streambuf
-	//Get the string from file, to compute digest
+	streampos size; // pointer to a point in the streambuf
+
+	// Get the string from file, to compute digest:
 	ifstream fileP((char*)filename.c_str(), ios::binary|ios::in|ios::ate);
 	if (fileP.is_open()) {
 		char * memblock;
@@ -45,7 +63,7 @@ int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce
 		digest_input = memblock;
 	}
 	else {
-		cout << "\nError opening file. Quit\n" << endl;
+		cout << "Error opening file! Quit." << endl;
 
 		// For GUI interfacing:
 		if(gui_server_on) {
@@ -55,28 +73,28 @@ int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce
 		return -1;
 	}
 
-	//Now the file to compute digest is in RAM in variable "digest_input".
-	//Let's calculate the length
+	// Now the file to compute digest is in RAM in variable "digest_input".
+	// Let's calculate the length:
 	int testsize = size;
 
-	//Time to do the digest
+	//Time to do the digest:
 	shared_ptr<uint8_t[]> input_data(new uint8_t[testsize]); // to be sent to digest API
 	memcpy(input_data.get(), digest_input, testsize);
 
 
-	cout << "\nStarting digest computation..." << endl;
+	cout << "Starting digest computation..." << endl;
 	SEcube_digest data_digest;
 	switch(algo_number){
-		case 0:
-			// when using SHA-256, you don't need to set anything else than the algorithm
+		case 0: // SHA-256
+			// When using SHA-256, you don't need to set anything else than the algorithm
 			data_digest.algorithm = L1Algorithms::Algorithms::SHA256;
 			l1->L1Digest(testsize, input_data, data_digest);
 			break;
-		case 1:
-			/* when using HMAC-SHA-256, we also need to provide other details. this type of digest is
+		case 1: // HMAC-SHA-256
+			/* When using HMAC-SHA-256, we also need to provide other details. this type of digest is
 			 * authenticated by means of a shared secret (i.e. a symmetric key), therefore we must provide
-			 * the ID of the key to be used for authentication. we also need to set the value of the usenonce
-			 * flag to false or true. this value should always be false, unless you want to compute the digest
+			 * the ID of the key to be used for authentication. We also need to set the value of the usenonce
+			 * flag to false or true. This value should always be false, unless you want to compute the digest
 			 * using a specific nonce to begin with, which is useful for instance if you already have the value
 			 * of the digest computed on the same data with the same algorithm, and you want to recompute it
 			 * (therefore using the same nonce you used before) to see if the digest is still the same or not. */
@@ -84,24 +102,18 @@ int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce
 			data_digest.algorithm = L1Algorithms::Algorithms::HMACSHA256;
 
 			if( !usenonce ) {
-				data_digest.usenonce = false; // we don't want to provide a specific nonce manually
+				data_digest.usenonce = false; // We don't want to provide a specific nonce manually
 			} else {
-				data_digest.usenonce = true;
+				data_digest.usenonce = true; //  We want to provide a specific nonce manually
 				data_digest.digest_nonce = nonce;
 			}
 
 			l1->L1Digest(testsize, input_data, data_digest);
 
-			// This code was not elimiated for checking how to set the nonce:
-//			temp.key_id = keyID;
-//			temp.usenonce = true;
-//			temp.algorithm = L1Algorithms::Algorithms::HMACSHA256;
-//			temp.digest_nonce = data_digest.digest_nonce;
-//			l1->L1Digest(testsize, input_data, temp);
 			break;
 		// notice that, after calling the L1Digest() function, our digest will be stored inside the Digest object
 		default:
-			cout << "Input error...quit." << endl;
+			cout << "Input error! Quit." << endl;
 
 			// For GUI interfacing:
 			if(gui_server_on) {
@@ -112,12 +124,10 @@ int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce
 			return -1;
 	}
 
-	this_thread::sleep_for(chrono::milliseconds(1000));
-
 	string digest; // String that will store the digest in hex format
 	string nonce; // String that will store the nonce in hex format
-	char tmp[4];
-	string out_msg; // Message to be sent to the GUI
+	char tmp[4]; // Used for converting the digest and nonce to the %02x format
+	string out_msg; // Message to be sent to the GUI, if gui_server_on
 
 	// Extract digest string in hex format:
 	for(uint8_t i : data_digest.digest){
@@ -125,7 +135,7 @@ int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce
 		digest += tmp;
 	}
 
-	cout << "\nThe hex value of the digest is: " << digest << endl;
+	cout << "The hex value of the digest is: " << digest << endl;
 	out_msg = "digest hex: " + string(digest);
 
 	// If the algorithm selected is the HMAC-SHA-256, the nonce must be extracted:
@@ -150,6 +160,12 @@ int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce
 	return 0;
 }
 
+/**
+ * Encrypts the input file using SEFile and stores it in the same path.
+ * Due to the current SEFile implementation, only the AES_HMACSHA256 can be used.
+ *
+ * returns: 0 if the encryption is successful, -1 in case of error
+ */
 int encryption( int sock, string filename, uint32_t keyID, string encAlgo ) {
 
 	Response_GENERIC resp; // Response to GUI, used if gui_server_on
@@ -212,10 +228,10 @@ int encryption( int sock, string filename, uint32_t keyID, string encAlgo ) {
 //		return -1;
 //	}
 
-	// Encrypt the desired file using sefile:
+	// Encrypt the desired file using SEFile:
 	cout << "File to encrypt: " << filename << endl << "KeyID to use for encrypting: " << keyID << endl << "Encryption algorithm: " << encAlgo << endl;
 
-	SEfile file1(l1.get(), keyID, encAlgoID); // we create a SEfile object bounded to the L1 SEcube object, we specify also the ID of the key and the algorithm that we want to use
+	SEfile file1(l1.get(), keyID, encAlgoID); // We create a SEfile object bounded to the L1 SEcube object, we specify also the ID of the key and the algorithm that we want to use
 
 	// Open the file to encrypt using sefile secure_open:
 	file1.secure_open((char*)filename.c_str(), SEFILE_WRITE, SEFILE_NEWFILE); // If the file already exists it is overwritten
@@ -235,7 +251,7 @@ int encryption( int sock, string filename, uint32_t keyID, string encAlgo ) {
 		}
 	} else {
 
-		cout << "Error encrypting the file!" << endl;
+		cout << "Error encrypting the file! Quit." << endl;
 
 		// For GUI interfacing:
 		if(gui_server_on) {
@@ -373,7 +389,6 @@ int list_devices(int sock) {
 	Response_DEV_LIST resp; // Response to GUI, used if gui_server_on
 
 	cout << "Looking for SEcube devices..." << endl;
-	this_thread::sleep_for(chrono::milliseconds(2000));
 
 	vector<pair<string, string>> devices;
 	int ret = l0->GetDeviceList(devices); // this API fills the vector with pairs including details about the devices (path and serial number)
