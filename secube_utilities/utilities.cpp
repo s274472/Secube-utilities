@@ -213,9 +213,14 @@ void Utilities::on_deviceListButton_clicked()
     // Clear the list:
     ui->devices_treeWidget_Encryption->clear();
 
+    // Prepare command:
+    QString command = "secube_cmd.exe -dl -gui_server";
+
+    cout << command.toUtf8().constData() << endl;
+
     // Send request and wait for response:
     Response_DEV_LIST resp;
-    resp = sendRequestToBackend<Response_DEV_LIST>("secube_cmd.exe -dl -gui_server");
+    resp = sendRequestToBackend<Response_DEV_LIST>(command.toUtf8().constData());
 
     // Update UI:
 
@@ -245,10 +250,14 @@ void Utilities::on_deviceListButton_Decryption_clicked()
     // Clear the list:
     ui->devices_treeWidget_Decryption->clear();
 
+    // Prepare command:
+    QString command = "secube_cmd.exe -dl -gui_server";
+
+    cout << command.toUtf8().constData() << endl;
 
     // Send request and wait for response:
     Response_DEV_LIST resp;
-    resp = sendRequestToBackend<Response_DEV_LIST>("secube_cmd.exe -dl -gui_server");
+    resp = sendRequestToBackend<Response_DEV_LIST>(command.toUtf8().constData());
 
     // Update UI:
     if(resp.err_code<0) {
@@ -277,9 +286,14 @@ void Utilities::on_deviceListButton_Digest_clicked()
     // Clear the list:
     ui->devices_treeWidget_Digest->clear();
 
+    // Prepare command:
+    QString command = "secube_cmd.exe -dl -gui_server";
+
+    cout << command.toUtf8().constData() << endl;
+
     // Send request and wait for response:
     Response_DEV_LIST resp;
-    resp = sendRequestToBackend<Response_DEV_LIST>("secube_cmd.exe -dl -gui_server");
+    resp = sendRequestToBackend<Response_DEV_LIST>(command.toUtf8().constData());
 
     // Update UI:
     if(resp.err_code<0) {
@@ -308,9 +322,14 @@ void Utilities::on_deviceListButton_UpdatePath_clicked()
     // Clear the list:
     ui->devices_treeWidget_UpdatePath->clear();
 
+    // Prepare command:
+    QString command = "secube_cmd.exe -dl -gui_server";
+
+    cout << command.toUtf8().constData() << endl;
+
     // Send request and wait for response:
     Response_DEV_LIST resp;
-    resp = sendRequestToBackend<Response_DEV_LIST>("secube_cmd.exe -dl -gui_server");
+    resp = sendRequestToBackend<Response_DEV_LIST>(command.toUtf8().constData());
 
     // Update UI:
     if(resp.err_code<0) {
@@ -352,7 +371,7 @@ void Utilities::on_listkeys_button_clicked()
         command += " " + ui->device_line->text() + " ";
     }
 
-    cout << command.toUtf8().constData() << endl; // For Debug
+    cout << command.toUtf8().constData() << endl;
 
     // Send request and wait for response:
     Response_LIST_KEYS resp;
@@ -360,15 +379,12 @@ void Utilities::on_listkeys_button_clicked()
 
     // Update UI:
     if(resp.err_code<0) {
-        cout << resp.err_msg << endl;
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
 
         int i = 0;
         for(i=0; i<resp.num_keys;i++) {
-            cout << resp.key_ids[i] << endl;
-
             QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->keys_treeWidget_Encryption);
             treeItem->setText(0, QString::number(resp.key_ids[i]) );
             treeItem->setText(1, QString::number(resp.key_sizes[i]) );
@@ -409,14 +425,11 @@ void Utilities::on_listkeys_button_Digest_clicked()
 
     // Update UI:
     if(resp.err_code<0) {
-        cout << resp.err_msg << endl;
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
         int i = 0;
         for(i=0; i<resp.num_keys;i++) {
-            cout << resp.key_ids[i] << endl;
-
             QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->keys_treeWidget_Digest);
             treeItem->setText(0, QString::number(resp.key_ids[i]) );
             treeItem->setText(1, QString::number(resp.key_sizes[i]) );

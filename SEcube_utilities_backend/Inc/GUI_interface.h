@@ -3,19 +3,19 @@
 #ifndef INC_GUI_INTERFACE_H_
 #define INC_GUI_INTERFACE_H_
 
-#define BUFLEN 1024*100 // dimension of input/output buffer for communicating with the GUI
-#define STR_SIZE 250
-#define ARR_SIZE 20
-#define comm_port 1235
-
 #include <ws2tcpip.h>
 #include <iostream>
 #include "../cereal/archives/binary.hpp"
 
 using namespace std;
 
+#define BUFLEN 1024*100 // dimension of input/output buffer for communicating with the GUI
+#define STR_SIZE 250
+#define ARR_SIZE 20
+#define comm_port 1235
+
 // Global variable for allowing the backend to work as a server for the GUI
-// If true the GUI server is on
+// The content of this variable is handled by the argument parser
 extern int gui_server_on;
 
 // Structs sent to the GUI containing the response:

@@ -1,7 +1,7 @@
 /**
  * All the available utilities are implemented here.
  *
- * In case the gui_server flag is provided, the output of the called utility is forwarded to the GUI via socket.
+ * In case the gui_server flag is set, the output of the called utility is forwarded to the GUI via socket.
  * For more details on how the socket communication interface with the GUI is implemented, please take a look at the
  * GUI_interface.h and GUI_interface.cpp sources (and the related linux implementation: linux_GUI_interface.h and linux_GUI_interface.cpp).
  */
@@ -17,6 +17,8 @@ extern unique_ptr<L1> l1;
  *
  * If usenonce is true, the provided nonce is used for the digest computation(using the HMAC-SHA-256 algorithm), otherwise the nonce
  * is computed automatically.
+ *
+ * In order to call this utility, first login on the desired SECube device!
  *
  * returns: 0 if the digest was correctly computed, -1 in case of error
  */
@@ -162,7 +164,8 @@ int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce
 
 /**
  * Encrypts the input file using SEFile and stores it in the same path.
- * Due to the current SEFile implementation, only the AES_HMACSHA256 can be used.
+ * Due to the current SEFile implementation, only the AES_HMACSHA256 algorithm can be used.
+ * In order to call this utility, first login on the desired SECube device!
  *
  * returns: 0 if the encryption is successful, -1 in case of error
  */
@@ -275,6 +278,13 @@ int encryption( int sock, string filename, uint32_t keyID, string encAlgo ) {
 	return 0;
 }
 
+/**
+ * Decrypts the input file using SEFile and stores it in the same path.
+ * The input filename must be the decrypted one(to decrypt using the encrypted filename please use: decryption_w_encrypted_filename).
+ * In order to call this utility, first login on the desired SECube device!
+ *
+ * returns: 0 if the decryption is successful, -1 in case of error
+ */
 int decryption(string filename) {
 
 	// Print the title:
@@ -312,6 +322,13 @@ int decryption(string filename) {
 	return 0;
 }
 
+/**
+ * Decrypts the input file using SEFile and stores it in the same path.
+ * The input filename must be the encrypted one(to decrypt using the decrypted filename please use: decryption).
+ * In order to call this utility, first login on the desired SECube device!
+ *
+ * returns: 0 if the decryption is successful, -1 in case of error
+ */
 int decryption_w_encrypted_filename(int sock, string filename) {
 
 	Response_GENERIC resp; // Response to GUI, used if gui_server_on
@@ -383,17 +400,21 @@ int decryption_w_encrypted_filename(int sock, string filename) {
 	return 0;
 }
 
-//Will return the number of devices found.
+/**
+ * Discovers all the SECube devices connected to the PC and prints on console the DeviceID, Path and Serial Number.
+ *
+ * returns: the number of SECube devices found, -1 in case of error
+ */
 int list_devices(int sock) {
 
 	Response_DEV_LIST resp; // Response to GUI, used if gui_server_on
 
 	cout << "Looking for SEcube devices..." << endl;
 
-	vector<pair<string, string>> devices;
-	int ret = l0->GetDeviceList(devices); // this API fills the vector with pairs including details about the devices (path and serial number)
+	vector<pair<string, string>> devices; // The elements inside the vector are (path, serial number)
+	int ret = l0->GetDeviceList(devices); // This API fills the vector with pairs including details about the devices (path and serial number)
 	if (ret) {
-		cerr << "\nError while searching for SEcube devices! Quit." << endl;
+		cerr << "Error while searching for SEcube devices! Quit." << endl;
 
 		// For GUI interfacing:
 		if(gui_server_on) {
@@ -403,9 +424,9 @@ int list_devices(int sock) {
 		return -1;
 	}
 
-	int numdevices = l0->GetNumberDevices(); // this API checks how many SEcube devices are connected to the PC
+	int numdevices = l0->GetNumberDevices(); // This API checks how many SEcube devices are connected to the PC
 	if (numdevices == 0) {
-		cerr << "\nNo SEcube devices found! Quit." << endl;
+		cerr << "No SEcube devices found! Quit." << endl;
 
 		// For GUI interfacing:
 		if(gui_server_on) {
@@ -414,6 +435,8 @@ int list_devices(int sock) {
 
 		return -1;
 	}
+
+	// Print the devices informations on console and prepare the response to the GUI:
 	cout << "Number of SEcube devices found: " << numdevices << endl;
 	int index = 0;
 	cout << "------------------------------------------------------------------------------------" << endl;
@@ -425,7 +448,10 @@ int list_devices(int sock) {
 
 		// For GUI interfacing:
 		if(gui_server_on) {
+
 			// Prepare response to GUI:
+			// The response will contain: an array of string (paths), for storing the device path
+			//							  an array of string (serials), for storing the device serial
 			strcpy(resp.paths[index], p.first.c_str());
 			strcpy(resp.serials[index], p.second.c_str());
 		}
@@ -442,14 +468,15 @@ int list_devices(int sock) {
 		sendResponseToGUI<Response_DEV_LIST>(sock, resp);
 	}
 
-
-	//I think these strings should be passed to the GUI with a socket, to let the user choose the correct SEcube.
-	//In this way the GUI will generate a number that can be passed to the login function.
 	return numdevices;
 }
 
-// List all the stored keys inside the SEcube device
-// returns: number of stored keys inside the SEcube device, or -1 in case of error.
+/**
+ * List all the stored keys inside the SEcube device and prints on console the KeyID and Length.
+ * In order to call this utility, first login on the desired SECube device!
+ *
+ * returns: number of stored keys inside the SEcube device, -1 in case of error
+ */
 int list_keys(int sock) {
 
 	Response_LIST_KEYS resp; // Response to GUI, used if gui_server_on
@@ -458,19 +485,20 @@ int list_keys(int sock) {
 	try{
 		l1->L1KeyList(keys);
 	} catch (...) {
-		cout << "Unexpected error trying to list the stored keys..." << endl;
+		cout << "Unexpected error trying to list the stored keys! Quit." << endl;
 
 		// For GUI interfacing:
 		if(gui_server_on) {
-			sendErrorToGUI<Response_LIST_KEYS>(sock, resp, -1, "Unexpected error trying to list the stored keys...");
+			sendErrorToGUI<Response_LIST_KEYS>(sock, resp, -1, "Unexpected error trying to list the stored keys!");
 		}
 
 		return -1;
 	}
 
+	// Print the keys informations on console and prepare the response to the GUI:
 	cout << "Keys stored inside the SEcube device:" << endl;
 	if(keys.size() == 0){
-		cout << "\nThere are no keys currently stored inside the SEcube device." << endl;
+		cout << "There are no keys currently stored inside the SEcube device." << endl;
 	} else {
 		int cnt = 0;
 		for(pair<uint32_t, uint16_t> k : keys){
@@ -478,7 +506,10 @@ int list_keys(int sock) {
 
 			// For GUI interfacing:
 			if(gui_server_on) {
+
 				// Prepare response to GUI:
+				// The response will contain: an array of string (key_ids), for storing the KeyID
+				//							  an array of uint16_t (key_sizes), for storing the Key Length
 				resp.key_ids[cnt] = k.first;
 				resp.key_sizes[cnt] = k.second;
 			}
@@ -498,25 +529,30 @@ int list_keys(int sock) {
 	return keys.size();
 }
 
+/**
+ * Login to the specified SECube  DeviceID using the provided PIN.
+ *
+ * returns: 0 if the login is successful, -1 in case of error
+ */
 int login(array<uint8_t, L1Parameters::Size::PIN> pin, int device) {
 
 	vector<pair<string, string>> devices;
-	int ret = l0->GetDeviceList(devices); // this API fills the vector with pairs including details about the devices (path and serial number)
+	int ret = l0->GetDeviceList(devices); // This API fills the vector with pairs including details about the devices (path and serial number)
 	if (ret) {
-		cerr << "\nError while searching for SEcube devices! Quit." << endl;
+		cerr << "Error while searching for SEcube devices! Quit." << endl;
 		return -1;
 	}
 
-	int numdevices = l0->GetNumberDevices(); // this API checks how many SEcube devices are connected to the PC
+	int numdevices = l0->GetNumberDevices(); // This API checks how many SEcube devices are connected to the PC
 	if (numdevices == 0) {
-		cerr << "\nNo SEcube devices found! Quit." << endl;
+		cout << "No SEcube devices found! Quit." << endl;
 		return -1;
 	}
 
 	if ((device >= 0) && (device < numdevices)) {
 		std::array<uint8_t, L0Communication::Size::SERIAL> sn = { 0 };
 		if (devices.at(device).second.length() > L0Communication::Size::SERIAL) {
-			cerr << "Unexpected error...quit." << endl;
+			cout << "Unexpected error! Quit." << endl;
 			return -1;
 		} else {
 			memcpy(sn.data(), devices.at(device).second.data(),
@@ -529,39 +565,50 @@ int login(array<uint8_t, L1Parameters::Size::PIN> pin, int device) {
 		try {
 			l1->L1Login(pin, SE3_ACCESS_USER, true);
 
-		} catch (...) { // catch any kind of exception (login will throw if the password is wrong or if any error happens)
-			cerr << "SEcube login error. Check the pin and retry." << endl;
+		} catch (...) { // Catch any kind of exception (login will throw if the password is wrong or if any error happens)
+			cout << "SEcube login error! Check the pin and retry! Quit." << endl;
 			return -1;
 		}
 
 		if (!l1->L1GetSessionLoggedIn()) { // check if login was ok
-			cerr << "SEcube login error. Quit." << endl;
+			cout << "SEcube login error! Quit." << endl;
 			return -1;
 		} else {
-			cout << "SEcube login OK" << endl;
+			cout << "SEcube login OK!" << endl;
 		}
 
 	}
 	return 0;
 }
 
+/**
+ * Logout from the previously logged-in SECube device.
+ *
+ * returns: 0 if the logout is successful, -1 in case of error
+ */
 int logout() {
 
-	cout << "\nLogging out..." << endl;
+	cout << "Logging out..." << endl;
 	try {
 		l1->L1Logout();
 	} catch (...) {
-		cout << "Logout error. Quit." << endl;
+		cout << "Logout error! Quit." << endl;
 		return -1;
 	}
-	if (l1->L1GetSessionLoggedIn()) { // check if logout was ok
-		cout << "Logout error. Quit." << endl;
+	if (l1->L1GetSessionLoggedIn()) { // Check if logout was ok
+		cout << "Logout error! Quit." << endl;
 		return -1;
 	}
-	cout << "You are now logged out." << endl;
+	cout << "You are now logged out!" << endl;
 
 	return 0;
 }
+
+/**
+ * Finds a key using SEKey that can be used for the specified users, or group.
+ *
+ * returns: 1 if a key was found, 0 otherwise
+ */
 int find_key (uint32_t& keyID, string user, string group){
 	bool keyfound = false;
 	string chosen;
@@ -621,6 +668,11 @@ int find_key (uint32_t& keyID, string user, string group){
 	}
 }
 
+/**
+ * Prints the helper on the console.
+ *
+ * returns: void
+ */
 void print_command_line() {
 	cout
 			<< "************************************************************************"

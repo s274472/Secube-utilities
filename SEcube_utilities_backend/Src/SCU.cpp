@@ -177,7 +177,6 @@ int main(int argc, char *argv[]) {
 			{
 				int err = login(new_pin, deviceID);
 				if( err<0 ) { // In case of error during login:
-					cout << "Error during login! Quit." << endl;
 
 					// For GUI interfacing:
 					if(gui_server_on){
@@ -244,7 +243,6 @@ int main(int argc, char *argv[]) {
 			{
 				int err = login(new_pin, deviceID);
 				if( err<0 ) { // In case of error during login:
-					cout << "Error during login! Quit." << endl;
 
 					// For GUI interfacing:
 					if(gui_server_on){
@@ -308,7 +306,6 @@ int main(int argc, char *argv[]) {
 			{
 				int err = login(new_pin, deviceID);
 				if( err<0 ) { // In case of error during login:
-					cout << "Error during login! Quit." << endl;
 
 					// For GUI interfacing:
 					if(gui_server_on){
@@ -391,7 +388,6 @@ int main(int argc, char *argv[]) {
 			{
 				int err = login(new_pin, deviceID);
 				if( err<0 ) { // In case of error during login:
-					cout << "Error during login! Quit." << endl;
 
 					// For GUI interfacing:
 					if(gui_server_on){
@@ -423,7 +419,6 @@ int main(int argc, char *argv[]) {
 			{
 				int err = login(new_pin, deviceID);
 				if( err<0 ) { // In case of error during login:
-					cout << "Error during login! Quit." << endl;
 
 					// For GUI interfacing:
 					if(gui_server_on){
