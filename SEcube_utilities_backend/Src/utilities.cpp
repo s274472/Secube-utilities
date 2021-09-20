@@ -3,6 +3,370 @@
 extern unique_ptr<L0> l0;
 extern unique_ptr<L1> l1;
 
+//algorithms : 0) SHA-256 (no key required) 1) HMAC-SHA-256
+int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce, std::array<uint8_t, B5_SHA256_DIGEST_SIZE> nonce) {
+
+	Response_GENERIC resp; // Response to GUI, used if gui_server_on
+
+	int algo_number;
+
+	cout << "SEcube digest utility" << endl << endl;
+
+	if(algo.compare("SHA-256") == 0) {
+		algo_number = 0;
+	}
+	else if (algo.compare("HMAC-SHA-256") == 0) {
+		algo_number = 1;
+	}
+	else {
+		cout << "Invalid algorithm. Quit." << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Invalid encryption algorithm!");
+		}
+
+		return -1;
+	}
+
+	char* digest_input;
+	vector<pair<uint32_t, uint16_t>> keys;
+	streampos size;		//pointer to a point in the streambuf
+	//Get the string from file, to compute digest
+	ifstream fileP((char*)filename.c_str(), ios::binary|ios::in|ios::ate);
+	if (fileP.is_open()) {
+		char * memblock;
+		size = fileP.tellg();
+		memblock = new char [size];
+		memset(memblock,'\0', size);
+		fileP.seekg (0, ios::beg);
+		fileP.read (memblock, size);
+		fileP.close();
+		digest_input = memblock;
+	}
+	else {
+		cout << "\nError opening file. Quit\n" << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Error opening file!");
+		}
+
+		return -1;
+	}
+
+	//Now the file to compute digest is in RAM in variable "digest_input".
+	//Let's calculate the length
+	int testsize = size;
+
+	//Time to do the digest
+	shared_ptr<uint8_t[]> input_data(new uint8_t[testsize]); // to be sent to digest API
+	memcpy(input_data.get(), digest_input, testsize);
+
+
+	cout << "\nStarting digest computation..." << endl;
+	SEcube_digest data_digest;
+	switch(algo_number){
+		case 0:
+			// when using SHA-256, you don't need to set anything else than the algorithm
+			data_digest.algorithm = L1Algorithms::Algorithms::SHA256;
+			l1->L1Digest(testsize, input_data, data_digest);
+			break;
+		case 1:
+			/* when using HMAC-SHA-256, we also need to provide other details. this type of digest is
+			 * authenticated by means of a shared secret (i.e. a symmetric key), therefore we must provide
+			 * the ID of the key to be used for authentication. we also need to set the value of the usenonce
+			 * flag to false or true. this value should always be false, unless you want to compute the digest
+			 * using a specific nonce to begin with, which is useful for instance if you already have the value
+			 * of the digest computed on the same data with the same algorithm, and you want to recompute it
+			 * (therefore using the same nonce you used before) to see if the digest is still the same or not. */
+			data_digest.key_id = keyID; // use the selected key ID
+			data_digest.algorithm = L1Algorithms::Algorithms::HMACSHA256;
+
+			if( !usenonce ) {
+				data_digest.usenonce = false; // we don't want to provide a specific nonce manually
+			} else {
+				data_digest.usenonce = true;
+				data_digest.digest_nonce = nonce;
+			}
+
+			l1->L1Digest(testsize, input_data, data_digest);
+
+			// This code was not elimiated for checking how to set the nonce:
+//			temp.key_id = keyID;
+//			temp.usenonce = true;
+//			temp.algorithm = L1Algorithms::Algorithms::HMACSHA256;
+//			temp.digest_nonce = data_digest.digest_nonce;
+//			l1->L1Digest(testsize, input_data, temp);
+			break;
+		// notice that, after calling the L1Digest() function, our digest will be stored inside the Digest object
+		default:
+			cout << "Input error...quit." << endl;
+
+			// For GUI interfacing:
+			if(gui_server_on) {
+				sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Input error!");
+			}
+
+			l1->L1Logout();
+			return -1;
+	}
+
+	this_thread::sleep_for(chrono::milliseconds(1000));
+
+	string digest; // String that will store the digest in hex format
+	string nonce; // String that will store the nonce in hex format
+	char tmp[4];
+	string out_msg; // Message to be sent to the GUI
+
+	// Extract digest string in hex format:
+	for(uint8_t i : data_digest.digest){
+		sprintf(tmp, "%02x ", i);
+		digest += tmp;
+	}
+
+	cout << "\nThe hex value of the digest is: " << digest << endl;
+	out_msg = "digest hex: " + string(digest);
+
+	// If the algorithm selected is the HMAC-SHA-256, the nonce must be extracted:
+	if(algo.compare("HMAC-SHA-256") == 0) {
+
+		// Extract nonce string in hex format:
+		for(uint8_t i : data_digest.digest_nonce){
+			sprintf(tmp, "%02x ", i);
+			nonce += tmp;
+		}
+
+		cout << "The hex value of the nonce is: " << nonce << endl;
+		out_msg += "\n\nnonce hex: " + string(nonce);
+	}
+
+	// For GUI interfacing:
+	if(gui_server_on) {
+
+		sendErrorToGUI<Response_GENERIC>(sock, resp, 0, out_msg); // In this case err_code = 0 means everything went correctly
+	}
+
+	return 0;
+}
+
+int encryption( int sock, string filename, uint32_t keyID, string encAlgo ) {
+
+	Response_GENERIC resp; // Response to GUI, used if gui_server_on
+
+	int encAlgoID;
+
+	// Print the title:
+	cout << "SEcube encrypt utility" << endl << endl;
+
+	// Check that the provided encAlgo is valid:
+	if( encAlgo == "AES") {
+
+		encAlgoID = L1Algorithms::Algorithms::AES;
+	} else if( encAlgo == "SHA256" ) {
+
+		encAlgoID = L1Algorithms::Algorithms::SHA256;
+	} else if( encAlgo == "HMACSHA256" ) {
+
+		encAlgoID = L1Algorithms::Algorithms::HMACSHA256;
+	} else if( encAlgo == "AES_HMACSHA256" ) {
+
+		encAlgoID = L1Algorithms::Algorithms::AES_HMACSHA256;
+	} else {
+
+		cout << "Invalid encryption algorithm!" << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Invalid encryption algorithm!");
+		}
+
+		//l1->L1Logout();
+		return -1;
+	}
+
+	// Check that the provided keyID is valid:
+//	vector<pair<uint32_t, uint16_t>> keys;
+//	try{
+//		l1->L1KeyList(keys);
+//	} catch (...) {
+//		cout << "\nError retrieving keys inside the SEcube device. Quit." << endl;
+//		//l1->L1Logout();
+//		return -1;
+//	}
+//	if(keys.size() == 0){
+//		cout << "\nError, there are no keys inside the SEcube device. Impossible to continue." << endl;
+//		//l1->L1Logout();
+//		return -1;
+//	}
+//
+//	bool contained = false;
+//	for(pair<uint32_t, uint16_t> k : keys){
+//
+//		if( k.first == keyID ) { contained = true; break; }
+//	}
+//	if( !contained ) {
+//
+//		cout << "\nError, the provided keyID is not valid. Impossible to continue." << endl;
+//		//l1->L1Logout();
+//		return -1;
+//	}
+
+	// Encrypt the desired file using sefile:
+	cout << "File to encrypt: " << filename << endl << "KeyID to use for encrypting: " << keyID << endl << "Encryption algorithm: " << encAlgo << endl;
+
+	SEfile file1(l1.get(), keyID, encAlgoID); // we create a SEfile object bounded to the L1 SEcube object, we specify also the ID of the key and the algorithm that we want to use
+
+	// Open the file to encrypt using sefile secure_open:
+	file1.secure_open((char*)filename.c_str(), SEFILE_WRITE, SEFILE_NEWFILE); // If the file already exists it is overwritten
+	int pos; /* we move to the end of the file (this is not really necessary here because the file has just been created) */
+	file1.secure_seek(0, &pos, SEFILE_END); // append to the end of the file
+
+	// Open the file to encrypt using standard OS system call:
+	ifstream inFile(filename, ios::binary);
+	char buffer[BUFF_SIZE];
+
+	if( inFile ){
+
+		inFile.seekg(0, std::ios::beg);
+		while( inFile.readsome(buffer, BUFF_SIZE) ) {
+
+			file1.secure_write( (uint8_t*)buffer, inFile.gcount() );
+		}
+	} else {
+
+		cout << "Error encrypting the file!" << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Error encrypting the file!");
+		}
+
+		return -1;
+	}
+
+	// Close the files:
+	inFile.close();
+	file1.secure_close();
+
+	cout << "File correctly encrypted!" << endl;
+
+	// For GUI interfacing:
+	if(gui_server_on) {
+		sendErrorToGUI<Response_GENERIC>(sock, resp, 0, "File correctly encrypted!"); // In this case err_code = 0 means everything went correctly
+	}
+
+	return 0;
+}
+
+int decryption(string filename) {
+
+	// Print the title:
+	cout << "SEcube decrypt utility" << endl << endl;
+	cout << "File to decrypt: " << filename << endl;
+
+	SEfile file1(l1.get());
+	file1.secure_open((char*) filename.c_str(), SEFILE_READ, SEFILE_OPEN);
+	int pos;
+	file1.secure_seek(0, &pos, SEFILE_BEGIN); // not really necessary, when a file is opened its pointer is already set to the first sector (header excluded)
+
+	// Save the decrypted file:
+	ofstream outFile(filename, ios::out|ios::binary);
+	char buffer[BUFF_SIZE];
+	unsigned int bytesread;
+
+	if( outFile ) {
+
+		do{
+			file1.secure_read((uint8_t*) buffer, BUFF_SIZE, &bytesread);
+			outFile.write(buffer, bytesread);
+		} while( bytesread>0 );
+	} else {
+
+		cout << "Error decrypting the file!" << endl;
+		return -1;
+	}
+
+	// Close files:
+	file1.secure_close();
+	outFile.close();
+
+	cout << "File correctly decrypted!" << endl;
+
+	return 0;
+}
+
+int decryption_w_encrypted_filename(int sock, string filename) {
+
+	Response_GENERIC resp; // Response to GUI, used if gui_server_on
+
+	// Print the title:
+	cout << "SEcube decrypt utility" << endl << endl;
+	cout << "File to decrypt: " << filename << endl;
+
+	SEfile file1(l1.get());
+	vector<pair<string,string>> list;
+	secure_ls(filename, list, l1.get());
+
+	int position_of_slash = -1;
+	for (int i_filename = filename.length(); i_filename>=0; i_filename--) {
+		if (filename[i_filename] == '\\' || filename[i_filename] == '/') {
+			position_of_slash = i_filename;
+			break;
+		}
+	}
+
+	if (position_of_slash == -1)
+		filename = list[0].second; //because it's relative path
+	else {
+		filename = filename.erase(position_of_slash + 1, filename.length());
+		filename = filename + list[0].second;
+	}
+
+	cout << "Will decrypt as:" << endl;
+	cout << filename << endl;
+
+	file1.secure_open((char*) filename.c_str(), SEFILE_READ, SEFILE_OPEN);
+	int pos;
+	file1.secure_seek(0, &pos, SEFILE_BEGIN); // not really necessary, when a file is opened its pointer is already set to the first sector (header excluded)
+
+	// Save the decrypted file:
+	ofstream outFile(filename, ios::out|ios::binary);
+	char buffer[BUFF_SIZE];
+	unsigned int bytesread;
+
+	if( outFile ) {
+
+		do{
+			file1.secure_read((uint8_t*) buffer, BUFF_SIZE, &bytesread);
+			outFile.write(buffer, bytesread);
+		} while( bytesread>0 );
+	} else {
+
+		cout << "Error decrypting the file!" << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Error decrypting the file!");
+		}
+
+		return -1;
+	}
+
+	// Close files:
+	file1.secure_close();
+	outFile.close();
+
+	cout << "File correctly decrypted!" << endl;
+
+	// For GUI interfacing:
+	if(gui_server_on) {
+		sendErrorToGUI<Response_GENERIC>(sock, resp, 0, "File correctly decrypted!"); // In this case err_code = 0 means everything went correctly
+	}
+
+	return 0;
+}
+
 //Will return the number of devices found.
 int list_devices(int sock) {
 
@@ -266,7 +630,7 @@ void print_command_line() {
 	cout << "\t-sha SHA-256 (digest only, no key required)" << endl;
 	cout << "\t-hmac HMAC-SHA-256 (digest only)" << endl;
 	cout << "\t-nonce \"nonce string\" (if specified, the nonce for the HMAC-SHA-256 is set manually)" << endl;
-//	cout << "\t-aes AES" << endl;
+	cout << "\t-gui_server (should only be specified by the GUI!)" << endl;
 	cout
 			<< "************************************************************************"
 			<< endl;
