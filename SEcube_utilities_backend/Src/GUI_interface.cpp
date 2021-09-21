@@ -1,10 +1,15 @@
-#ifdef _WIN32
+#ifdef _WIN32 // This source is compiled only on Windows
 
 #include "../Inc/GUI_interface.h"
 
+/**
+ * This function waits for a connection with the GUI via socket on the provided listenPort.
+ *
+ * returns: socket ID
+ */
 int network(int listenPort){
 
-	cout << "[LOG] [Server] GUI Socket Server started." << endl;
+	cout << "[LOG] [Backend] GUI Socket Server started." << endl;
 
 	// Initialize Winsock:
 	WSADATA wsData;
@@ -12,14 +17,14 @@ int network(int listenPort){
 
 	int wsOk = WSAStartup(ver, &wsData);
 	if( wsOk != 0 ) {
-		cout << "[LOG] [Server] Error initializing WinSock!" << endl;
+		cout << "[LOG] [Backend] Error initializing WinSock!" << endl;
 		return -1;
 	}
 
 	// Create a socket:
 	int s0 = socket(AF_INET, SOCK_STREAM, 0);
 	if (s0 < 0) {
-		cout << "[LOG] [Server] Error creating socket!" << endl;
+		cout << "[LOG] [Backend] Error creating socket!" << endl;
 		return -1;
 	}
 
@@ -32,32 +37,30 @@ int network(int listenPort){
 
 	int yes=1;
 	if( setsockopt(s0, SOL_SOCKET, SO_REUSEADDR, (char*)&yes, sizeof(yes)) < 0 ) {
-		cout << "[LOG] [Server] setsockopt failed! Error: " << errno << endl;
+		cout << "[LOG] [Backend] setsockopt failed! Error: " << errno << endl;
 	}
 
 	int res = bind(s0, (struct sockaddr*) &address, sizeof(address));
 	if (res < 0) {
-		cout << "[LOG] [Server] Error binding socket! error number: " << errno << endl;
+		cout << "[LOG] [Backend] Error binding socket! error number: " << errno << endl;
 		return -1;
 	}
 
 	// Tell winsock the socket is for listening
 	res = listen(s0, 1); // "1" is the maximal length of the queue
 	if (res < 0) {
-		cout << "[LOG] [Server] Error listening!" << endl;
+		cout << "[LOG] [Backend] Error listening!" << endl;
 		return -1;
 	}
 
 	// Wait for connection
-	struct sockaddr_in peer_address;
-	socklen_t peer_address_len;
-	cout << "[LOG] [Server] Waiting for connection..." << endl;
+	cout << "[LOG] [Backend] Waiting for connection..." << endl;
 	int s1 = accept(s0, NULL, NULL);
 	if (s1 < 0) {
-		cout << "[LOG] [Server] accept failed: %d\n" << WSAGetLastError() << endl;
+		cout << "[LOG] [Backend] accept failed: %d\n" << WSAGetLastError() << endl;
 		return -1;
 	}
-	cout << "[LOG] [Server] Connected to GUI." << endl;
+	cout << "[LOG] [Backend] Connected to GUI." << endl;
 
 	// Close listening socket
 	closesocket(s0);
@@ -65,6 +68,11 @@ int network(int listenPort){
 	return s1;
 }
 
+/**
+ * This functions closes and cleans the socket connection.
+ *
+ * returns: void
+ */
 void closeAndCleanConnection(int sock) {
 
 	// Close the socket:

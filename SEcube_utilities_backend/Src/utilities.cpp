@@ -472,7 +472,7 @@ int list_devices(int sock) {
 }
 
 /**
- * List all the stored keys inside the SEcube device and prints on console the KeyID and Length.
+ * List all the stored keys inside the SEcube device and prints on console the KeyID and Key Size.
  * In order to call this utility, first login on the desired SECube device!
  *
  * returns: number of stored keys inside the SEcube device, -1 in case of error
@@ -508,8 +508,8 @@ int list_keys(int sock) {
 			if(gui_server_on) {
 
 				// Prepare response to GUI:
-				// The response will contain: an array of string (key_ids), for storing the KeyID
-				//							  an array of uint16_t (key_sizes), for storing the Key Length
+				// The response will contain: an array of uint32_t (key_ids), for storing the KeyID
+				//							  an array of uint16_t (key_sizes), for storing the Key Size
 				resp.key_ids[cnt] = k.first;
 				resp.key_sizes[cnt] = k.second;
 			}
