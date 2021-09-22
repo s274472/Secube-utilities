@@ -61,15 +61,19 @@ int main(int argc, char *argv[]) {
 		if (strcmp(argv[cur], "-dev") == 0) {
 			if (argc > cur + 1) {
 				deviceID = atoi(argv[++cur]);
-			} else
+			} else {
+				cout << "Error! no device specified after -dev! Quit." << endl;
 				return -1;
+			}
 		}
 		//Pin
 		if (strcmp(argv[cur], "-p") == 0) {
 			if (argc > cur + 1) {
 				pin = argv[++cur];
-			} else
+			} else {
+				cout << "Error! no pin specified after -p! Quit." << endl;
 				return -1;
+			}
 		}
 		//Encryption
 		if (strcmp(argv[cur], "-e") == 0) {
@@ -102,8 +106,10 @@ int main(int argc, char *argv[]) {
 			utility = UPDATE_PATH;
 			if (argc > cur + 1) {
 				update_path = argv[++cur];
-			} else
+			} else {
+				cout << "Error! no path specified after -path! Quit." << endl;
 				return -1;
+			}
 		}
 		//Gui Server
 		if (strcmp(argv[cur], "-gui_server") == 0) {
@@ -121,29 +127,37 @@ int main(int argc, char *argv[]) {
 		if (strcmp(argv[cur], "-u") == 0) {
 			if (argc > cur + 1) {
 				user = argv[++cur];
-			} else
+			} else {
+				cout << "Error! no user specified after -u! Quit." << endl;
 				return -1;
+			}
 		}
 		//Group ID
 		if (strcmp(argv[cur], "-g") == 0) {
 			if (argc > cur + 1) {
 				group = argv[++cur];
-			} else
+			} else {
+				cout << "Error! no group specified after -g! Quit." << endl;
 				return -1;
+			}
 		}
 		//Filename path
 		if (strcmp(argv[cur], "-f") == 0) {
 			if (argc > cur + 1) {
 				path = argv[++cur];
-			} else
+			} else {
+				cout << "Error! no file specified after -f! Quit." << endl;
 				return -1;
+			}
 		}
 		//Key ID
 		if (strcmp(argv[cur], "-k") == 0) {
 			if (argc > cur + 1) {
 				keyID = ((uint32_t) atoi(argv[++cur]));
-			} else
+			} else {
+				cout << "Error! no key specified after -k! Quit." << endl;
 				return -1;
+			}
 		}
 		//Algorithm
 		if (strcmp(argv[cur], "-aes_hmac") == 0) {

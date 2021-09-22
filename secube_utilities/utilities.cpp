@@ -227,22 +227,25 @@ void Utilities::on_deviceListButton_clicked()
 
     cout << command.toUtf8().constData() << endl;
 
-    // Send request and wait for response:
+    // Send request to backend and wait for response:
     Response_DEV_LIST resp;
     resp = sendRequestToBackend<Response_DEV_LIST>(command.toUtf8().constData());
 
     // Update UI:
-
     if(resp.err_code<0) {
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
         int i = 0;
         for(i=0; i<resp.num_devices;i++) {
+
+            // Create the new item for the QTreeWidget with the device information:
             QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->devices_treeWidget_Encryption);
-            treeItem->setText(0, QString::number(i) );
-            treeItem->setText(1, resp.paths[i] );
-            treeItem->setText(2, resp.serials[i] );
+            treeItem->setText(0, QString::number(i) ); // Device ID
+            treeItem->setText(1, resp.paths[i] ); // Device Path
+            treeItem->setText(2, resp.serials[i] ); // Device Serial
+
+            // Add the item to the QTreeWidget:
             ui->devices_treeWidget_Encryption->addTopLevelItem(treeItem);
         }
     }
@@ -264,7 +267,7 @@ void Utilities::on_deviceListButton_Decryption_clicked()
 
     cout << command.toUtf8().constData() << endl;
 
-    // Send request and wait for response:
+    // Send request to backend and wait for response:
     Response_DEV_LIST resp;
     resp = sendRequestToBackend<Response_DEV_LIST>(command.toUtf8().constData());
 
@@ -275,10 +278,14 @@ void Utilities::on_deviceListButton_Decryption_clicked()
     else {
         int i = 0;
         for(i=0; i<resp.num_devices;i++) {
+
+            // Create the new item for the QTreeWidget with the device information:
             QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->devices_treeWidget_Decryption);
-            treeItem->setText(0, QString::number(i) );
-            treeItem->setText(1, resp.paths[i] );
-            treeItem->setText(2, resp.serials[i] );
+            treeItem->setText(0, QString::number(i) ); // Device ID
+            treeItem->setText(1, resp.paths[i] ); // Device Path
+            treeItem->setText(2, resp.serials[i] ); // Device Serial
+
+            // Add the item to the QTreeWidget:
             ui->devices_treeWidget_Decryption->addTopLevelItem(treeItem);
         }
     }
@@ -300,7 +307,7 @@ void Utilities::on_deviceListButton_Digest_clicked()
 
     cout << command.toUtf8().constData() << endl;
 
-    // Send request and wait for response:
+    // Send request to backend and wait for response:
     Response_DEV_LIST resp;
     resp = sendRequestToBackend<Response_DEV_LIST>(command.toUtf8().constData());
 
@@ -311,10 +318,14 @@ void Utilities::on_deviceListButton_Digest_clicked()
     else {
         int i = 0;
         for(i=0; i<resp.num_devices;i++) {
+
+            // Create the new item for the QTreeWidget with the device information:
             QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->devices_treeWidget_Digest);
-            treeItem->setText(0, QString::number(i) );
-            treeItem->setText(1, resp.paths[i] );
-            treeItem->setText(2, resp.serials[i] );
+            treeItem->setText(0, QString::number(i) ); // Device ID
+            treeItem->setText(1, resp.paths[i] ); // Device Path
+            treeItem->setText(2, resp.serials[i] ); // Device Serial
+
+            // Add the item to the QTreeWidget:
             ui->devices_treeWidget_Digest->addTopLevelItem(treeItem);
         }
     }
@@ -336,7 +347,7 @@ void Utilities::on_deviceListButton_UpdatePath_clicked()
 
     cout << command.toUtf8().constData() << endl;
 
-    // Send request and wait for response:
+    // Send request to backend and wait for response:
     Response_DEV_LIST resp;
     resp = sendRequestToBackend<Response_DEV_LIST>(command.toUtf8().constData());
 
@@ -347,10 +358,14 @@ void Utilities::on_deviceListButton_UpdatePath_clicked()
     else {
         int i = 0;
         for(i=0; i<resp.num_devices;i++) {
+
+            // Create the new item for the QTreeWidget with the device information:
             QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->devices_treeWidget_UpdatePath);
-            treeItem->setText(0, QString::number(i) );
-            treeItem->setText(1, resp.paths[i] );
-            treeItem->setText(2, resp.serials[i] );
+            treeItem->setText(0, QString::number(i) ); // Device ID
+            treeItem->setText(1, resp.paths[i] ); // Device Path
+            treeItem->setText(2, resp.serials[i] ); // Device Serial
+
+            // Add the item to the QTreeWidget:
             ui->devices_treeWidget_UpdatePath->addTopLevelItem(treeItem);
         }
     }
@@ -358,6 +373,7 @@ void Utilities::on_deviceListButton_UpdatePath_clicked()
     ui->deviceListButton_UpdatePath->setText("List devices...");
 }
 
+// Key list buttons:
 void Utilities::on_listkeys_button_clicked()
 {
 
@@ -382,7 +398,7 @@ void Utilities::on_listkeys_button_clicked()
 
     cout << command.toUtf8().constData() << endl;
 
-    // Send request and wait for response:
+    // Send request to backend and wait for response:
     Response_LIST_KEYS resp;
     resp = sendRequestToBackend<Response_LIST_KEYS>(command.toUtf8().constData());
 
@@ -394,9 +410,13 @@ void Utilities::on_listkeys_button_clicked()
 
         int i = 0;
         for(i=0; i<resp.num_keys;i++) {
+
+            // Create the new item for the QTreeWidget with the key information:
             QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->keys_treeWidget_Encryption);
-            treeItem->setText(0, QString::number(resp.key_ids[i]) );
-            treeItem->setText(1, QString::number(resp.key_sizes[i]) );
+            treeItem->setText(0, QString::number(resp.key_ids[i]) ); // Key ID
+            treeItem->setText(1, QString::number(resp.key_sizes[i]) ); // Key Size
+
+            // Add the item to the QTreeWidget:
             ui->keys_treeWidget_Encryption->addTopLevelItem(treeItem);
         }
     }
@@ -428,7 +448,7 @@ void Utilities::on_listkeys_button_Digest_clicked()
 
     cout << command.toUtf8().constData() << endl; // For Debug
 
-    // Send request and wait for response:
+    // Send request to backend and wait for response:
     Response_LIST_KEYS resp;
     resp = sendRequestToBackend<Response_LIST_KEYS>(command.toUtf8().constData());
 
@@ -439,9 +459,13 @@ void Utilities::on_listkeys_button_Digest_clicked()
     else {
         int i = 0;
         for(i=0; i<resp.num_keys;i++) {
+
+            // Create the new item for the QTreeWidget with the key information:
             QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->keys_treeWidget_Digest);
-            treeItem->setText(0, QString::number(resp.key_ids[i]) );
-            treeItem->setText(1, QString::number(resp.key_sizes[i]) );
+            treeItem->setText(0, QString::number(resp.key_ids[i]) ); // Key ID
+            treeItem->setText(1, QString::number(resp.key_sizes[i]) ); // Key Size
+
+            // Add the item to the QTreeWidget:
             ui->keys_treeWidget_Digest->addTopLevelItem(treeItem);
         }
     }
@@ -449,7 +473,7 @@ void Utilities::on_listkeys_button_Digest_clicked()
     ui->listkeys_button_Digest->setText("List keys...");
 }
 
-
+// Decryption button:
 void Utilities::on_decrypt_button_clicked()
 {
 
@@ -478,11 +502,17 @@ void Utilities::on_decrypt_button_clicked()
     if( ui->file_line_Decryption->text().size()>0 ) {
         command += "-f";
         command += " " + ui->file_line_Decryption->text() + " ";
+    } else {
+        ui->decrypt_button->setText("Error!");
+        ui->decrypt_button->repaint(); // Forces update
+        QMessageBox::critical(0, QString("Error!"), QString("Please specify a valid file path!"), QMessageBox::Ok);
+        ui->decrypt_button->setText("Decrypt");
+        return;
     }
 
     cout << command.toUtf8().constData() << endl; // For Debug
 
-    // Send request and wait for response:
+    // Send request to backend and wait for response:
     Response_GENERIC resp;
     resp = sendRequestToBackend<Response_GENERIC>(command.toUtf8().constData());
 
@@ -501,6 +531,7 @@ void Utilities::on_decrypt_button_clicked()
     ui->decrypt_button->setText("Decrypt");
 }
 
+// Encryption button:
 void Utilities::on_encrypt_button_clicked()
 {
     ui->encrypt_button->setText("Encrypting...");
@@ -522,6 +553,12 @@ void Utilities::on_encrypt_button_clicked()
     if( ui->file_line->text().size()>0 ) {
         command += "-f";
         command += " " + ui->file_line->text() + " ";
+    } else {
+        ui->encrypt_button->setText("Error!");
+        ui->encrypt_button->repaint(); // Forces update
+        QMessageBox::critical(0, QString("Error!"), QString("Please specify a valid file path!"), QMessageBox::Ok);
+        ui->encrypt_button->setText("Encrypt");
+        return;
     }
 
     if( ui->key_line->isEnabled() && ui->key_line->text().size()>0 ) {
@@ -547,7 +584,7 @@ void Utilities::on_encrypt_button_clicked()
 
     cout << command.toUtf8().constData() << endl; // For Debug
 
-    // Send request and wait for response:
+    // Send request to backend and wait for response:
     Response_GENERIC resp;
     resp = sendRequestToBackend<Response_GENERIC>(command.toUtf8().constData());
 
@@ -566,6 +603,7 @@ void Utilities::on_encrypt_button_clicked()
     ui->encrypt_button->setText("Encrypt");
 }
 
+// Digest button:
 void Utilities::on_digest_button_clicked()
 {
 
@@ -588,6 +626,12 @@ void Utilities::on_digest_button_clicked()
     if( ui->file_line_Digest->text().size()>0 ) {
         command += "-f";
         command += " " + ui->file_line_Digest->text() + " ";
+    } else {
+        ui->digest_button->setText("Error!");
+        ui->digest_button->repaint(); // Forces update
+        QMessageBox::critical(0, QString("Error!"), QString("Please specify a valid file path!"), QMessageBox::Ok);
+        ui->digest_button->setText("Compute Digest");
+        return;
     }
 
     if( ui->key_line_Digest->isEnabled() && ui->key_line_Digest->text().size()>0 ) {
@@ -618,19 +662,19 @@ void Utilities::on_digest_button_clicked()
 
     cout << command.toUtf8().constData() << endl; // For Debug
 
-    // Send request and wait for response:
+    // Send request to backend and wait for response:
     Response_GENERIC resp;
     resp = sendRequestToBackend<Response_GENERIC>(command.toUtf8().constData());
 
     // Update UI:
     if(resp.err_code<0) {
         ui->digest_button->setText("Error!");
-        ui->digest_button->repaint();
+        ui->digest_button->repaint(); // Forces update
         QMessageBox::critical(0, QString("Error!"), QString(resp.err_msg), QMessageBox::Ok);
     }
     else {
         ui->digest_button->setText("Done!");
-        ui->digest_button->repaint();
+        ui->digest_button->repaint(); // Forces update
         QMessageBox::information(0, QString("Done!"), QString(resp.err_msg), QMessageBox::Ok);
     }
 
@@ -638,6 +682,7 @@ void Utilities::on_digest_button_clicked()
 
 }
 
+// Update path button:
 void Utilities::on_updatePath_button_clicked()
 {
 
@@ -648,8 +693,13 @@ void Utilities::on_updatePath_button_clicked()
     QString command = "secube_cmd.exe -gui_server -update_path ";
 
     if( ui->path_line_UpdatePath->text().size()>0 ) {
-        command += "-f";
-        command += " " + ui->path_line_UpdatePath->text() + " ";
+        command += ui->path_line_UpdatePath->text() + " ";
+    } else {
+        ui->updatePath_button->setText("Error!");
+        ui->updatePath_button->repaint(); // Forces update
+        QMessageBox::critical(0, QString("Error!"), QString("Please specify a valid path!"), QMessageBox::Ok);
+        ui->updatePath_button->setText("Update SEKey path");
+        return;
     }
 
     if( ui->pin_line_UpdatePath->text().size()>0 ) {
@@ -664,7 +714,7 @@ void Utilities::on_updatePath_button_clicked()
 
     cout << command.toUtf8().constData() << endl; // For Debug
 
-    // Send request and wait for response:
+    // Send request to backend and wait for response:
     Response_GENERIC resp;
     resp = sendRequestToBackend<Response_GENERIC>(command.toUtf8().constData());
 
