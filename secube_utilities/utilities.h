@@ -19,7 +19,13 @@ public:
 
 private slots:
 
-    void on_browseButton_clicked();
+    void on_browseButton_Encryption_clicked();
+
+    void on_browseButton_Decryption_clicked();
+
+    void on_browseButton_Digest_clicked();
+
+    void on_browseButton_UpdatePath_clicked();
 
     void on_deviceListButton_clicked();
 
@@ -39,17 +45,11 @@ private slots:
 
     void on_key_line_textChanged(const QString &arg1);
 
-    void on_browseButton_2_clicked();
-
-    void on_browseButton_3_clicked();
-
     void on_group_line_Digest_textChanged(const QString &arg1);
 
     void on_user_line_Digest_textChanged(const QString &arg1);
 
     void on_key_line_Digest_textChanged(const QString &arg1);
-
-    void on_browseButton_4_clicked();
 
     void on_updatePath_button_clicked();
 

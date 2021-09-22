@@ -82,7 +82,7 @@ struct Response_LIST_KEYS : Response_GENERIC
 
   int num_keys; // Number of keys stored in the selected SECube device
   uint32_t key_ids[ARR_SIZE]; // An array of uint32_t, for storing the KeyID
-  uint16_t key_sizes[ARR_SIZE]; // An array of uint16_t (key_sizes), for storing the Key Size. The size is in bits
+  uint16_t key_sizes[ARR_SIZE]; // An array of uint16_t, for storing the Key Size. The size is in bits
 
   // This method lets cereal know which data members to serialize
   template<class Archive>

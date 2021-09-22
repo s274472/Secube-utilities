@@ -58,7 +58,7 @@
      <bool>true</bool>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_1">
      <attribute name="title">
@@ -90,7 +90,7 @@
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Device ID:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="browseButton">
+     <widget class="QPushButton" name="browseButton_Encryption">
       <property name="geometry">
        <rect>
         <x>630</x>
@@ -364,7 +364,7 @@
       </column>
      </widget>
      <zorder>listkeys_button</zorder>
-     <zorder>browseButton</zorder>
+     <zorder>browseButton_Encryption</zorder>
      <zorder>deviceListButton</zorder>
      <zorder>label</zorder>
      <zorder>encrypt_button</zorder>
@@ -412,7 +412,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="browseButton_2">
+     <widget class="QPushButton" name="browseButton_Decryption">
       <property name="geometry">
        <rect>
         <x>630</x>
@@ -575,7 +575,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="browseButton_3">
+     <widget class="QPushButton" name="browseButton_Digest">
       <property name="geometry">
        <rect>
         <x>630</x>
@@ -870,7 +870,7 @@
      </widget>
      <zorder>label_12</zorder>
      <zorder>file_line_Digest</zorder>
-     <zorder>browseButton_3</zorder>
+     <zorder>browseButton_Digest</zorder>
      <zorder>label_13</zorder>
      <zorder>device_line_Digest</zorder>
      <zorder>label_14</zorder>
@@ -919,7 +919,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="browseButton_4">
+     <widget class="QPushButton" name="browseButton_UpdatePath">
       <property name="geometry">
        <rect>
         <x>630</x>
@@ -1033,7 +1033,7 @@
       </column>
      </widget>
      <zorder>label_8</zorder>
-     <zorder>browseButton_4</zorder>
+     <zorder>browseButton_UpdatePath</zorder>
      <zorder>label_19</zorder>
      <zorder>device_line_UpdatePath</zorder>
      <zorder>label_20</zorder>

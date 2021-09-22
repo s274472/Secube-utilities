@@ -34,7 +34,7 @@ public:
     QWidget *tab_1;
     QPushButton *listkeys_button;
     QLabel *label_3;
-    QPushButton *browseButton;
+    QPushButton *browseButton_Encryption;
     QPushButton *deviceListButton;
     QLineEdit *user_line;
     QLabel *label_5;
@@ -56,7 +56,7 @@ public:
     QWidget *tab_2;
     QLabel *label_9;
     QLineEdit *file_line_Decryption;
-    QPushButton *browseButton_2;
+    QPushButton *browseButton_Decryption;
     QLabel *label_10;
     QLineEdit *device_line_Decryption;
     QLabel *label_11;
@@ -68,7 +68,7 @@ public:
     QWidget *tab_3;
     QLabel *label_12;
     QLineEdit *file_line_Digest;
-    QPushButton *browseButton_3;
+    QPushButton *browseButton_Digest;
     QLabel *label_13;
     QLineEdit *device_line_Digest;
     QLabel *label_14;
@@ -92,7 +92,7 @@ public:
     QWidget *tab_4;
     QLabel *label_8;
     QLineEdit *path_line_UpdatePath;
-    QPushButton *browseButton_4;
+    QPushButton *browseButton_UpdatePath;
     QLabel *label_19;
     QLineEdit *device_line_UpdatePath;
     QLabel *label_20;
@@ -133,9 +133,9 @@ public:
         label_3 = new QLabel(tab_1);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(0, 120, 71, 21));
-        browseButton = new QPushButton(tab_1);
-        browseButton->setObjectName(QString::fromUtf8("browseButton"));
-        browseButton->setGeometry(QRect(630, 40, 75, 23));
+        browseButton_Encryption = new QPushButton(tab_1);
+        browseButton_Encryption->setObjectName(QString::fromUtf8("browseButton_Encryption"));
+        browseButton_Encryption->setGeometry(QRect(630, 40, 75, 23));
         deviceListButton = new QPushButton(tab_1);
         deviceListButton->setObjectName(QString::fromUtf8("deviceListButton"));
         deviceListButton->setGeometry(QRect(600, 210, 101, 23));
@@ -196,7 +196,7 @@ public:
         devices_treeWidget_Encryption->setGeometry(QRect(270, 90, 431, 111));
         tabWidget->addTab(tab_1, QString());
         listkeys_button->raise();
-        browseButton->raise();
+        browseButton_Encryption->raise();
         deviceListButton->raise();
         label->raise();
         encrypt_button->raise();
@@ -224,9 +224,9 @@ public:
         file_line_Decryption = new QLineEdit(tab_2);
         file_line_Decryption->setObjectName(QString::fromUtf8("file_line_Decryption"));
         file_line_Decryption->setGeometry(QRect(40, 10, 671, 20));
-        browseButton_2 = new QPushButton(tab_2);
-        browseButton_2->setObjectName(QString::fromUtf8("browseButton_2"));
-        browseButton_2->setGeometry(QRect(630, 40, 75, 23));
+        browseButton_Decryption = new QPushButton(tab_2);
+        browseButton_Decryption->setObjectName(QString::fromUtf8("browseButton_Decryption"));
+        browseButton_Decryption->setGeometry(QRect(630, 40, 75, 23));
         label_10 = new QLabel(tab_2);
         label_10->setObjectName(QString::fromUtf8("label_10"));
         label_10->setGeometry(QRect(0, 120, 71, 21));
@@ -263,9 +263,9 @@ public:
         file_line_Digest = new QLineEdit(tab_3);
         file_line_Digest->setObjectName(QString::fromUtf8("file_line_Digest"));
         file_line_Digest->setGeometry(QRect(40, 10, 671, 20));
-        browseButton_3 = new QPushButton(tab_3);
-        browseButton_3->setObjectName(QString::fromUtf8("browseButton_3"));
-        browseButton_3->setGeometry(QRect(630, 40, 75, 23));
+        browseButton_Digest = new QPushButton(tab_3);
+        browseButton_Digest->setObjectName(QString::fromUtf8("browseButton_Digest"));
+        browseButton_Digest->setGeometry(QRect(630, 40, 75, 23));
         label_13 = new QLabel(tab_3);
         label_13->setObjectName(QString::fromUtf8("label_13"));
         label_13->setGeometry(QRect(0, 120, 71, 21));
@@ -332,7 +332,7 @@ public:
         tabWidget->addTab(tab_3, QString());
         label_12->raise();
         file_line_Digest->raise();
-        browseButton_3->raise();
+        browseButton_Digest->raise();
         label_13->raise();
         device_line_Digest->raise();
         label_14->raise();
@@ -361,9 +361,9 @@ public:
         path_line_UpdatePath = new QLineEdit(tab_4);
         path_line_UpdatePath->setObjectName(QString::fromUtf8("path_line_UpdatePath"));
         path_line_UpdatePath->setGeometry(QRect(50, 10, 661, 20));
-        browseButton_4 = new QPushButton(tab_4);
-        browseButton_4->setObjectName(QString::fromUtf8("browseButton_4"));
-        browseButton_4->setGeometry(QRect(630, 40, 75, 23));
+        browseButton_UpdatePath = new QPushButton(tab_4);
+        browseButton_UpdatePath->setObjectName(QString::fromUtf8("browseButton_UpdatePath"));
+        browseButton_UpdatePath->setGeometry(QRect(630, 40, 75, 23));
         label_19 = new QLabel(tab_4);
         label_19->setObjectName(QString::fromUtf8("label_19"));
         label_19->setGeometry(QRect(0, 120, 71, 21));
@@ -388,7 +388,7 @@ public:
         devices_treeWidget_UpdatePath->setGeometry(QRect(270, 90, 431, 111));
         tabWidget->addTab(tab_4, QString());
         label_8->raise();
-        browseButton_4->raise();
+        browseButton_UpdatePath->raise();
         label_19->raise();
         device_line_UpdatePath->raise();
         label_20->raise();
@@ -402,7 +402,7 @@ public:
 
         retranslateUi(Utilities);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(Utilities);
@@ -413,7 +413,7 @@ public:
         Utilities->setWindowTitle(QCoreApplication::translate("Utilities", "SECube Utilities", nullptr));
         listkeys_button->setText(QCoreApplication::translate("Utilities", "List keys...", nullptr));
         label_3->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">Device ID:</p></body></html>", nullptr));
-        browseButton->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
+        browseButton_Encryption->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
         deviceListButton->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
 #if QT_CONFIG(tooltip)
         user_line->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>If specified, find keys automatically. Insert it as U+the number of the user (e.g., U10). Put list of users between &quot; &quot;, each one separated by space.</p></body></html>", nullptr));
@@ -445,7 +445,7 @@ public:
         ___qtreewidgetitem1->setText(0, QCoreApplication::translate("Utilities", "Device ID", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_1), QCoreApplication::translate("Utilities", "Encryption", nullptr));
         label_9->setText(QCoreApplication::translate("Utilities", "File:", nullptr));
-        browseButton_2->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
+        browseButton_Decryption->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
         label_10->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">Device ID:</p></body></html>", nullptr));
         label_11->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">PIN:</p></body></html>", nullptr));
         deviceListButton_Decryption->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
@@ -460,7 +460,7 @@ public:
         ___qtreewidgetitem2->setText(0, QCoreApplication::translate("Utilities", "Device ID", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("Utilities", "Decryption", nullptr));
         label_12->setText(QCoreApplication::translate("Utilities", "File:", nullptr));
-        browseButton_3->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
+        browseButton_Digest->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
         label_13->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">Device ID:</p></body></html>", nullptr));
         label_14->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">PIN:</p></body></html>", nullptr));
         deviceListButton_Digest->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));
@@ -488,9 +488,12 @@ public:
         ___qtreewidgetitem4->setText(0, QCoreApplication::translate("Utilities", "Key ID", nullptr));
         label_22->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">Before listing keys, please insert your pin!</p></body></html>", nullptr));
         label_23->setText(QCoreApplication::translate("Utilities", "Nonce:", nullptr));
+#if QT_CONFIG(tooltip)
+        nonce_line_Digest->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>If not specified, the SEcube will compute it randomly. It will be truncated if it exceed 32 byte.</p></body></html>", nullptr));
+#endif // QT_CONFIG(tooltip)
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("Utilities", "Digest", nullptr));
         label_8->setText(QCoreApplication::translate("Utilities", "Path:", nullptr));
-        browseButton_4->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
+        browseButton_UpdatePath->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));
         label_19->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">Device ID:</p></body></html>", nullptr));
         label_20->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">PIN:</p></body></html>", nullptr));
         deviceListButton_UpdatePath->setText(QCoreApplication::translate("Utilities", "List devices...", nullptr));

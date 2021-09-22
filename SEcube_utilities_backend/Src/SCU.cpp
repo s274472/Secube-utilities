@@ -1,5 +1,5 @@
 /**
- * Entry point of the SEcube Utilities backend appplication.
+ * Entry point of the SEcube Utilities backend application.
  * Contains the main function, that extracts all the input parameters and perform the requested security utility.
  *
  * In case the gui_server flag is provided, all the output messages are forwarded to the GUI via socket.

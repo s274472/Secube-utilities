@@ -1,3 +1,10 @@
+/**
+ * All the UI events handling are contained here.
+ *
+ * For connecting the signal to the handling function the QT Autoconnection(connectSlotsByName) is used,
+ * for this reason all the signal handling functions must be in the form: on_widgetName_signalName().
+ */
+
 #include "utilities.h"
 #include "ui_utilities.h"
 #include <QFileDialog>
@@ -12,42 +19,27 @@
 #include <iostream>
 #include "cereal/archives/binary.hpp"
 
-QString target_file;
-
 Utilities::Utilities(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Utilities)
 {
     ui->setupUi(this);
-    //If there is an argument passed to the application,
-    //it will be used as filename by default
+    //If there is an argument passed to the application, it will be used as path/filename by default:
     if (QCoreApplication::arguments().length() > 1) {
-        QString prova = QCoreApplication::arguments().at(1);
-        target_file = prova;
-        ui -> file_line -> setText(target_file);
+        QString path = QCoreApplication::arguments().at(1);
+
+        // Update all the file_lines and the path_line:
+        ui -> file_line -> setText(path);
+        ui -> file_line_Decryption -> setText(path);
+        ui -> file_line_Digest -> setText(path);
+        ui -> path_line_UpdatePath -> setText(path);
     }
 
 }
 
-
 Utilities::~Utilities()
 {
     delete ui;
-}
-
-void Utilities::set_target_file(QString filename)
-{
-    target_file = filename;
-    ui -> file_line -> setText(target_file);
-}
-
-//If button "Browse" is clicked...
-void Utilities::on_browseButton_clicked()
-{
-    //Open a dialog to choose the file, save the path in the target_file variable
-    target_file = QFileDialog::getOpenFileName();
-    //And update the content of the "File" form.
-    ui -> file_line -> setText(target_file);
 }
 
 void Utilities::on_group_line_textChanged(const QString &arg1)
@@ -100,25 +92,6 @@ void Utilities::on_key_line_textChanged(const QString &arg1)
          ui ->group_line ->setPlaceholderText("N/A");
     }
 }
-
-
-void Utilities::on_browseButton_2_clicked()
-{
-    //Open a dialog to choose the file, save the path in the target_file variable
-    target_file = QFileDialog::getOpenFileName();
-    //And update the content of the "File" form.
-    ui -> file_line_Decryption -> setText(target_file);
-}
-
-
-void Utilities::on_browseButton_3_clicked()
-{
-    //Open a dialog to choose the file, save the path in the target_file variable
-    target_file = QFileDialog::getOpenFileName();
-    //And update the content of the "File" form.
-    ui -> file_line_Digest -> setText(target_file);
-}
-
 
 void Utilities::on_group_line_Digest_textChanged(const QString &arg1)
 {
@@ -195,15 +168,51 @@ void Utilities::on_algorithm_comboBox_Digest_activated(int index)
     }
 }
 
-
-void Utilities::on_browseButton_4_clicked()
+// Browse buttons:
+void Utilities::on_browseButton_Encryption_clicked()
 {
-    //Open a dialog to choose the path, save the path in the target_file variable
-    target_file = QFileDialog::getExistingDirectory();
-    //And update the content of the "Path" form.
-    ui -> path_line_UpdatePath -> setText(target_file);
+    // Open a dialog to choose the file:
+    QString file_path = QFileDialog::getOpenFileName();
+
+    // And update the content of the "File" form for all the file_lines:
+    ui -> file_line -> setText(file_path);
+    ui -> file_line_Decryption -> setText(file_path);
+    ui -> file_line_Digest -> setText(file_path);
 }
 
+void Utilities::on_browseButton_Decryption_clicked()
+{
+    // Open a dialog to choose the file:
+    QString file_path = QFileDialog::getOpenFileName();
+
+    // And update the content of the "File" form for all the file_lines:
+    ui -> file_line -> setText(file_path);
+    ui -> file_line_Decryption -> setText(file_path);
+    ui -> file_line_Digest -> setText(file_path);
+}
+
+
+void Utilities::on_browseButton_Digest_clicked()
+{
+    // Open a dialog to choose the file:
+    QString file_path = QFileDialog::getOpenFileName();
+
+    // And update the content of the "File" form for all the file_lines:
+    ui -> file_line -> setText(file_path);
+    ui -> file_line_Decryption -> setText(file_path);
+    ui -> file_line_Digest -> setText(file_path);
+}
+
+void Utilities::on_browseButton_UpdatePath_clicked()
+{
+    // Open a dialog to choose the path:
+    QString path = QFileDialog::getExistingDirectory();
+
+    //A nd update the content of the "Path" form.
+    ui -> path_line_UpdatePath -> setText(path);
+}
+
+// Device list butttons:
 void Utilities::on_deviceListButton_clicked()
 {
 

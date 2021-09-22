@@ -178,17 +178,8 @@ int encryption( int sock, string filename, uint32_t keyID, string encAlgo ) {
 	// Print the title:
 	cout << "SEcube encrypt utility" << endl << endl;
 
-	// Check that the provided encAlgo is valid:
-	if( encAlgo == "AES") {
-
-		encAlgoID = L1Algorithms::Algorithms::AES;
-	} else if( encAlgo == "SHA256" ) {
-
-		encAlgoID = L1Algorithms::Algorithms::SHA256;
-	} else if( encAlgo == "HMACSHA256" ) {
-
-		encAlgoID = L1Algorithms::Algorithms::HMACSHA256;
-	} else if( encAlgo == "AES_HMACSHA256" ) {
+	// Only the AES_HMACSHA256 algorithm can be used for encrypting using SEFile:
+	if( encAlgo == "AES_HMACSHA256" ) {
 
 		encAlgoID = L1Algorithms::Algorithms::AES_HMACSHA256;
 	} else {
@@ -200,7 +191,6 @@ int encryption( int sock, string filename, uint32_t keyID, string encAlgo ) {
 			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Invalid encryption algorithm!");
 		}
 
-		//l1->L1Logout();
 		return -1;
 	}
 

@@ -1,3 +1,11 @@
+/**
+ * Entry point of the SEcube Utilities GUI application.
+ * Contains the main function.
+ *
+ * This application uses the MIT licensed QTDarkStyleSheet(https://github.com/ColinDuquesnoy/QDarkStyleSheet)
+ * to set a dark theme by default.
+ */
+
 #include "utilities.h"
 
 #include <QApplication>
