@@ -695,7 +695,7 @@ void print_command_line() {
 	cout << "\t-dl devices list" << endl;
 	cout << "\t-kl keys list" << endl;
 	cout << "\t-update_path <SEkey path> updates the path of the shared folder for the SEkey KMS" << endl;
-	cout << "\t-u <user(s)> if specified, find keys automatically (put list of users between " ", each one separated by space)" << endl;
+    cout << "\t-u <user(s)> if specified, find keys automatically (put list of users between \" \", each one separated by space)" << endl;
 	cout << "\t-g <group> if specified, find keys automatically" << endl;
 	cout << "\t-f <filename path>: filename path to use for the selected utility"
 			<< endl;
@@ -704,7 +704,7 @@ void print_command_line() {
 	cout << "\t-sha SHA-256 (digest only, no key required)" << endl;
 	cout << "\t-hmac HMAC-SHA-256 (digest only)" << endl;
     cout << "\t-nonce <nonce> (if specified, the nonce for the HMAC-SHA-256 is set manually)" << endl;
-	cout << "\t-gui_server (should only be specified by the GUI!)" << endl;
+    cout << "\t-gui_server (must be specified by the GUI only!)" << endl;
 	cout
 			<< "************************************************************************"
 			<< endl;
