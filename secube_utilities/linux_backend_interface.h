@@ -104,7 +104,7 @@ Response sendRequestToBackend(string cmd) {
     // In this way in background the Backend will perform the utility function and then will send the response to the GUI
     if((child_pid=fork()) == 0){ // The child is the Backend
             // Child process will return 0 from fork()
-            system( ("/home/user/Downloads/SEcube_utilities_backend/Debug/SCU.exe " + cmd + "&").c_str() );
+            system( ("./secube_cmd.exe " + cmd + "&").c_str() );
             exit(0);
     } else{ // The parent is the GUI
         // Parent process will return a non-zero value from fork()
