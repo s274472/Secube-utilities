@@ -194,33 +194,6 @@ int encryption( int sock, string filename, uint32_t keyID, string encAlgo ) {
 		return -1;
 	}
 
-	// Check that the provided keyID is valid:
-//	vector<pair<uint32_t, uint16_t>> keys;
-//	try{
-//		l1->L1KeyList(keys);
-//	} catch (...) {
-//		cout << "\nError retrieving keys inside the SEcube device. Quit." << endl;
-//		//l1->L1Logout();
-//		return -1;
-//	}
-//	if(keys.size() == 0){
-//		cout << "\nError, there are no keys inside the SEcube device. Impossible to continue." << endl;
-//		//l1->L1Logout();
-//		return -1;
-//	}
-//
-//	bool contained = false;
-//	for(pair<uint32_t, uint16_t> k : keys){
-//
-//		if( k.first == keyID ) { contained = true; break; }
-//	}
-//	if( !contained ) {
-//
-//		cout << "\nError, the provided keyID is not valid. Impossible to continue." << endl;
-//		//l1->L1Logout();
-//		return -1;
-//	}
-
 	// Encrypt the desired file using SEFile:
 	cout << "File to encrypt: " << filename << endl << "KeyID to use for encrypting: " << keyID << endl << "Encryption algorithm: " << encAlgo << endl;
 
@@ -656,6 +629,50 @@ int find_key (uint32_t& keyID, string user, string group){
 		sekey_stop();
 		return 0;
 	}
+}
+
+/**
+ * Checks if the input keyID is contained inside the logged-in SECube device.
+ * In order to call this utility, first login on the desired SECube device!
+ *
+ * The Response is Response_GENERIC because this function is used inside the encryption utility(that uses
+ * a Response_GENERIC as Response)
+ *
+ * Returns: 1 if the key is contained inside the SECube device, 0 otherwise
+ */
+int isKeyContained(int sock, uint32_t keyID) {
+
+	Response_GENERIC resp; // Response to GUI, used if gui_server_on
+
+	vector<pair<uint32_t, uint16_t>> keys;
+	try{
+		l1->L1KeyList(keys);
+	} catch (...) {
+		cout << "Unexpected error trying to check the provided key! Quit." << endl;
+
+		// For GUI interfacing:
+		if(gui_server_on) {
+			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Unexpected error trying to check the provided key!");
+		}
+
+		return -1;
+	}
+
+	if(keys.size() == 0){ // If there are no keys inside the SECube device:
+		return 0; // Return false
+	} else { // If there are some keys stored inside the SECube device:
+
+		bool contained = false;
+		for(pair<uint32_t, uint16_t> k : keys){
+
+			if( k.first == keyID ) { contained = true; break; } // keyID is contained.
+		}
+
+		if( !contained ) { return 0; } // Return false
+		else { return 1; } // Return true
+	}
+
+	return 0; // Return false
 }
 
 /**

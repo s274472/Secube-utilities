@@ -202,8 +202,19 @@ int main(int argc, char *argv[]) {
 				}
 			}
 
-			if (keyID != 0) // If a keyID is specified, the encryption utility can be called
-				encryption(gui_socket, path, keyID, alg);
+			if (keyID != 0) {// If a keyID is specified, the encryption utility can be called
+
+				// Check keyID is contained inside the SECube device:
+				if( isKeyContained(gui_socket, keyID) )
+					encryption(gui_socket, path, keyID, alg);
+				else {
+					// For GUI interfacing:
+					if(gui_server_on) {
+						Response_GENERIC resp;
+						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "The specified keyID is not contained inside the selected SECube device!");
+					}
+				}
+			}
 			else { // If a keyID is not specified, SEKey is used for finding an usable key for the specified user(s) or group
 
 				// Check if the sekey_path must be updated:
