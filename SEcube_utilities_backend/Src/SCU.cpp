@@ -208,11 +208,15 @@ int main(int argc, char *argv[]) {
 				if( isKeyContained(gui_socket, keyID) )
 					encryption(gui_socket, path, keyID, alg);
 				else {
+					cout << "The specified keyID is not contained inside the selected SECube device! Quit." << endl;
+
 					// For GUI interfacing:
 					if(gui_server_on) {
 						Response_GENERIC resp;
 						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "The specified keyID is not contained inside the selected SECube device!");
 					}
+
+					return -1;
 				}
 			}
 			else { // If a keyID is not specified, SEKey is used for finding an usable key for the specified user(s) or group
