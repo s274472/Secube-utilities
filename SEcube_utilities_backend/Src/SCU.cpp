@@ -107,7 +107,7 @@ int main(int argc, char *argv[]) {
 			if (argc > cur + 1) {
 				update_path = argv[++cur];
 			} else {
-				cout << "Error! no path specified after -path! Quit." << endl;
+                cout << "Error! no path specified after -update_path! Quit." << endl;
 				return -1;
 			}
 		}
