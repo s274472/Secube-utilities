@@ -667,8 +667,8 @@ void print_command_line() {
 	cout
 			<< "************************************************************************"
 			<< endl;
-	cout << "SECube Utilities: " << endl;
-	cout << "SCU [-help] [-dev <deviceID>] [-p <pin>] [-e|-d|-dk|-di|-dl|-kl] [-update_path <path>] [-u <user(s)>|-g <group>][-f <filename path] [-k <keyID>] [-aes|-sha|-hmac|aes_hmac]" << endl;
+    cout << "SEcube Utilities: " << endl;
+    cout << "program_name [-help] [-dev <deviceID>] [-p <pin>] [-e|-d|-dk|-di|-dl|-kl] [-update_path <path>] [-u <user(s)>|-g <group>][-f <filename path] [-k <keyID>] [-aes|-sha|-hmac|aes_hmac] [-nonce <nonce>]" << endl;
 	cout << "\t-dev <deviceID>" << endl;
 	cout << "\t-p <pin>" << endl;
 	cout << "\t-e encryption" << endl;
@@ -686,7 +686,7 @@ void print_command_line() {
 	cout << "\t-aes_hmac AES_HMACSHA256 (encryption only)" << endl;
 	cout << "\t-sha SHA-256 (digest only, no key required)" << endl;
 	cout << "\t-hmac HMAC-SHA-256 (digest only)" << endl;
-	cout << "\t-nonce \"nonce string\" (if specified, the nonce for the HMAC-SHA-256 is set manually)" << endl;
+    cout << "\t-nonce <nonce> (if specified, the nonce for the HMAC-SHA-256 is set manually)" << endl;
 	cout << "\t-gui_server (should only be specified by the GUI!)" << endl;
 	cout
 			<< "************************************************************************"
