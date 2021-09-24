@@ -205,7 +205,7 @@ int main(int argc, char *argv[]) {
 			if (keyID != 0) {// If a keyID is specified, the encryption utility can be called
 
 				// Check keyID is contained inside the SECube device:
-				if( isKeyContained(gui_socket, keyID) )
+				if( isKeyContained(keyID) )
 					encryption(gui_socket, path, keyID, alg);
 				else {
 					cout << "The specified keyID is not contained inside the selected SECube device! Quit." << endl;
@@ -348,8 +348,25 @@ int main(int argc, char *argv[]) {
 
 			// The SHA-256 algorithm do not require a key
 			// The HMAC-SHA-256 requires a key, this must be or manually inserted or retrieved using SEKey
-			if ( (alg.compare("SHA-256") == 0) || (keyID!=0) ) // If the key is not needed or explicitly specified, proceed:
+			if ( (alg.compare("SHA-256") == 0)  ){  // If the key is not needed, proceed:
 				digest(gui_socket, path, keyID, alg, usenonce, nonce); // The digest utility is called
+			}
+			else if ( (keyID!=0) ) { // If the key is needed and manually inserted:
+				// Check keyID is contained inside the SECube device:
+				if( isKeyContained(keyID) )
+					digest(gui_socket, path, keyID, alg, usenonce, nonce); // The digest utility is called
+				else {
+					cout << "The specified keyID is not contained inside the selected SECube device! Quit." << endl;
+
+					// For GUI interfacing:
+					if(gui_server_on) {
+						Response_GENERIC resp;
+						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "The specified keyID is not contained inside the selected SECube device!");
+					}
+
+					return -1;
+				}
+			}
 			else { // Else extract the key using SEKey:
 
 				// Check if the sekey_path must be updated:

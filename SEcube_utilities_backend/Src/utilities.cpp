@@ -635,27 +635,16 @@ int find_key (uint32_t& keyID, string user, string group){
  * Checks if the input keyID is contained inside the logged-in SECube device.
  * In order to call this utility, first login on the desired SECube device!
  *
- * The Response is Response_GENERIC because this function is used inside the encryption utility(that uses
- * a Response_GENERIC as Response)
- *
- * Returns: 1 if the key is contained inside the SECube device, 0 otherwise
+ * Returns: 1 if the key is contained inside the SECube device, 0 otherwise or in case of error
  */
-int isKeyContained(int sock, uint32_t keyID) {
-
-	Response_GENERIC resp; // Response to GUI, used if gui_server_on
+int isKeyContained(uint32_t keyID) {
 
 	vector<pair<uint32_t, uint16_t>> keys;
 	try{
 		l1->L1KeyList(keys);
 	} catch (...) {
 		cout << "Unexpected error trying to check the provided key! Quit." << endl;
-
-		// For GUI interfacing:
-		if(gui_server_on) {
-			sendErrorToGUI<Response_GENERIC>(sock, resp, -1, "Unexpected error trying to check the provided key!");
-		}
-
-		return -1;
+		return 0; // Return false in case of unexpected error
 	}
 
 	if(keys.size() == 0){ // If there are no keys inside the SECube device:

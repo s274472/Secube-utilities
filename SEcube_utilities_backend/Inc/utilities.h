@@ -36,6 +36,6 @@ int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce
 int decryption(string); // returns: 0 if the decryption is successful, -1 in case of error
 int decryption_w_encrypted_filename(int sock, string filename); // returns: 0 if the decryption is successful, -1 in case of error
 int encryption(int sock, string , uint32_t , string); // returns: 0 if the encryption is successful, -1 in case of error
-int isKeyContained(int sock, uint32_t keyID); // returns: 1 if the key is contained inside the SECube device, 0 otherwise
+int isKeyContained(uint32_t keyID); // returns: 1 if the key is contained inside the SECube device, 0 otherwise
 
 #endif
