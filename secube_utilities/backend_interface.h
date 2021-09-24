@@ -108,40 +108,49 @@ Response sendRequestToBackend(string cmd) {
     si.cb = sizeof(si);
     ZeroMemory( &pi, sizeof(pi) );
 
-    CreateProcessA("secube_cmd.exe", LPSTR(cmd.c_str()), NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
+    if( CreateProcessA("secube_cmd.exe", LPSTR(cmd.c_str()), NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi) == 0 ) {
+        // In case of error tryng to run the Backend application:
 
-    // Connect to the backend via socket:
-    int sock = connectToBackend();
-
-    // Wait for response from the Backend:
-    int res = -1;
-    char request[BUFLEN] = {0};
-    char reply[BUFLEN] = {0};
-    std::stringstream ss; // any stream can be used
-
-    memset(request, 0, BUFLEN);
-    memset(reply, 0, BUFLEN);
-    res = recv(sock, request, BUFLEN, 0);
-    if (res < 0) {
-        cout << "[LOG] [GUI] Error reading response from backend!" << endl;
-    } else {
-        cout << "[LOG] [GUI] Received " << res << " bytes." << endl;
-
-        // Deserialize the Response using Cereal:
-        std::stringstream ss;
-        ss.write((char*)request, res);
-        cereal::BinaryInputArchive iarchive(ss);
-        iarchive(resp); // Read the data from the archive
+        // Create and return an error Response:
+        resp.err_code = -1;
+        string err_msg = "The Backend application could not be started!";
+        strcpy(resp.err_msg, err_msg.c_str());
     }
+    else { // Backend correctly started:
+
+        // Connect to the backend via socket:
+        int sock = connectToBackend();
+
+        // Wait for response from the Backend:
+        int res = -1;
+        char request[BUFLEN] = {0};
+        char reply[BUFLEN] = {0};
+        std::stringstream ss; // any stream can be used
+
+        memset(request, 0, BUFLEN);
+        memset(reply, 0, BUFLEN);
+        res = recv(sock, request, BUFLEN, 0);
+        if (res < 0) {
+            cout << "[LOG] [GUI] Error reading response from backend!" << endl;
+        } else {
+            cout << "[LOG] [GUI] Received " << res << " bytes." << endl;
+
+            // Deserialize the Response using Cereal:
+            std::stringstream ss;
+            ss.write((char*)request, res);
+            cereal::BinaryInputArchive iarchive(ss);
+            iarchive(resp); // Read the data from the archive
+        }
 
 
-    // Close the socket:
-    closesocket(sock);
+        // Close the socket:
+        closesocket(sock);
 
-    // Cleanup winsock:
-    WSACleanup();
+        // Cleanup winsock:
+        WSACleanup();
 
-    cout << "[LOG] [GUI] Disconnected." << endl;
+        cout << "[LOG] [GUI] Disconnected." << endl;
+    }
 
     return resp;
 }

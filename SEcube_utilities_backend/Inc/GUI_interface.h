@@ -19,7 +19,7 @@ using namespace std;
 extern int gui_server_on;
 
 /**
- * When the backend is started with the gui_server argument, after performing the desired utility it waits for a socket connection with the GUI and then
+ * When the Backend is started with the gui_server argument, after performing the desired utility it waits for a socket connection with the GUI and then
  * sends back the outcome of the utility operation performed.
  * The information sent back can be simple(for example: everything was correct or some error arise) or more complex(informations of all the SECube
  * devices attached to the PC).
