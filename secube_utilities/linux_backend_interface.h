@@ -100,44 +100,55 @@ Response sendRequestToBackend(string cmd) {
     Response resp;
     pid_t child_pid;
 
-    // Create a process in background for running the Backend application using the cmd received:
-    // In this way in background the Backend will perform the utility function and then will send the response to the GUI
-    if((child_pid=fork()) == 0){ // The child is the Backend
-            // Child process will return 0 from fork()
-            system( ("./secube_cmd.exe " + cmd + "&").c_str() );
-            exit(0);
-    } else{ // The parent is the GUI
-        // Parent process will return a non-zero value from fork()
-        //sleep(4);
-        waitpid(child_pid, NULL, WUNTRACED);
-        // Connect to backend server:
-        int sock = connectToBackend();
+    // Check if the Backend application can be found:
+    if ( access("./secube_cmd.exe", F_OK)!=0 ) {
+        // In case of error tryng to run the Backend application:
 
-        // Wait for Response from the backend:
-        int res = -1;
-        char request[BUFLEN] = {0};
-        char reply[BUFLEN] = {0};
-        std::stringstream ss; // any stream can be used
+        // Create and return an error Response:
+        resp.err_code = -1;
+        string err_msg = "The Backend application could not be started!";
+        strcpy(resp.err_msg, err_msg.c_str());
+    }
+    else { // Backend correctly started:
 
-        memset(request, 0, BUFLEN);
-        memset(reply, 0, BUFLEN);
-        res = recv(sock, request, BUFLEN, 0);
-        if (res < 0) {
-            cout << "[LOG] [GUI] Error reading response from backend!" << endl;
-        } else {
-            cout << "[LOG] [GUI] Received " << res << " bytes." << endl;
+        // Create a process in background for running the Backend application using the cmd received:
+        // In this way in background the Backend will perform the utility function and then will send the response to the GUI
+        if((child_pid=fork()) == 0){ // The child is the Backend
+                // Child process will return 0 from fork()
+                system( ("./secube_cmd.exe " + cmd + "&").c_str() );
+                exit(0);
+        } else{ // The parent is the GUI
+            // Parent process will return a non-zero value from fork()
+            waitpid(child_pid, NULL, WUNTRACED);
+            // Connect to backend server:
+            int sock = connectToBackend();
 
-            // Deserialize the Response using Cereal:
-            std::stringstream ss;
-            ss.write((char*)request, res);
-            cereal::BinaryInputArchive iarchive(ss);
-            iarchive(resp); // Read the data from the archive
+            // Wait for Response from the backend:
+            int res = -1;
+            char request[BUFLEN] = {0};
+            char reply[BUFLEN] = {0};
+            std::stringstream ss; // any stream can be used
+
+            memset(request, 0, BUFLEN);
+            memset(reply, 0, BUFLEN);
+            res = recv(sock, request, BUFLEN, 0);
+            if (res < 0) {
+                cout << "[LOG] [GUI] Error reading response from backend!" << endl;
+            } else {
+                cout << "[LOG] [GUI] Received " << res << " bytes." << endl;
+
+                // Deserialize the Response using Cereal:
+                std::stringstream ss;
+                ss.write((char*)request, res);
+                cereal::BinaryInputArchive iarchive(ss);
+                iarchive(resp); // Read the data from the archive
+            }
+
+            // Close the socket:
+            close(sock);
+
+            cout << "[LOG] [GUI] Disconnected." << endl;
         }
-
-        // Close the socket:
-        close(sock);
-
-        cout << "[LOG] [GUI] Disconnected." << endl;
     }
 
     return resp;
