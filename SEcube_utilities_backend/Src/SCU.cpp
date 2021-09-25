@@ -251,6 +251,13 @@ int main(int argc, char *argv[]) {
 					encryption(gui_socket, path, keyID, alg); // The encryption utility is called with the KeyID obtained using SEKey
 					sekey_stop();
 				}
+				else {
+					cout << "SEkey: No valid key found!" << endl;
+					if (gui_server_on) {
+						Response_GENERIC resp;
+						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "SEkey: No valid key found!");
+					}
+				}
 			}
 
 			logout();
