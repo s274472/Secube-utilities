@@ -24,7 +24,7 @@ using namespace std;
 unique_ptr<L0> l0;
 unique_ptr<L1> l1;
 
-// Global variable for allowing the backend to work as a server for the GUI
+// Global variable for allowing the Backend to work as a server for the GUI
 // The content of this variable is handled by the argument parser
 int gui_server_on = false; // If true the GUI server is on
 
@@ -223,12 +223,12 @@ int main(int argc, char *argv[]) {
 
 				// Check if the sekey_path must be updated:
 				if (!read_sekey_update_path(*l0.get(), l1.get())) {
-					cout << "Update the sekey path!" << endl;
+					cout << "Update the SEKey path!" << endl;
 
 					// For GUI interfacing:
 					if(gui_server_on) {
 						Response_GENERIC resp;
-						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Update the sekey path!");
+						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Update the SEKey path!");
 					}
 
 					return -1;
@@ -238,12 +238,12 @@ int main(int argc, char *argv[]) {
 				if (find_key(keyID, user, group)) {
 
 					if(sekey_start(*l0, l1.get()) != 0){ // In case of error starting SEKey:
-						cout << "Error starting SEkey!" << endl;
+						cout << "Error starting SEKey!" << endl;
 
 						// For GUI interfacing:
 						if(gui_server_on) {
 							Response_GENERIC resp;
-							sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Error starting SEkey!");
+							sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Error starting SEKey!");
 						}
 
 						return -1;
@@ -252,10 +252,10 @@ int main(int argc, char *argv[]) {
 					sekey_stop();
 				}
 				else {
-					cout << "SEkey: No valid key found!" << endl;
+					cout << "SEKey: No valid key found!" << endl;
 					if (gui_server_on) {
 						Response_GENERIC resp;
-						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "SEkey: No valid key found!");
+						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "SEKey: No valid key found!");
 					}
 					return -1;
 				}
@@ -295,24 +295,24 @@ int main(int argc, char *argv[]) {
 
 				// Check if the sekey_path must be updated:
 				if (!read_sekey_update_path(*l0.get(), l1.get())) {
-					cout << "Update the sekey path!" << endl;
+					cout << "Update the SEKey path!" << endl;
 
 					// For GUI interfacing:
 					if(gui_server_on) {
 						Response_GENERIC resp;
-						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Update the sekey path!");
+						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Update the SEKey path!");
 					}
 
 					return -1;
 				}
 
 				if(sekey_start(*l0, l1.get()) != 0){ // In case of error starting SEKey:
-					cout << "Error starting SEkey!" << endl;
+					cout << "Error starting SEKey!" << endl;
 
 					// For GUI interfacing:
 					if(gui_server_on) {
 						Response_GENERIC resp;
-						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Error starting SEkey!");
+						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Error starting SEKey!");
 					}
 
 					return -1;
@@ -379,12 +379,12 @@ int main(int argc, char *argv[]) {
 
 				// Check if the sekey_path must be updated:
 				if (!read_sekey_update_path(*l0.get(), l1.get())) {
-					cout << "Update the sekey path!" << endl;
+					cout << "Update the SEKey path!" << endl;
 
 					// For GUI interfacing:
 					if(gui_server_on) {
 						Response_GENERIC resp;
-						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Update the sekey path!");
+						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Update the SEKey path!");
 					}
 
 					return -1;
@@ -393,12 +393,12 @@ int main(int argc, char *argv[]) {
 				// Use SEKey to find an usable key for the specified user(s) or group:
 				if (find_key(keyID, user, group)) {
 					if(sekey_start(*l0, l1.get()) != 0){ // In case of error starting SEKey:
-						cout << "Error starting SEkey!" << endl;
+						cout << "Error starting SEKey!" << endl;
 
 						// For GUI interfacing:
 						if(gui_server_on) {
 							Response_GENERIC resp;
-							sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Error starting SEkey!");
+							sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "Error starting SEKey!");
 						}
 
 						return -1;
@@ -407,10 +407,10 @@ int main(int argc, char *argv[]) {
 					sekey_stop();
 				}
 				else {
-					cout << "SEkey: No valid key found!" << endl;
+					cout << "SEKey: No valid key found!" << endl;
 					if (gui_server_on) {
 						Response_GENERIC resp;
-						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "SEkey: No valid key found!");
+						sendErrorToGUI<Response_GENERIC>(gui_socket, resp, -1, "SEKey: No valid key found!");
 					}
 					return -1;
 				}

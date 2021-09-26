@@ -3,7 +3,7 @@
  *
  * In case the gui_server flag is set, the output of the called utility is forwarded to the GUI via socket.
  * For more details on how the socket communication interface with the GUI is implemented, please take a look at the
- * GUI_interface.h and GUI_interface.cpp sources (and the related linux implementation: linux_GUI_interface.h and linux_GUI_interface.cpp).
+ * GUI_interface.h and GUI_interface.cpp sources (and the related Linux implementation: linux_GUI_interface.h and linux_GUI_interface.cpp).
  */
 
 #include "../Inc/utilities.h"
