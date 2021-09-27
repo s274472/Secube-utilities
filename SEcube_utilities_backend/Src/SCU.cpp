@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
 	uint32_t keyID = 0;
 	string alg;
 	Utilities utility = DEFAULT;
-	std::array<uint8_t, B5_SHA256_DIGEST_SIZE> nonce;nonce.fill(0);
+	std::array<uint8_t, B5_SHA256_DIGEST_SIZE> nonce;nonce.fill(0); // By default the nonce is filled with 0s
 	bool usenonce = false;
 
 	int gui_socket = -1; // Socket used for GUI interfacing
@@ -118,10 +118,20 @@ int main(int argc, char *argv[]) {
 		//Nonce
 		if (strcmp(argv[cur], "-nonce") == 0) {
 			usenonce = true;
-			char* nonce_str = argv[++cur];
-			for(int i=0; (i<strlen(nonce_str) && i<B5_SHA256_DIGEST_SIZE); i++) { // If the nonce string size in input is greater than B5_SHA256_DIGEST_SIZE,
-				nonce[i] = nonce_str[i];										  // the string is truncated
+
+			char* nonce_str_hex = argv[++cur]; // String containing the hex values of the nonce
+
+			// Convert the string of hex values in an array of uint8_t(since this is what the digest object is using as nonce)
+			istringstream hex_chars_stream(nonce_str_hex);
+
+			unsigned int c;
+			int i=0;
+			while (hex_chars_stream >> std::hex >> c) {
+				nonce[i++] = c;
+				if(i>=B5_SHA256_DIGEST_SIZE) // If the nonce string size is greater than B5_SHA256_DIGEST_SIZE,
+					break; 					 // the string is truncated
 			}
+
 		}
 		//User(s) ID(s)
 		if (strcmp(argv[cur], "-u") == 0) {

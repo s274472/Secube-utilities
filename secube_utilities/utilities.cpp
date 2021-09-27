@@ -656,7 +656,38 @@ void Utilities::on_digest_button_clicked()
     }
 
     if(ui->nonce_line_Digest->isEnabled() && ui->nonce_line_Digest->text().size()>0 ) {
-        command += "-nonce \"" + ui->nonce_line_Digest->text();
+        QString nonce;
+
+        if(!ui->isNonceHexadecimal_checkBox_Digest->isChecked()) {
+
+            // Convert the string of chars into a string of hexadecimal values:
+            char hex[4];
+            for( int i=0; i< ui->nonce_line_Digest->text().size(); i++) {
+                sprintf(hex, "%02x ", ui->nonce_line_Digest->text().at(i));
+                nonce += hex;
+            }
+
+
+        }
+        else { // The nonce is already in hexadecimal format
+
+            // Check that the nonce is conform to the hexadecimal notation:
+            string nonce_hex = ui->nonce_line_Digest->text().toStdString();
+
+            for(int i=0; i<ui->nonce_line_Digest->text().size(); i++) {
+                if( (nonce_hex[i]!=' ') && (isxdigit(nonce_hex[i]) == 0) ) {
+                    ui->digest_button->setText("Error!");
+                    ui->digest_button->repaint(); // Forces update
+                    QMessageBox::critical(0, QString("Error!"), QString("The nonce inserted is not conform to the hexadecimal notation!"), QMessageBox::Ok);
+                    ui->digest_button->setText("Compute Digest");
+                    return;
+                }
+            }
+
+            nonce += ui->nonce_line_Digest->text();
+        }
+
+        command += "-nonce \"" + nonce;
         command += "\"";
     }
 

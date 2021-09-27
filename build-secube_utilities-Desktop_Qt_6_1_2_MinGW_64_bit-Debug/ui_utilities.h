@@ -89,6 +89,7 @@ public:
     QLabel *label_22;
     QLabel *label_23;
     QLineEdit *nonce_line_Digest;
+    QCheckBox *isNonceHexadecimal_checkBox_Digest;
     QWidget *tab_4;
     QLabel *label_8;
     QLineEdit *path_line_UpdatePath;
@@ -284,22 +285,22 @@ public:
         deviceListButton_Digest->setGeometry(QRect(600, 210, 101, 23));
         label_15 = new QLabel(tab_3);
         label_15->setObjectName(QString::fromUtf8("label_15"));
-        label_15->setGeometry(QRect(10, 230, 61, 21));
+        label_15->setGeometry(QRect(10, 210, 61, 21));
         group_line_Digest = new QLineEdit(tab_3);
         group_line_Digest->setObjectName(QString::fromUtf8("group_line_Digest"));
-        group_line_Digest->setGeometry(QRect(80, 230, 171, 24));
+        group_line_Digest->setGeometry(QRect(80, 210, 171, 24));
         label_16 = new QLabel(tab_3);
         label_16->setObjectName(QString::fromUtf8("label_16"));
-        label_16->setGeometry(QRect(0, 270, 71, 21));
+        label_16->setGeometry(QRect(0, 250, 71, 21));
         user_line_Digest = new QLineEdit(tab_3);
         user_line_Digest->setObjectName(QString::fromUtf8("user_line_Digest"));
-        user_line_Digest->setGeometry(QRect(80, 270, 171, 24));
+        user_line_Digest->setGeometry(QRect(80, 250, 171, 24));
         label_17 = new QLabel(tab_3);
         label_17->setObjectName(QString::fromUtf8("label_17"));
-        label_17->setGeometry(QRect(0, 310, 71, 21));
+        label_17->setGeometry(QRect(0, 290, 71, 21));
         key_line_Digest = new QLineEdit(tab_3);
         key_line_Digest->setObjectName(QString::fromUtf8("key_line_Digest"));
-        key_line_Digest->setGeometry(QRect(80, 310, 171, 24));
+        key_line_Digest->setGeometry(QRect(80, 290, 171, 24));
         label_18 = new QLabel(tab_3);
         label_18->setObjectName(QString::fromUtf8("label_18"));
         label_18->setGeometry(QRect(0, 400, 71, 21));
@@ -325,10 +326,14 @@ public:
         label_22->setGeometry(QRect(290, 400, 321, 31));
         label_23 = new QLabel(tab_3);
         label_23->setObjectName(QString::fromUtf8("label_23"));
-        label_23->setGeometry(QRect(30, 350, 43, 21));
+        label_23->setGeometry(QRect(22, 330, 51, 21));
         nonce_line_Digest = new QLineEdit(tab_3);
         nonce_line_Digest->setObjectName(QString::fromUtf8("nonce_line_Digest"));
-        nonce_line_Digest->setGeometry(QRect(80, 350, 171, 24));
+        nonce_line_Digest->setGeometry(QRect(80, 330, 171, 24));
+        isNonceHexadecimal_checkBox_Digest = new QCheckBox(tab_3);
+        isNonceHexadecimal_checkBox_Digest->setObjectName(QString::fromUtf8("isNonceHexadecimal_checkBox_Digest"));
+        isNonceHexadecimal_checkBox_Digest->setGeometry(QRect(40, 360, 211, 23));
+        isNonceHexadecimal_checkBox_Digest->setLayoutDirection(Qt::RightToLeft);
         tabWidget->addTab(tab_3, QString());
         label_12->raise();
         file_line_Digest->raise();
@@ -353,6 +358,7 @@ public:
         label_22->raise();
         label_23->raise();
         nonce_line_Digest->raise();
+        isNonceHexadecimal_checkBox_Digest->raise();
         tab_4 = new QWidget();
         tab_4->setObjectName(QString::fromUtf8("tab_4"));
         label_8 = new QLabel(tab_4);
@@ -487,10 +493,11 @@ public:
         ___qtreewidgetitem4->setText(1, QCoreApplication::translate("Utilities", "Key Size", nullptr));
         ___qtreewidgetitem4->setText(0, QCoreApplication::translate("Utilities", "Key ID", nullptr));
         label_22->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">Before listing keys, please insert your pin!</p></body></html>", nullptr));
-        label_23->setText(QCoreApplication::translate("Utilities", "Nonce:", nullptr));
+        label_23->setText(QCoreApplication::translate("Utilities", "<html><head/><body><p align=\"right\">Nonce:</p></body></html>", nullptr));
 #if QT_CONFIG(tooltip)
         nonce_line_Digest->setToolTip(QCoreApplication::translate("Utilities", "<html><head/><body><p>If not specified, the SEcube will compute it randomly. It will be truncated if it exceed 32 byte.</p></body></html>", nullptr));
 #endif // QT_CONFIG(tooltip)
+        isNonceHexadecimal_checkBox_Digest->setText(QCoreApplication::translate("Utilities", "Nonce is in hexadecimal format:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("Utilities", "Digest", nullptr));
         label_8->setText(QCoreApplication::translate("Utilities", "Path:", nullptr));
         browseButton_UpdatePath->setText(QCoreApplication::translate("Utilities", "Browse...", nullptr));

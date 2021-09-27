@@ -113,7 +113,7 @@ Response sendRequestToBackend(string cmd) {
 
         // Create and return an error Response:
         resp.err_code = -1;
-        string err_msg = "The Backend application could not be started!";
+        string err_msg = "The Backend application cannot not be started!";
         strcpy(resp.err_msg, err_msg.c_str());
     }
     else { // Backend correctly started:
