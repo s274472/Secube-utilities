@@ -16,7 +16,7 @@
 using namespace std;
 
 #define BUFLEN 1024*100 // dimension of input/output buffer for communicating with the GUI
-#define STR_SIZE 250
+#define STR_SIZE 300
 #define ARR_SIZE 20
 #define comm_port 1235 // The port used for the socket connection to the GUI
 

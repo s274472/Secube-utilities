@@ -127,7 +127,8 @@ int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce
 	}
 
 	string digest; // String that will store the digest in hex format
-	string nonce; // String that will store the nonce in hex format
+	string nonce_hex; // String that will store the nonce in hex format
+	string nonce_str; // String that will store the nonce in ASCII format
 	char tmp[4]; // Used for converting the digest and nonce to the %02x format
 	string out_msg; // Message to be sent to the GUI, if gui_server_on
 
@@ -138,7 +139,7 @@ int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce
 	}
 
 	cout << "The hex value of the digest is: " << digest << endl;
-	out_msg = "digest hex: " + string(digest);
+	out_msg = "Digest hex: " + string(digest);
 
 	// If the algorithm selected is the HMAC-SHA-256, the nonce must be extracted:
 	if(algo.compare("HMAC-SHA-256") == 0) {
@@ -146,11 +147,15 @@ int digest(int sock, string filename, uint32_t keyID, string algo, bool usenonce
 		// Extract nonce string in hex format:
 		for(uint8_t i : data_digest.digest_nonce){
 			sprintf(tmp, "%02x ", i);
-			nonce += tmp;
+			nonce_hex += tmp;
+			if(i!=0)
+				nonce_str += char(i); // Add only non NULL char
 		}
 
-		cout << "The hex value of the nonce is: " << nonce << endl;
-		out_msg += "\n\nnonce hex: " + string(nonce);
+		cout << "The hex value of the nonce is: " << nonce_hex << endl;
+		cout << "Nonce string: " << nonce_str << endl;
+		out_msg += "\n\nNonce hex: " + string(nonce_hex);
+		out_msg += "\n\nNonce string: " + nonce_str;
 	}
 
 	// For GUI interfacing:
