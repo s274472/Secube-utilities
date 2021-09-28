@@ -661,9 +661,18 @@ void Utilities::on_digest_button_clicked()
         if(!ui->isNonceHexadecimal_checkBox_Digest->isChecked()) {
 
             // Convert the string of chars into a string of hexadecimal values:
-            char hex[4];
+            char hex[6];
             for( int i=0; i< ui->nonce_line_Digest->text().size(); i++) {
+                //QString string_to_convert = ui->nonce_line_Digest->text();
                 sprintf(hex, "%02x ", ui->nonce_line_Digest->text().at(i));
+                if(hex[3]!='\0') {
+                    ui->digest_button->setText("Error!");
+                    ui->digest_button->repaint(); // Forces update
+                    QMessageBox::critical(0, QString("Error!"), QString("The nonce inserted caused an error. Maybe non-printable character are present. Try to insert the nonce in its hexadecimal notation."), QMessageBox::Ok);
+                    ui->digest_button->setText("Compute Digest");
+                    ui->digest_button->repaint(); // Forces update
+                    return;
+                }
                 nonce += hex;
             }
 

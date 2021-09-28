@@ -40,6 +40,9 @@ QToolBar * {
 /* QWidget ----------------------------------------------------------------
 
 --------------------------------------------------------------------------- */
+
+QMessageBox { messagebox-text-interaction-flags: 5; }
+
 QWidget {
   background-color: #19232D;
   border: 0px solid #455364;

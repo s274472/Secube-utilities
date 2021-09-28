@@ -697,7 +697,7 @@ void print_command_line() {
 	cout << "\t-aes_hmac AES_HMACSHA256 (encryption only)" << endl;
 	cout << "\t-sha SHA-256 (digest only, no key required)" << endl;
 	cout << "\t-hmac HMAC-SHA-256 (digest only)" << endl;
-    cout << "\t-nonce <nonce> (if specified, the nonce for the HMAC-SHA-256 is set manually)" << endl;
+    cout << "\t-nonce <nonce> (if specified, the nonce for the HMAC-SHA-256 is set manually - please insert it in hexadecimal notation, with spaces, like \"ab bc 00 12\")" << endl;
     cout << "\t-gui_server (must be specified by the GUI only!)" << endl;
 	cout
 			<< "************************************************************************"
