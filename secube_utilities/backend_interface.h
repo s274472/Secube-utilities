@@ -108,12 +108,16 @@ Response sendRequestToBackend(string cmd) {
     si.cb = sizeof(si);
     ZeroMemory( &pi, sizeof(pi) );
 
-    if( CreateProcessA("secube_cmd.exe", LPSTR(cmd.c_str()), NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi) == 0 ) {
+    LPSTR lpFilePart;
+    char filename[MAX_PATH];
+    SearchPathA( NULL, "secube_cmd", ".exe", MAX_PATH, filename, &lpFilePart);
+    cout << filename << endl;
+    if( CreateProcessA(LPCSTR(filename), LPSTR(cmd.c_str()), NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi) == 0 ) {
         // In case of error tryng to run the Backend application:
 
         // Create and return an error Response:
         resp.err_code = -1;
-        string err_msg = "The Backend application cannot not be started!";
+        string err_msg = "The Backend application cannot be started!";
         strcpy(resp.err_msg, err_msg.c_str());
     }
     else { // Backend correctly started:
